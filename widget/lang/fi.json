@@ -1,0 +1,94 @@
+{
+    "title": "Näyttöasetukset",
+    "open": "Avaa näyttöasetukset",
+    "close": "Sulje",
+    "back": "Takaisin",
+    "reset": "Palauta kaikki",
+    "hideWidget": "Piilota (tämä istunto)",
+    "statement": "Saavutettavuusseloste",
+    "structureTitle": "Sivun rakenne",
+    "headings": "Otsikot",
+    "landmarks": "Maamerkit",
+    "structureEmpty": "Tältä sivulta ei löytynyt otsikoita.",
+    "on": "Päällä",
+    "off": "Pois",
+    "f": {
+        "fontsize": "Tekstin koko",
+        "spacing": "Välistys",
+        "font": "Fontti",
+        "contrast": "Kontrasti",
+        "saturation": "Värit",
+        "bluefilter": "Sinisuodatin",
+        "colorblind": "Värisokeus",
+        "links": "Korosta linkit",
+        "focus": "Korosta kohdistus",
+        "cursor": "Suuri kohdistin",
+        "guide": "Lukuviivain",
+        "mask": "Lukumaski",
+        "animations": "Pysäytä animaatiot",
+        "images": "Piilota kuvat",
+        "structure": "Sivun rakenne",
+        "tts": "Lue ääneen",
+        "ttsrate": "Lukunopeus",
+        "align": "Tasaa teksti",
+        "profiles": "Profiilit"
+    },
+    "s": {
+        "fontsize": [
+            "Pois",
+            "Suuri",
+            "Suurempi",
+            "Suurin"
+        ],
+        "font": [
+            "Pois",
+            "Helppolukuinen",
+            "Dysleksia"
+        ],
+        "contrast": [
+            "Pois",
+            "Tumma",
+            "Vaalea",
+            "Käänteinen"
+        ],
+        "saturation": [
+            "Pois",
+            "Harmaasävy",
+            "Matala",
+            "Korkea"
+        ],
+        "bluefilter": [
+            "Pois",
+            "Kevyt",
+            "Keskitaso",
+            "Voimakas"
+        ],
+        "colorblind": {
+            "1": "Punaheikkous",
+            "2": "Viherheikkous",
+            "3": "Siniheikkous"
+        },
+        "align": [
+            "Pois",
+            "Vasen",
+            "Keskitetty",
+            "Oikea"
+        ],
+        "tts": [
+            "Pois",
+            "Lue sivu",
+            "Osoita ja lue"
+        ],
+        "ttsrate": {
+            "1": "Hitaampi",
+            "2": "Normaali",
+            "3": "Nopeampi"
+        }
+    },
+    "p": {
+        "vision": "Parempi näkyvyys",
+        "motion": "Vähemmän liikettä",
+        "focus": "Keskittyminen",
+        "dyslexia": "Dysleksia"
+    }
+}

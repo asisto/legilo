@@ -1,0 +1,94 @@
+{
+    "title": "Visningsindstillinger",
+    "open": "Åbn visningsindstillinger",
+    "close": "Luk",
+    "back": "Tilbage",
+    "reset": "Nulstil alt",
+    "hideWidget": "Skjul (denne session)",
+    "statement": "Tilgængelighedserklæring",
+    "structureTitle": "Sidestruktur",
+    "headings": "Overskrifter",
+    "landmarks": "Landemærker",
+    "structureEmpty": "Ingen overskrifter fundet på denne side.",
+    "on": "Til",
+    "off": "Fra",
+    "f": {
+        "fontsize": "Skriftstørrelse",
+        "spacing": "Afstand",
+        "font": "Skrifttype",
+        "contrast": "Kontrast",
+        "saturation": "Farver",
+        "bluefilter": "Blåt filter",
+        "colorblind": "Farveblindhed",
+        "links": "Fremhæv links",
+        "focus": "Fremhæv fokus",
+        "cursor": "Stor markør",
+        "guide": "Læselineal",
+        "mask": "Læsemaske",
+        "animations": "Stop animationer",
+        "images": "Skjul billeder",
+        "structure": "Sidestruktur",
+        "tts": "Oplæsning",
+        "ttsrate": "Læsehastighed",
+        "align": "Juster tekst",
+        "profiles": "Profiler"
+    },
+    "s": {
+        "fontsize": [
+            "Fra",
+            "Stor",
+            "Større",
+            "Størst"
+        ],
+        "font": [
+            "Fra",
+            "Letlæselig",
+            "Ordblindhed"
+        ],
+        "contrast": [
+            "Fra",
+            "Mørk",
+            "Lys",
+            "Inverteret"
+        ],
+        "saturation": [
+            "Fra",
+            "Gråtoner",
+            "Lav",
+            "Høj"
+        ],
+        "bluefilter": [
+            "Fra",
+            "Let",
+            "Mellem",
+            "Stærk"
+        ],
+        "colorblind": {
+            "1": "Rødsvaghed",
+            "2": "Grønsvaghed",
+            "3": "Blåsvaghed"
+        },
+        "align": [
+            "Fra",
+            "Venstre",
+            "Centreret",
+            "Højre"
+        ],
+        "tts": [
+            "Fra",
+            "Læs siden op",
+            "Peg og lyt"
+        ],
+        "ttsrate": {
+            "1": "Langsommere",
+            "2": "Normal",
+            "3": "Hurtigere"
+        }
+    },
+    "p": {
+        "vision": "Bedre synlighed",
+        "motion": "Mindre bevægelse",
+        "focus": "Fokus",
+        "dyslexia": "Ordblindhed"
+    }
+}

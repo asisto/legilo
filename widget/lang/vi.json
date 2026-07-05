@@ -1,0 +1,94 @@
+{
+    "title": "Cài đặt hiển thị",
+    "open": "Mở cài đặt hiển thị",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "reset": "Đặt lại tất cả",
+    "hideWidget": "Ẩn (phiên này)",
+    "statement": "Tuyên bố về khả năng tiếp cận",
+    "structureTitle": "Cấu trúc trang",
+    "headings": "Tiêu đề",
+    "landmarks": "Vùng trang",
+    "structureEmpty": "Không tìm thấy tiêu đề trên trang này.",
+    "on": "Bật",
+    "off": "Tắt",
+    "f": {
+        "fontsize": "Cỡ chữ",
+        "spacing": "Khoảng cách",
+        "font": "Phông chữ",
+        "contrast": "Độ tương phản",
+        "saturation": "Màu sắc",
+        "bluefilter": "Lọc ánh sáng xanh",
+        "colorblind": "Mù màu",
+        "links": "Làm nổi liên kết",
+        "focus": "Làm nổi tiêu điểm",
+        "cursor": "Con trỏ lớn",
+        "guide": "Thước đọc",
+        "mask": "Mặt nạ đọc",
+        "animations": "Dừng hoạt ảnh",
+        "images": "Ẩn hình ảnh",
+        "structure": "Cấu trúc trang",
+        "tts": "Đọc to",
+        "ttsrate": "Tốc độ đọc",
+        "align": "Căn chữ",
+        "profiles": "Chế độ"
+    },
+    "s": {
+        "fontsize": [
+            "Tắt",
+            "Lớn",
+            "Lớn hơn",
+            "Lớn nhất"
+        ],
+        "font": [
+            "Tắt",
+            "Dễ đọc",
+            "Chứng khó đọc"
+        ],
+        "contrast": [
+            "Tắt",
+            "Tối",
+            "Sáng",
+            "Đảo ngược"
+        ],
+        "saturation": [
+            "Tắt",
+            "Thang xám",
+            "Thấp",
+            "Cao"
+        ],
+        "bluefilter": [
+            "Tắt",
+            "Nhẹ",
+            "Vừa",
+            "Mạnh"
+        ],
+        "colorblind": {
+            "1": "Yếu màu đỏ",
+            "2": "Yếu màu lục",
+            "3": "Yếu màu lam"
+        },
+        "align": [
+            "Tắt",
+            "Trái",
+            "Giữa",
+            "Phải"
+        ],
+        "tts": [
+            "Tắt",
+            "Đọc trang",
+            "Chỉ và đọc"
+        ],
+        "ttsrate": {
+            "1": "Chậm hơn",
+            "2": "Bình thường",
+            "3": "Nhanh hơn"
+        }
+    },
+    "p": {
+        "vision": "Nhìn rõ hơn",
+        "motion": "Ít chuyển động",
+        "focus": "Tập trung",
+        "dyslexia": "Chứng khó đọc"
+    }
+}

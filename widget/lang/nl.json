@@ -1,0 +1,94 @@
+{
+    "title": "Weergave-instellingen",
+    "open": "Weergave-instellingen openen",
+    "close": "Sluiten",
+    "back": "Terug",
+    "reset": "Alles resetten",
+    "hideWidget": "Verbergen (deze sessie)",
+    "statement": "Toegankelijkheidsverklaring",
+    "structureTitle": "Paginastructuur",
+    "headings": "Koppen",
+    "landmarks": "Gebieden",
+    "structureEmpty": "Geen koppen gevonden op deze pagina.",
+    "on": "Aan",
+    "off": "Uit",
+    "f": {
+        "fontsize": "Tekstgrootte",
+        "spacing": "Afstand",
+        "font": "Lettertype",
+        "contrast": "Contrast",
+        "saturation": "Kleuren",
+        "bluefilter": "Blauwfilter",
+        "colorblind": "Kleurenblindheid",
+        "links": "Links markeren",
+        "focus": "Focus markeren",
+        "cursor": "Grote cursor",
+        "guide": "Leesliniaal",
+        "mask": "Leesmasker",
+        "animations": "Animaties stoppen",
+        "images": "Afbeeldingen verbergen",
+        "structure": "Paginastructuur",
+        "tts": "Voorlezen",
+        "ttsrate": "Voorleessnelheid",
+        "align": "Tekstuitlijning",
+        "profiles": "Profielen"
+    },
+    "s": {
+        "fontsize": [
+            "Uit",
+            "Groot",
+            "Groter",
+            "Grootst"
+        ],
+        "font": [
+            "Uit",
+            "Leesbaar",
+            "Dyslexie"
+        ],
+        "contrast": [
+            "Uit",
+            "Donker",
+            "Licht",
+            "Omgekeerd"
+        ],
+        "saturation": [
+            "Uit",
+            "Grijstinten",
+            "Laag",
+            "Hoog"
+        ],
+        "bluefilter": [
+            "Uit",
+            "Licht",
+            "Gemiddeld",
+            "Sterk"
+        ],
+        "colorblind": {
+            "1": "Roodzwakte",
+            "2": "Groenzwakte",
+            "3": "Blauwzwakte"
+        },
+        "align": [
+            "Uit",
+            "Links",
+            "Gecentreerd",
+            "Rechts"
+        ],
+        "tts": [
+            "Uit",
+            "Pagina voorlezen",
+            "Aanwijzen en voorlezen"
+        ],
+        "ttsrate": {
+            "1": "Langzamer",
+            "2": "Normaal",
+            "3": "Sneller"
+        }
+    },
+    "p": {
+        "vision": "Beter zicht",
+        "motion": "Minder beweging",
+        "focus": "Concentratie",
+        "dyslexia": "Dyslexie"
+    }
+}

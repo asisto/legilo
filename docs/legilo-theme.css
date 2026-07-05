@@ -1,0 +1,79 @@
+/*
+ * Legilo theme template
+ * ---------------------
+ * The Legilo panel lives in Shadow DOM, so your page styles cannot break it
+ * by accident. Every building block is exposed via a CSS ::part() name, so
+ * you can restyle it deliberately from your own stylesheet - no fork needed.
+ *
+ * Usage: copy the rules you want to change into your site's CSS and adapt
+ * them. Everything you do not touch keeps the built-in default design.
+ * Colors, button size and corner radius can also be set without any CSS via
+ * the embed URL (color, color2, size, radius - see legilo.eu).
+ *
+ * Available parts:
+ *   trigger          the round launcher button
+ *   panel            the whole panel container
+ *   head             panel header bar
+ *   title            panel heading text
+ *   close            close (x) button
+ *   body             scrollable content area
+ *   profiles-title   "Profiles" mini heading
+ *   profiles         profile chip row
+ *   profile          a single profile chip
+ *   grid             feature card grid
+ *   feature          a single feature card (button)
+ *   feature-active   additionally present while a feature card is active
+ *   state            the state line inside an active feature card
+ *   structure        the page-structure list view
+ *   foot             footer area
+ *   reset            "reset all" button
+ *   hide             "hide for this session" link
+ *   statement        accessibility statement link (if configured)
+ *   brandlink        the small Legilo info link
+ *   guide            reading guide bar (overlay)
+ *   mask             reading mask panels (overlay)
+ */
+
+/* Launcher button */
+#legilo-host::part(trigger) {
+    /* border-radius: 12px; */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, .25); */
+}
+
+/* Panel frame and typography */
+#legilo-host::part(panel) {
+    /* font-family: "Your Brand Font", system-ui, sans-serif; */
+    /* border-radius: 8px; */
+    /* box-shadow: 0 8px 40px rgba(0, 0, 0, .3); */
+}
+
+/* Header bar */
+#legilo-host::part(head) {
+    /* background: #222; color: #fff; */
+}
+
+/* Feature cards */
+#legilo-host::part(feature) {
+    /* background: #fafafa; border-color: #ddd; border-radius: 6px; */
+}
+#legilo-host::part(feature-active) {
+    /* background: #14532d; border-color: #14532d; */
+}
+
+/* Profile chips */
+#legilo-host::part(profile) {
+    /* border-radius: 4px; */
+}
+
+/* Footer buttons and links */
+#legilo-host::part(reset) {
+    /* background: #eee; */
+}
+
+/* Reading guide / mask overlays */
+#legilo-overlays::part(guide) {
+    /* background: #e8a600; */
+}
+#legilo-overlays::part(mask) {
+    /* background: rgba(0, 0, 0, .6); */
+}

@@ -1,0 +1,94 @@
+{
+    "title": "Paramètres d'affichage",
+    "open": "Ouvrir les paramètres d'affichage",
+    "close": "Fermer",
+    "back": "Retour",
+    "reset": "Tout réinitialiser",
+    "hideWidget": "Masquer (cette session)",
+    "statement": "Déclaration d'accessibilité",
+    "structureTitle": "Structure de la page",
+    "headings": "Titres",
+    "landmarks": "Zones",
+    "structureEmpty": "Aucun titre trouvé sur cette page.",
+    "on": "On",
+    "off": "Off",
+    "f": {
+        "fontsize": "Taille du texte",
+        "spacing": "Espacement",
+        "font": "Police",
+        "contrast": "Contraste",
+        "saturation": "Couleurs",
+        "bluefilter": "Filtre lumière bleue",
+        "colorblind": "Daltonisme",
+        "links": "Surligner les liens",
+        "focus": "Surligner le focus",
+        "cursor": "Grand curseur",
+        "guide": "Règle de lecture",
+        "mask": "Masque de lecture",
+        "animations": "Arrêter les animations",
+        "images": "Masquer les images",
+        "structure": "Structure de la page",
+        "tts": "Lecture à voix haute",
+        "ttsrate": "Vitesse de lecture",
+        "align": "Alignement du texte",
+        "profiles": "Profils"
+    },
+    "s": {
+        "fontsize": [
+            "Off",
+            "Grand",
+            "Plus grand",
+            "Maximum"
+        ],
+        "font": [
+            "Off",
+            "Lisible",
+            "Dyslexie"
+        ],
+        "contrast": [
+            "Off",
+            "Sombre",
+            "Clair",
+            "Inversé"
+        ],
+        "saturation": [
+            "Off",
+            "Niveaux de gris",
+            "Faible",
+            "Forte"
+        ],
+        "bluefilter": [
+            "Off",
+            "Léger",
+            "Moyen",
+            "Fort"
+        ],
+        "colorblind": {
+            "1": "Déficience rouge",
+            "2": "Déficience verte",
+            "3": "Déficience bleue"
+        },
+        "align": [
+            "Off",
+            "Gauche",
+            "Centré",
+            "Droite"
+        ],
+        "tts": [
+            "Off",
+            "Lire la page",
+            "Pointer et lire"
+        ],
+        "ttsrate": {
+            "1": "Plus lente",
+            "2": "Normale",
+            "3": "Plus rapide"
+        }
+    },
+    "p": {
+        "vision": "Meilleure visibilité",
+        "motion": "Moins de mouvement",
+        "focus": "Concentration",
+        "dyslexia": "Dyslexie"
+    }
+}

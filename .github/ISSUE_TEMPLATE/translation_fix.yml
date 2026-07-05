@@ -1,0 +1,25 @@
+name: Translation fix
+description: Improve a machine-generated translation (native speakers very welcome!)
+labels: [translation]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        All translations were machine-generated. Native review is the most
+        valuable contribution to this project - thank you! You can also open a
+        pull request directly against `widget/lang/<code>.json` or
+        `translations/<code>.php`.
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      placeholder: e.g. ar, he, zh, ja, ko, hi, fr, ...
+    validations:
+      required: true
+  - type: textarea
+    id: fixes
+    attributes:
+      label: Wrong text and suggested fix
+      description: Current wording, better wording, and where it appears (widget panel or legilo.eu page).
+    validations:
+      required: true

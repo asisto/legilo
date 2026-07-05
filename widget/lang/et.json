@@ -1,0 +1,94 @@
+{
+    "title": "Kuvaseaded",
+    "open": "Ava kuvaseaded",
+    "close": "Sule",
+    "back": "Tagasi",
+    "reset": "Lähtesta kõik",
+    "hideWidget": "Peida (see seanss)",
+    "statement": "Ligipääsetavuse avaldus",
+    "structureTitle": "Lehe struktuur",
+    "headings": "Pealkirjad",
+    "landmarks": "Piirkonnad",
+    "structureEmpty": "Sellel lehel pealkirju ei leitud.",
+    "on": "Sees",
+    "off": "Väljas",
+    "f": {
+        "fontsize": "Kirja suurus",
+        "spacing": "Vahed",
+        "font": "Font",
+        "contrast": "Kontrastsus",
+        "saturation": "Värvid",
+        "bluefilter": "Sinise filter",
+        "colorblind": "Värvipimedus",
+        "links": "Tõsta lingid esile",
+        "focus": "Tõsta fookus esile",
+        "cursor": "Suur kursor",
+        "guide": "Lugemisjoonlaud",
+        "mask": "Lugemismask",
+        "animations": "Peata animatsioonid",
+        "images": "Peida pildid",
+        "structure": "Lehe struktuur",
+        "tts": "Ettelugemine",
+        "ttsrate": "Lugemiskiirus",
+        "align": "Teksti joondus",
+        "profiles": "Profiilid"
+    },
+    "s": {
+        "fontsize": [
+            "Väljas",
+            "Suur",
+            "Suurem",
+            "Suurim"
+        ],
+        "font": [
+            "Väljas",
+            "Loetav",
+            "Düsleksia"
+        ],
+        "contrast": [
+            "Väljas",
+            "Tume",
+            "Hele",
+            "Pööratud"
+        ],
+        "saturation": [
+            "Väljas",
+            "Halltoonid",
+            "Madal",
+            "Kõrge"
+        ],
+        "bluefilter": [
+            "Väljas",
+            "Kerge",
+            "Keskmine",
+            "Tugev"
+        ],
+        "colorblind": {
+            "1": "Punase nõrkus",
+            "2": "Rohelise nõrkus",
+            "3": "Sinise nõrkus"
+        },
+        "align": [
+            "Väljas",
+            "Vasakule",
+            "Keskele",
+            "Paremale"
+        ],
+        "tts": [
+            "Väljas",
+            "Loe leht ette",
+            "Osuta ja kuula"
+        ],
+        "ttsrate": {
+            "1": "Aeglasem",
+            "2": "Tavaline",
+            "3": "Kiirem"
+        }
+    },
+    "p": {
+        "vision": "Parem nähtavus",
+        "motion": "Vähem liikumist",
+        "focus": "Fookus",
+        "dyslexia": "Düsleksia"
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "title": "Anzeige-Einstellungen",
+    "open": "Anzeige-Einstellungen öffnen",
+    "close": "Schließen",
+    "back": "Zurück",
+    "reset": "Alles zurücksetzen",
+    "hideWidget": "Ausblenden (diese Sitzung)",
+    "statement": "Barrierefreiheitserklärung",
+    "structureTitle": "Seitenstruktur",
+    "headings": "Überschriften",
+    "landmarks": "Bereiche",
+    "structureEmpty": "Keine Überschriften auf dieser Seite gefunden.",
+    "on": "Ein",
+    "off": "Aus",
+    "f": {
+        "fontsize": "Schriftgröße",
+        "spacing": "Abstände",
+        "font": "Schriftart",
+        "contrast": "Kontrast",
+        "saturation": "Farben",
+        "bluefilter": "Blaufilter",
+        "colorblind": "Farbfehlsichtigkeit",
+        "links": "Links hervorheben",
+        "focus": "Fokus hervorheben",
+        "cursor": "Großer Mauszeiger",
+        "guide": "Leselineal",
+        "mask": "Lesemaske",
+        "animations": "Animationen stoppen",
+        "images": "Bilder ausblenden",
+        "structure": "Seitenstruktur",
+        "tts": "Vorlesen",
+        "ttsrate": "Vorlese-Tempo",
+        "align": "Textausrichtung",
+        "profiles": "Profile"
+    },
+    "s": {
+        "fontsize": [
+            "Aus",
+            "Groß",
+            "Größer",
+            "Sehr groß"
+        ],
+        "font": [
+            "Aus",
+            "Leserlich",
+            "Dyslexie"
+        ],
+        "contrast": [
+            "Aus",
+            "Dunkel",
+            "Hell",
+            "Invertiert"
+        ],
+        "saturation": [
+            "Aus",
+            "Graustufen",
+            "Schwach",
+            "Kräftig"
+        ],
+        "bluefilter": [
+            "Aus",
+            "Leicht",
+            "Mittel",
+            "Stark"
+        ],
+        "colorblind": {
+            "1": "Rotschwäche",
+            "2": "Grünschwäche",
+            "3": "Blauschwäche"
+        },
+        "align": [
+            "Aus",
+            "Links",
+            "Zentriert",
+            "Rechts"
+        ],
+        "tts": [
+            "Aus",
+            "Seite vorlesen",
+            "Zeigen & vorlesen"
+        ],
+        "ttsrate": {
+            "1": "Langsamer",
+            "2": "Normal",
+            "3": "Schneller"
+        }
+    },
+    "p": {
+        "vision": "Besser sehen",
+        "motion": "Weniger Bewegung",
+        "focus": "Konzentration",
+        "dyslexia": "Dyslexie"
+    }
+}

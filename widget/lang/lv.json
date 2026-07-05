@@ -1,0 +1,94 @@
+{
+    "title": "Attēlojuma iestatījumi",
+    "open": "Atvērt attēlojuma iestatījumus",
+    "close": "Aizvērt",
+    "back": "Atpakaļ",
+    "reset": "Atiestatīt visu",
+    "hideWidget": "Paslēpt (šai sesijai)",
+    "statement": "Piekļūstamības paziņojums",
+    "structureTitle": "Lapas struktūra",
+    "headings": "Virsraksti",
+    "landmarks": "Orientieri",
+    "structureEmpty": "Šajā lapā virsraksti nav atrasti.",
+    "on": "Ieslēgts",
+    "off": "Izslēgts",
+    "f": {
+        "fontsize": "Teksta lielums",
+        "spacing": "Atstarpes",
+        "font": "Fonts",
+        "contrast": "Kontrasts",
+        "saturation": "Krāsas",
+        "bluefilter": "Zilās gaismas filtrs",
+        "colorblind": "Krāsu aklums",
+        "links": "Izcelt saites",
+        "focus": "Izcelt fokusu",
+        "cursor": "Liels kursors",
+        "guide": "Lasīšanas līnija",
+        "mask": "Lasīšanas maska",
+        "animations": "Apturēt animācijas",
+        "images": "Paslēpt attēlus",
+        "structure": "Lapas struktūra",
+        "tts": "Lasīt skaļi",
+        "ttsrate": "Lasīšanas ātrums",
+        "align": "Līdzināt tekstu",
+        "profiles": "Profili"
+    },
+    "s": {
+        "fontsize": [
+            "Izslēgts",
+            "Liels",
+            "Lielāks",
+            "Vislielākais"
+        ],
+        "font": [
+            "Izslēgts",
+            "Viegli lasāms",
+            "Disleksija"
+        ],
+        "contrast": [
+            "Izslēgts",
+            "Tumšs",
+            "Gaišs",
+            "Invertēts"
+        ],
+        "saturation": [
+            "Izslēgts",
+            "Pelēktoņi",
+            "Zems",
+            "Augsts"
+        ],
+        "bluefilter": [
+            "Izslēgts",
+            "Viegls",
+            "Vidējs",
+            "Stiprs"
+        ],
+        "colorblind": {
+            "1": "Sarkanās krāsas vājums",
+            "2": "Zaļās krāsas vājums",
+            "3": "Zilās krāsas vājums"
+        },
+        "align": [
+            "Izslēgts",
+            "Pa kreisi",
+            "Centrēts",
+            "Pa labi"
+        ],
+        "tts": [
+            "Izslēgts",
+            "Lasīt lapu",
+            "Norādīt un lasīt"
+        ],
+        "ttsrate": {
+            "1": "Lēnāk",
+            "2": "Normāli",
+            "3": "Ātrāk"
+        }
+    },
+    "p": {
+        "vision": "Labāka redzamība",
+        "motion": "Mazāk kustību",
+        "focus": "Fokuss",
+        "dyslexia": "Disleksija"
+    }
+}

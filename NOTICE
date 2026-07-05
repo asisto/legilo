@@ -1,0 +1,7 @@
+Third-party components
+======================
+
+OpenDyslexic font (assets/fonts/opendyslexic-*.woff2)
+  Not covered by this project's MIT license.
+  Licensed under the SIL Open Font License 1.1 - see assets/fonts/OFL.txt.
+  The OFL.txt file must stay with the font files.

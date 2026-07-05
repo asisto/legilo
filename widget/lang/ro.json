@@ -1,0 +1,94 @@
+{
+    "title": "Setări de afișare",
+    "open": "Deschide setările de afișare",
+    "close": "Închide",
+    "back": "Înapoi",
+    "reset": "Resetează tot",
+    "hideWidget": "Ascunde (această sesiune)",
+    "statement": "Declarație de accesibilitate",
+    "structureTitle": "Structura paginii",
+    "headings": "Titluri",
+    "landmarks": "Repere",
+    "structureEmpty": "Nu s-au găsit titluri pe această pagină.",
+    "on": "Pornit",
+    "off": "Oprit",
+    "f": {
+        "fontsize": "Mărimea textului",
+        "spacing": "Spațiere",
+        "font": "Font",
+        "contrast": "Contrast",
+        "saturation": "Culori",
+        "bluefilter": "Filtru de albastru",
+        "colorblind": "Daltonism",
+        "links": "Evidențiază linkurile",
+        "focus": "Evidențiază focusul",
+        "cursor": "Cursor mare",
+        "guide": "Riglă de citire",
+        "mask": "Mască de citire",
+        "animations": "Oprește animațiile",
+        "images": "Ascunde imaginile",
+        "structure": "Structura paginii",
+        "tts": "Citire cu voce tare",
+        "ttsrate": "Viteza de citire",
+        "align": "Aliniere text",
+        "profiles": "Profiluri"
+    },
+    "s": {
+        "fontsize": [
+            "Oprit",
+            "Mare",
+            "Mai mare",
+            "Cel mai mare"
+        ],
+        "font": [
+            "Oprit",
+            "Lizibil",
+            "Dislexie"
+        ],
+        "contrast": [
+            "Oprit",
+            "Întunecat",
+            "Luminos",
+            "Inversat"
+        ],
+        "saturation": [
+            "Oprit",
+            "Tonuri de gri",
+            "Redusă",
+            "Ridicată"
+        ],
+        "bluefilter": [
+            "Oprit",
+            "Ușor",
+            "Mediu",
+            "Puternic"
+        ],
+        "colorblind": {
+            "1": "Deficiență de roșu",
+            "2": "Deficiență de verde",
+            "3": "Deficiență de albastru"
+        },
+        "align": [
+            "Oprit",
+            "Stânga",
+            "Centru",
+            "Dreapta"
+        ],
+        "tts": [
+            "Oprit",
+            "Citește pagina",
+            "Indică și citește"
+        ],
+        "ttsrate": {
+            "1": "Mai lent",
+            "2": "Normal",
+            "3": "Mai rapid"
+        }
+    },
+    "p": {
+        "vision": "Vizibilitate mai bună",
+        "motion": "Mai puțină mișcare",
+        "focus": "Concentrare",
+        "dyslexia": "Dislexie"
+    }
+}

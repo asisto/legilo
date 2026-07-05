@@ -1,0 +1,94 @@
+{
+    "title": "Nastavitve prikaza",
+    "open": "Odpri nastavitve prikaza",
+    "close": "Zapri",
+    "back": "Nazaj",
+    "reset": "Ponastavi vse",
+    "hideWidget": "Skrij (ta seja)",
+    "statement": "Izjava o dostopnosti",
+    "structureTitle": "Struktura strani",
+    "headings": "Naslovi",
+    "landmarks": "Orientacijske točke",
+    "structureEmpty": "Na tej strani ni najdenih naslovov.",
+    "on": "Vklopljeno",
+    "off": "Izklopljeno",
+    "f": {
+        "fontsize": "Velikost pisave",
+        "spacing": "Razmiki",
+        "font": "Pisava",
+        "contrast": "Kontrast",
+        "saturation": "Barve",
+        "bluefilter": "Filter modre svetlobe",
+        "colorblind": "Barvna slepota",
+        "links": "Poudari povezave",
+        "focus": "Poudari fokus",
+        "cursor": "Velik kazalec",
+        "guide": "Bralno ravnilo",
+        "mask": "Bralna maska",
+        "animations": "Ustavi animacije",
+        "images": "Skrij slike",
+        "structure": "Struktura strani",
+        "tts": "Glasno branje",
+        "ttsrate": "Hitrost branja",
+        "align": "Poravnava besedila",
+        "profiles": "Profili"
+    },
+    "s": {
+        "fontsize": [
+            "Izklopljeno",
+            "Veliko",
+            "Večje",
+            "Največje"
+        ],
+        "font": [
+            "Izklopljeno",
+            "Berljivo",
+            "Disleksija"
+        ],
+        "contrast": [
+            "Izklopljeno",
+            "Temno",
+            "Svetlo",
+            "Obrnjeno"
+        ],
+        "saturation": [
+            "Izklopljeno",
+            "Sivine",
+            "Nizka",
+            "Visoka"
+        ],
+        "bluefilter": [
+            "Izklopljeno",
+            "Rahel",
+            "Srednji",
+            "Močan"
+        ],
+        "colorblind": {
+            "1": "Slabše zaznavanje rdeče",
+            "2": "Slabše zaznavanje zelene",
+            "3": "Slabše zaznavanje modre"
+        },
+        "align": [
+            "Izklopljeno",
+            "Levo",
+            "Sredina",
+            "Desno"
+        ],
+        "tts": [
+            "Izklopljeno",
+            "Preberi stran",
+            "Pokaži in beri"
+        ],
+        "ttsrate": {
+            "1": "Počasneje",
+            "2": "Običajno",
+            "3": "Hitreje"
+        }
+    },
+    "p": {
+        "vision": "Boljša vidnost",
+        "motion": "Manj gibanja",
+        "focus": "Osredotočenost",
+        "dyslexia": "Disleksija"
+    }
+}

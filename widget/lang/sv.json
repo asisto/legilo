@@ -1,0 +1,94 @@
+{
+    "title": "Visningsinställningar",
+    "open": "Öppna visningsinställningar",
+    "close": "Stäng",
+    "back": "Tillbaka",
+    "reset": "Återställ allt",
+    "hideWidget": "Dölj (denna session)",
+    "statement": "Tillgänglighetsredogörelse",
+    "structureTitle": "Sidstruktur",
+    "headings": "Rubriker",
+    "landmarks": "Landmärken",
+    "structureEmpty": "Inga rubriker hittades på denna sida.",
+    "on": "På",
+    "off": "Av",
+    "f": {
+        "fontsize": "Textstorlek",
+        "spacing": "Avstånd",
+        "font": "Teckensnitt",
+        "contrast": "Kontrast",
+        "saturation": "Färger",
+        "bluefilter": "Blåljusfilter",
+        "colorblind": "Färgblindhet",
+        "links": "Markera länkar",
+        "focus": "Markera fokus",
+        "cursor": "Stor pekare",
+        "guide": "Läslinjal",
+        "mask": "Läsmask",
+        "animations": "Stoppa animationer",
+        "images": "Dölj bilder",
+        "structure": "Sidstruktur",
+        "tts": "Läs upp",
+        "ttsrate": "Läshastighet",
+        "align": "Justera text",
+        "profiles": "Profiler"
+    },
+    "s": {
+        "fontsize": [
+            "Av",
+            "Stor",
+            "Större",
+            "Störst"
+        ],
+        "font": [
+            "Av",
+            "Läsbar",
+            "Dyslexi"
+        ],
+        "contrast": [
+            "Av",
+            "Mörk",
+            "Ljus",
+            "Inverterad"
+        ],
+        "saturation": [
+            "Av",
+            "Gråskala",
+            "Låg",
+            "Hög"
+        ],
+        "bluefilter": [
+            "Av",
+            "Lätt",
+            "Medel",
+            "Stark"
+        ],
+        "colorblind": {
+            "1": "Rödsvaghet",
+            "2": "Grönsvaghet",
+            "3": "Blåsvaghet"
+        },
+        "align": [
+            "Av",
+            "Vänster",
+            "Centrerad",
+            "Höger"
+        ],
+        "tts": [
+            "Av",
+            "Läs upp sidan",
+            "Peka och lyssna"
+        ],
+        "ttsrate": {
+            "1": "Långsammare",
+            "2": "Normal",
+            "3": "Snabbare"
+        }
+    },
+    "p": {
+        "vision": "Bättre synlighet",
+        "motion": "Mindre rörelse",
+        "focus": "Fokus",
+        "dyslexia": "Dyslexi"
+    }
+}

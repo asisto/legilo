@@ -1,0 +1,94 @@
+{
+    "title": "Rodymo nustatymai",
+    "open": "Atidaryti rodymo nustatymus",
+    "close": "Uždaryti",
+    "back": "Atgal",
+    "reset": "Atstatyti viską",
+    "hideWidget": "Slėpti (šiai sesijai)",
+    "statement": "Prieinamumo pareiškimas",
+    "structureTitle": "Puslapio struktūra",
+    "headings": "Antraštės",
+    "landmarks": "Orientyrai",
+    "structureEmpty": "Šiame puslapyje antraščių nerasta.",
+    "on": "Įjungta",
+    "off": "Išjungta",
+    "f": {
+        "fontsize": "Šrifto dydis",
+        "spacing": "Tarpai",
+        "font": "Šriftas",
+        "contrast": "Kontrastas",
+        "saturation": "Spalvos",
+        "bluefilter": "Mėlynos šviesos filtras",
+        "colorblind": "Spalvų aklumas",
+        "links": "Išryškinti nuorodas",
+        "focus": "Išryškinti fokusą",
+        "cursor": "Didelis žymeklis",
+        "guide": "Skaitymo liniuotė",
+        "mask": "Skaitymo kaukė",
+        "animations": "Stabdyti animacijas",
+        "images": "Slėpti paveikslėlius",
+        "structure": "Puslapio struktūra",
+        "tts": "Skaityti balsu",
+        "ttsrate": "Skaitymo greitis",
+        "align": "Lygiuoti tekstą",
+        "profiles": "Profiliai"
+    },
+    "s": {
+        "fontsize": [
+            "Išjungta",
+            "Didelis",
+            "Didesnis",
+            "Didžiausias"
+        ],
+        "font": [
+            "Išjungta",
+            "Įskaitomas",
+            "Disleksija"
+        ],
+        "contrast": [
+            "Išjungta",
+            "Tamsus",
+            "Šviesus",
+            "Invertuota"
+        ],
+        "saturation": [
+            "Išjungta",
+            "Pilki tonai",
+            "Maža",
+            "Didelė"
+        ],
+        "bluefilter": [
+            "Išjungta",
+            "Silpnas",
+            "Vidutinis",
+            "Stiprus"
+        ],
+        "colorblind": {
+            "1": "Raudonos silpnumas",
+            "2": "Žalios silpnumas",
+            "3": "Mėlynos silpnumas"
+        },
+        "align": [
+            "Išjungta",
+            "Kairėje",
+            "Centre",
+            "Dešinėje"
+        ],
+        "tts": [
+            "Išjungta",
+            "Skaityti puslapį",
+            "Rodyti ir skaityti"
+        ],
+        "ttsrate": {
+            "1": "Lėčiau",
+            "2": "Įprastas",
+            "3": "Greičiau"
+        }
+    },
+    "p": {
+        "vision": "Geresnis matomumas",
+        "motion": "Mažiau judesio",
+        "focus": "Susikaupimas",
+        "dyslexia": "Disleksija"
+    }
+}

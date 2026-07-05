@@ -1,0 +1,17 @@
+RewriteEngine on
+
+# Interne Dateien nicht ausliefern (.offline gehoert gar nicht auf den Server;
+# der Eintrag hier ist nur ein Sicherheitsnetz, falls er doch mit hochgeladen wird)
+RewriteRule (^|/)(CLAUDE\.md|config\.php|config\.local\.php|generate\.php|imprint\.php|api\.php|widget/.*|translations/.*|wordpress/.*|\.offline/.*|\.idea/.*|\.git.*|\.github/.*|\.claude/.*)$ index.php [L]
+
+# Echte Dateien (assets/, test/) direkt ausliefern, alles andere durch den Router
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . index.php [L]
+
+# Fonts cross-origin erlauben (Widget läuft auf fremden Domains)
+<IfModule mod_headers.c>
+	<FilesMatch "\.(woff2?|png)$">
+		Header set Access-Control-Allow-Origin "*"
+		Header set Cache-Control "public, max-age=2592000"
+	</FilesMatch>
+</IfModule>

@@ -1,0 +1,94 @@
+{
+    "title": "Display settings",
+    "open": "Open display settings",
+    "close": "Close",
+    "back": "Back",
+    "reset": "Reset all",
+    "hideWidget": "Hide (this session)",
+    "statement": "Accessibility statement",
+    "structureTitle": "Page structure",
+    "headings": "Headings",
+    "landmarks": "Landmarks",
+    "structureEmpty": "No headings found on this page.",
+    "on": "On",
+    "off": "Off",
+    "f": {
+        "fontsize": "Font size",
+        "spacing": "Spacing",
+        "font": "Font",
+        "contrast": "Contrast",
+        "saturation": "Colors",
+        "bluefilter": "Blue filter",
+        "colorblind": "Color blindness",
+        "links": "Highlight links",
+        "focus": "Highlight focus",
+        "cursor": "Big cursor",
+        "guide": "Reading guide",
+        "mask": "Reading mask",
+        "animations": "Stop animations",
+        "images": "Hide images",
+        "structure": "Page structure",
+        "tts": "Read aloud",
+        "ttsrate": "Reading speed",
+        "align": "Align text",
+        "profiles": "Profiles"
+    },
+    "s": {
+        "fontsize": [
+            "Off",
+            "Large",
+            "Larger",
+            "Largest"
+        ],
+        "font": [
+            "Off",
+            "Readable",
+            "Dyslexia"
+        ],
+        "contrast": [
+            "Off",
+            "Dark",
+            "Light",
+            "Inverted"
+        ],
+        "saturation": [
+            "Off",
+            "Grayscale",
+            "Low",
+            "High"
+        ],
+        "bluefilter": [
+            "Off",
+            "Light",
+            "Medium",
+            "Strong"
+        ],
+        "colorblind": {
+            "1": "Red weakness",
+            "2": "Green weakness",
+            "3": "Blue weakness"
+        },
+        "align": [
+            "Off",
+            "Left",
+            "Center",
+            "Right"
+        ],
+        "tts": [
+            "Off",
+            "Read page",
+            "Point & read"
+        ],
+        "ttsrate": {
+            "1": "Slower",
+            "2": "Normal",
+            "3": "Faster"
+        }
+    },
+    "p": {
+        "vision": "Better visibility",
+        "motion": "Less motion",
+        "focus": "Focus",
+        "dyslexia": "Dyslexia"
+    }
+}

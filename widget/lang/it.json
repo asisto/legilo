@@ -1,0 +1,94 @@
+{
+    "title": "Impostazioni di visualizzazione",
+    "open": "Apri impostazioni di visualizzazione",
+    "close": "Chiudi",
+    "back": "Indietro",
+    "reset": "Ripristina tutto",
+    "hideWidget": "Nascondi (questa sessione)",
+    "statement": "Dichiarazione di accessibilità",
+    "structureTitle": "Struttura della pagina",
+    "headings": "Titoli",
+    "landmarks": "Aree",
+    "structureEmpty": "Nessun titolo trovato in questa pagina.",
+    "on": "On",
+    "off": "Off",
+    "f": {
+        "fontsize": "Dimensione testo",
+        "spacing": "Spaziatura",
+        "font": "Carattere",
+        "contrast": "Contrasto",
+        "saturation": "Colori",
+        "bluefilter": "Filtro luce blu",
+        "colorblind": "Daltonismo",
+        "links": "Evidenzia link",
+        "focus": "Evidenzia focus",
+        "cursor": "Cursore grande",
+        "guide": "Righello di lettura",
+        "mask": "Maschera di lettura",
+        "animations": "Ferma animazioni",
+        "images": "Nascondi immagini",
+        "structure": "Struttura pagina",
+        "tts": "Leggi ad alta voce",
+        "ttsrate": "Velocità di lettura",
+        "align": "Allineamento testo",
+        "profiles": "Profili"
+    },
+    "s": {
+        "fontsize": [
+            "Off",
+            "Grande",
+            "Più grande",
+            "Massimo"
+        ],
+        "font": [
+            "Off",
+            "Leggibile",
+            "Dislessia"
+        ],
+        "contrast": [
+            "Off",
+            "Scuro",
+            "Chiaro",
+            "Invertito"
+        ],
+        "saturation": [
+            "Off",
+            "Scala di grigi",
+            "Bassa",
+            "Alta"
+        ],
+        "bluefilter": [
+            "Off",
+            "Leggero",
+            "Medio",
+            "Forte"
+        ],
+        "colorblind": {
+            "1": "Deficit del rosso",
+            "2": "Deficit del verde",
+            "3": "Deficit del blu"
+        },
+        "align": [
+            "Off",
+            "Sinistra",
+            "Centrato",
+            "Destra"
+        ],
+        "tts": [
+            "Off",
+            "Leggi la pagina",
+            "Punta e leggi"
+        ],
+        "ttsrate": {
+            "1": "Più lenta",
+            "2": "Normale",
+            "3": "Più veloce"
+        }
+    },
+    "p": {
+        "vision": "Vista migliore",
+        "motion": "Meno movimento",
+        "focus": "Concentrazione",
+        "dyslexia": "Dislessia"
+    }
+}

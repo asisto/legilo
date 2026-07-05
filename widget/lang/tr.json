@@ -1,0 +1,94 @@
+{
+    "title": "Görünüm ayarları",
+    "open": "Görünüm ayarlarını aç",
+    "close": "Kapat",
+    "back": "Geri",
+    "reset": "Tümünü sıfırla",
+    "hideWidget": "Gizle (bu oturum)",
+    "statement": "Erişilebilirlik bildirimi",
+    "structureTitle": "Sayfa yapısı",
+    "headings": "Başlıklar",
+    "landmarks": "Bölgeler",
+    "structureEmpty": "Bu sayfada başlık bulunamadı.",
+    "on": "Açık",
+    "off": "Kapalı",
+    "f": {
+        "fontsize": "Yazı boyutu",
+        "spacing": "Aralık",
+        "font": "Yazı tipi",
+        "contrast": "Kontrast",
+        "saturation": "Renkler",
+        "bluefilter": "Mavi ışık filtresi",
+        "colorblind": "Renk körlüğü",
+        "links": "Bağlantıları vurgula",
+        "focus": "Odağı vurgula",
+        "cursor": "Büyük imleç",
+        "guide": "Okuma cetveli",
+        "mask": "Okuma maskesi",
+        "animations": "Animasyonları durdur",
+        "images": "Görselleri gizle",
+        "structure": "Sayfa yapısı",
+        "tts": "Sesli oku",
+        "ttsrate": "Okuma hızı",
+        "align": "Metin hizalama",
+        "profiles": "Profiller"
+    },
+    "s": {
+        "fontsize": [
+            "Kapalı",
+            "Büyük",
+            "Daha büyük",
+            "En büyük"
+        ],
+        "font": [
+            "Kapalı",
+            "Okunaklı",
+            "Disleksi"
+        ],
+        "contrast": [
+            "Kapalı",
+            "Koyu",
+            "Açık",
+            "Ters"
+        ],
+        "saturation": [
+            "Kapalı",
+            "Gri tonlama",
+            "Düşük",
+            "Yüksek"
+        ],
+        "bluefilter": [
+            "Kapalı",
+            "Hafif",
+            "Orta",
+            "Güçlü"
+        ],
+        "colorblind": {
+            "1": "Kırmızı zayıflığı",
+            "2": "Yeşil zayıflığı",
+            "3": "Mavi zayıflığı"
+        },
+        "align": [
+            "Kapalı",
+            "Sola",
+            "Ortala",
+            "Sağa"
+        ],
+        "tts": [
+            "Kapalı",
+            "Sayfayı oku",
+            "İşaret et ve oku"
+        ],
+        "ttsrate": {
+            "1": "Daha yavaş",
+            "2": "Normal",
+            "3": "Daha hızlı"
+        }
+    },
+    "p": {
+        "vision": "Daha iyi görüş",
+        "motion": "Daha az hareket",
+        "focus": "Odaklanma",
+        "dyslexia": "Disleksi"
+    }
+}

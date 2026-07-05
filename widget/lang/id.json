@@ -1,0 +1,94 @@
+{
+    "title": "Pengaturan tampilan",
+    "open": "Buka pengaturan tampilan",
+    "close": "Tutup",
+    "back": "Kembali",
+    "reset": "Atur ulang semua",
+    "hideWidget": "Sembunyikan (sesi ini)",
+    "statement": "Pernyataan aksesibilitas",
+    "structureTitle": "Struktur halaman",
+    "headings": "Judul",
+    "landmarks": "Penanda",
+    "structureEmpty": "Tidak ada judul di halaman ini.",
+    "on": "Aktif",
+    "off": "Nonaktif",
+    "f": {
+        "fontsize": "Ukuran huruf",
+        "spacing": "Jarak",
+        "font": "Jenis huruf",
+        "contrast": "Kontras",
+        "saturation": "Warna",
+        "bluefilter": "Filter biru",
+        "colorblind": "Buta warna",
+        "links": "Sorot tautan",
+        "focus": "Sorot fokus",
+        "cursor": "Kursor besar",
+        "guide": "Penggaris baca",
+        "mask": "Masker baca",
+        "animations": "Hentikan animasi",
+        "images": "Sembunyikan gambar",
+        "structure": "Struktur halaman",
+        "tts": "Baca nyaring",
+        "ttsrate": "Kecepatan baca",
+        "align": "Rata teks",
+        "profiles": "Profil"
+    },
+    "s": {
+        "fontsize": [
+            "Nonaktif",
+            "Besar",
+            "Lebih besar",
+            "Terbesar"
+        ],
+        "font": [
+            "Nonaktif",
+            "Mudah dibaca",
+            "Disleksia"
+        ],
+        "contrast": [
+            "Nonaktif",
+            "Gelap",
+            "Terang",
+            "Terbalik"
+        ],
+        "saturation": [
+            "Nonaktif",
+            "Skala abu-abu",
+            "Rendah",
+            "Tinggi"
+        ],
+        "bluefilter": [
+            "Nonaktif",
+            "Ringan",
+            "Sedang",
+            "Kuat"
+        ],
+        "colorblind": {
+            "1": "Lemah merah",
+            "2": "Lemah hijau",
+            "3": "Lemah biru"
+        },
+        "align": [
+            "Nonaktif",
+            "Kiri",
+            "Tengah",
+            "Kanan"
+        ],
+        "tts": [
+            "Nonaktif",
+            "Baca halaman",
+            "Tunjuk dan baca"
+        ],
+        "ttsrate": {
+            "1": "Lebih lambat",
+            "2": "Normal",
+            "3": "Lebih cepat"
+        }
+    },
+    "p": {
+        "vision": "Lebih mudah dilihat",
+        "motion": "Kurangi gerakan",
+        "focus": "Fokus",
+        "dyslexia": "Disleksia"
+    }
+}

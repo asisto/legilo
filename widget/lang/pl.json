@@ -1,0 +1,94 @@
+{
+    "title": "Ustawienia wyświetlania",
+    "open": "Otwórz ustawienia wyświetlania",
+    "close": "Zamknij",
+    "back": "Wstecz",
+    "reset": "Zresetuj wszystko",
+    "hideWidget": "Ukryj (ta sesja)",
+    "statement": "Deklaracja dostępności",
+    "structureTitle": "Struktura strony",
+    "headings": "Nagłówki",
+    "landmarks": "Obszary",
+    "structureEmpty": "Nie znaleziono nagłówków na tej stronie.",
+    "on": "Wł.",
+    "off": "Wył.",
+    "f": {
+        "fontsize": "Rozmiar tekstu",
+        "spacing": "Odstępy",
+        "font": "Czcionka",
+        "contrast": "Kontrast",
+        "saturation": "Kolory",
+        "bluefilter": "Filtr światła niebieskiego",
+        "colorblind": "Daltonizm",
+        "links": "Wyróżnij linki",
+        "focus": "Wyróżnij fokus",
+        "cursor": "Duży kursor",
+        "guide": "Linijka do czytania",
+        "mask": "Maska do czytania",
+        "animations": "Zatrzymaj animacje",
+        "images": "Ukryj obrazy",
+        "structure": "Struktura strony",
+        "tts": "Czytaj na głos",
+        "ttsrate": "Tempo czytania",
+        "align": "Wyrównanie tekstu",
+        "profiles": "Profile"
+    },
+    "s": {
+        "fontsize": [
+            "Wył.",
+            "Duży",
+            "Większy",
+            "Największy"
+        ],
+        "font": [
+            "Wył.",
+            "Czytelna",
+            "Dysleksja"
+        ],
+        "contrast": [
+            "Wył.",
+            "Ciemny",
+            "Jasny",
+            "Odwrócony"
+        ],
+        "saturation": [
+            "Wył.",
+            "Skala szarości",
+            "Niska",
+            "Wysoka"
+        ],
+        "bluefilter": [
+            "Wył.",
+            "Lekki",
+            "Średni",
+            "Mocny"
+        ],
+        "colorblind": {
+            "1": "Osłabienie czerwieni",
+            "2": "Osłabienie zieleni",
+            "3": "Osłabienie błękitu"
+        },
+        "align": [
+            "Wył.",
+            "Do lewej",
+            "Wyśrodkowany",
+            "Do prawej"
+        ],
+        "tts": [
+            "Wył.",
+            "Czytaj stronę",
+            "Wskaż i czytaj"
+        ],
+        "ttsrate": {
+            "1": "Wolniej",
+            "2": "Normalnie",
+            "3": "Szybciej"
+        }
+    },
+    "p": {
+        "vision": "Lepsza widoczność",
+        "motion": "Mniej ruchu",
+        "focus": "Koncentracja",
+        "dyslexia": "Dysleksja"
+    }
+}

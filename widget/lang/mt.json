@@ -1,0 +1,94 @@
+{
+    "title": "Settings tal-wiri",
+    "open": "Iftaħ is-settings tal-wiri",
+    "close": "Agħlaq",
+    "back": "Lura",
+    "reset": "Irrisettja kollox",
+    "hideWidget": "Aħbi (din is-sessjoni)",
+    "statement": "Dikjarazzjoni tal-aċċessibbiltà",
+    "structureTitle": "Struttura tal-paġna",
+    "headings": "Intestaturi",
+    "landmarks": "Punti ta' riferiment",
+    "structureEmpty": "Ma nstabux intestaturi f'din il-paġna.",
+    "on": "Mixgħul",
+    "off": "Mitfi",
+    "f": {
+        "fontsize": "Daqs tal-font",
+        "spacing": "Spazjar",
+        "font": "Font",
+        "contrast": "Kuntrast",
+        "saturation": "Kuluri",
+        "bluefilter": "Filtru blu",
+        "colorblind": "Għama tal-kuluri",
+        "links": "Enfasizza l-links",
+        "focus": "Enfasizza l-fokus",
+        "cursor": "Kursor kbir",
+        "guide": "Gwida tal-qari",
+        "mask": "Maskra tal-qari",
+        "animations": "Waqqaf l-animazzjonijiet",
+        "images": "Aħbi l-istampi",
+        "structure": "Struttura tal-paġna",
+        "tts": "Aqra b'leħen għoli",
+        "ttsrate": "Veloċità tal-qari",
+        "align": "Allinja t-test",
+        "profiles": "Profili"
+    },
+    "s": {
+        "fontsize": [
+            "Mitfi",
+            "Kbir",
+            "Ikbar",
+            "L-ikbar"
+        ],
+        "font": [
+            "Mitfi",
+            "Leġġibbli",
+            "Dislessija"
+        ],
+        "contrast": [
+            "Mitfi",
+            "Skur",
+            "Ċar",
+            "Invertit"
+        ],
+        "saturation": [
+            "Mitfi",
+            "Skala tal-griż",
+            "Baxx",
+            "Għoli"
+        ],
+        "bluefilter": [
+            "Mitfi",
+            "Ħafif",
+            "Medju",
+            "Qawwi"
+        ],
+        "colorblind": {
+            "1": "Dgħufija tal-aħmar",
+            "2": "Dgħufija tal-aħdar",
+            "3": "Dgħufija tal-blu"
+        },
+        "align": [
+            "Mitfi",
+            "Xellug",
+            "Ċentru",
+            "Lemin"
+        ],
+        "tts": [
+            "Mitfi",
+            "Aqra l-paġna",
+            "Ipponta u aqra"
+        ],
+        "ttsrate": {
+            "1": "Aktar bil-mod",
+            "2": "Normali",
+            "3": "Aktar mgħaġġel"
+        }
+    },
+    "p": {
+        "vision": "Viżibbiltà aħjar",
+        "motion": "Inqas moviment",
+        "focus": "Fokus",
+        "dyslexia": "Dislessija"
+    }
+}

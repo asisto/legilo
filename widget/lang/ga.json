@@ -1,0 +1,94 @@
+{
+    "title": "Socruithe taispeána",
+    "open": "Oscail socruithe taispeána",
+    "close": "Dún",
+    "back": "Ar ais",
+    "reset": "Athshocraigh gach rud",
+    "hideWidget": "Folaigh (an seisiún seo)",
+    "statement": "Ráiteas inrochtaineachta",
+    "structureTitle": "Struchtúr an leathanaigh",
+    "headings": "Ceannteidil",
+    "landmarks": "Sainchomharthaí",
+    "structureEmpty": "Níor aimsíodh ceannteidil ar an leathanach seo.",
+    "on": "Air",
+    "off": "As",
+    "f": {
+        "fontsize": "Clómhéid",
+        "spacing": "Spásáil",
+        "font": "Cló",
+        "contrast": "Codarsnacht",
+        "saturation": "Dathanna",
+        "bluefilter": "Scagaire gorm",
+        "colorblind": "Dathdhaille",
+        "links": "Aibhsigh naisc",
+        "focus": "Aibhsigh fócas",
+        "cursor": "Cúrsóir mór",
+        "guide": "Treoir léitheoireachta",
+        "mask": "Masc léitheoireachta",
+        "animations": "Stop beochan",
+        "images": "Folaigh íomhánna",
+        "structure": "Struchtúr an leathanaigh",
+        "tts": "Léigh os ard",
+        "ttsrate": "Luas léitheoireachta",
+        "align": "Ailínigh téacs",
+        "profiles": "Próifílí"
+    },
+    "s": {
+        "fontsize": [
+            "As",
+            "Mór",
+            "Níos mó",
+            "Is mó"
+        ],
+        "font": [
+            "As",
+            "Soléite",
+            "Disléicse"
+        ],
+        "contrast": [
+            "As",
+            "Dorcha",
+            "Geal",
+            "Inbhéartaithe"
+        ],
+        "saturation": [
+            "As",
+            "Liathscála",
+            "Íseal",
+            "Ard"
+        ],
+        "bluefilter": [
+            "As",
+            "Éadrom",
+            "Measartha",
+            "Láidir"
+        ],
+        "colorblind": {
+            "1": "Laige dhearg",
+            "2": "Laige ghlas",
+            "3": "Laige ghorm"
+        },
+        "align": [
+            "As",
+            "Ar chlé",
+            "Sa lár",
+            "Ar dheis"
+        ],
+        "tts": [
+            "As",
+            "Léigh an leathanach",
+            "Pointeáil agus léigh"
+        ],
+        "ttsrate": {
+            "1": "Níos moille",
+            "2": "Gnáthluas",
+            "3": "Níos gasta"
+        }
+    },
+    "p": {
+        "vision": "Infheictheacht níos fearr",
+        "motion": "Níos lú gluaisne",
+        "focus": "Fócas",
+        "dyslexia": "Disléicse"
+    }
+}

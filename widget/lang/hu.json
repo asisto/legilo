@@ -1,0 +1,94 @@
+{
+    "title": "Megjelenítési beállítások",
+    "open": "Megjelenítési beállítások megnyitása",
+    "close": "Bezárás",
+    "back": "Vissza",
+    "reset": "Összes visszaállítása",
+    "hideWidget": "Elrejtés (erre a munkamenetre)",
+    "statement": "Akadálymentesítési nyilatkozat",
+    "structureTitle": "Oldalszerkezet",
+    "headings": "Címsorok",
+    "landmarks": "Tájékozódási pontok",
+    "structureEmpty": "Nem található címsor ezen az oldalon.",
+    "on": "Be",
+    "off": "Ki",
+    "f": {
+        "fontsize": "Betűméret",
+        "spacing": "Térköz",
+        "font": "Betűtípus",
+        "contrast": "Kontraszt",
+        "saturation": "Színek",
+        "bluefilter": "Kékfényszűrő",
+        "colorblind": "Színtévesztés",
+        "links": "Linkek kiemelése",
+        "focus": "Fókusz kiemelése",
+        "cursor": "Nagy kurzor",
+        "guide": "Olvasóvonal",
+        "mask": "Olvasómaszk",
+        "animations": "Animációk leállítása",
+        "images": "Képek elrejtése",
+        "structure": "Oldalszerkezet",
+        "tts": "Felolvasás",
+        "ttsrate": "Felolvasási sebesség",
+        "align": "Szöveg igazítása",
+        "profiles": "Profilok"
+    },
+    "s": {
+        "fontsize": [
+            "Ki",
+            "Nagy",
+            "Nagyobb",
+            "Legnagyobb"
+        ],
+        "font": [
+            "Ki",
+            "Jól olvasható",
+            "Diszlexia"
+        ],
+        "contrast": [
+            "Ki",
+            "Sötét",
+            "Világos",
+            "Invertált"
+        ],
+        "saturation": [
+            "Ki",
+            "Szürkeárnyalatos",
+            "Alacsony",
+            "Magas"
+        ],
+        "bluefilter": [
+            "Ki",
+            "Enyhe",
+            "Közepes",
+            "Erős"
+        ],
+        "colorblind": {
+            "1": "Vörösgyengeség",
+            "2": "Zöldgyengeség",
+            "3": "Kékgyengeség"
+        },
+        "align": [
+            "Ki",
+            "Balra",
+            "Középre",
+            "Jobbra"
+        ],
+        "tts": [
+            "Ki",
+            "Oldal felolvasása",
+            "Rámutatás és felolvasás"
+        ],
+        "ttsrate": {
+            "1": "Lassabb",
+            "2": "Normál",
+            "3": "Gyorsabb"
+        }
+    },
+    "p": {
+        "vision": "Jobb láthatóság",
+        "motion": "Kevesebb mozgás",
+        "focus": "Fókusz",
+        "dyslexia": "Diszlexia"
+    }
+}

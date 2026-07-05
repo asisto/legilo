@@ -1,0 +1,8 @@
+# Interne Dateien: gehen weder online noch ins Repo
+.offline/
+.idea/
+.claude/
+CLAUDE.md
+
+# Lokale Konfiguration mit API-Key: liegt nur auf dem Server, nie im Repo
+config.local.php

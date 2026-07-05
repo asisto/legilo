@@ -1,0 +1,27 @@
+name: Bug report
+description: Something in the widget or configurator does not work
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Page where it happened
+      placeholder: https://example.com (or legilo.eu configurator)
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      placeholder: e.g. Chrome 138 on Windows 11, Safari on iOS 19
+  - type: textarea
+    id: embed
+    attributes:
+      label: Embed code or configuration
+      description: The script tag you use (URL parameters help a lot).
+      render: html

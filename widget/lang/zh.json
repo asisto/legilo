@@ -1,0 +1,94 @@
+{
+    "title": "显示设置",
+    "open": "打开显示设置",
+    "close": "关闭",
+    "back": "返回",
+    "reset": "重置全部",
+    "hideWidget": "隐藏（本次会话）",
+    "statement": "无障碍声明",
+    "structureTitle": "页面结构",
+    "headings": "标题",
+    "landmarks": "区域",
+    "structureEmpty": "本页未找到标题。",
+    "on": "开",
+    "off": "关",
+    "f": {
+        "fontsize": "字体大小",
+        "spacing": "间距",
+        "font": "字体",
+        "contrast": "对比度",
+        "saturation": "颜色",
+        "bluefilter": "蓝光过滤",
+        "colorblind": "色觉障碍",
+        "links": "突出链接",
+        "focus": "突出焦点",
+        "cursor": "大光标",
+        "guide": "阅读标尺",
+        "mask": "阅读遮罩",
+        "animations": "停止动画",
+        "images": "隐藏图片",
+        "structure": "页面结构",
+        "tts": "朗读",
+        "ttsrate": "朗读速度",
+        "align": "文本对齐",
+        "profiles": "模式"
+    },
+    "s": {
+        "fontsize": [
+            "关",
+            "大",
+            "更大",
+            "最大"
+        ],
+        "font": [
+            "关",
+            "易读",
+            "读写障碍"
+        ],
+        "contrast": [
+            "关",
+            "深色",
+            "浅色",
+            "反色"
+        ],
+        "saturation": [
+            "关",
+            "灰度",
+            "低",
+            "高"
+        ],
+        "bluefilter": [
+            "关",
+            "轻",
+            "中",
+            "强"
+        ],
+        "colorblind": {
+            "1": "红色弱",
+            "2": "绿色弱",
+            "3": "蓝色弱"
+        },
+        "align": [
+            "关",
+            "左对齐",
+            "居中",
+            "右对齐"
+        ],
+        "tts": [
+            "关",
+            "朗读页面",
+            "指向朗读"
+        ],
+        "ttsrate": {
+            "1": "较慢",
+            "2": "正常",
+            "3": "较快"
+        }
+    },
+    "p": {
+        "vision": "更清晰",
+        "motion": "减少动画",
+        "focus": "专注",
+        "dyslexia": "读写障碍"
+    }
+}

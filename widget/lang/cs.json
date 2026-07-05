@@ -1,0 +1,94 @@
+{
+    "title": "Nastavení zobrazení",
+    "open": "Otevřít nastavení zobrazení",
+    "close": "Zavřít",
+    "back": "Zpět",
+    "reset": "Obnovit vše",
+    "hideWidget": "Skrýt (tato relace)",
+    "statement": "Prohlášení o přístupnosti",
+    "structureTitle": "Struktura stránky",
+    "headings": "Nadpisy",
+    "landmarks": "Orientační body",
+    "structureEmpty": "Na této stránce nejsou žádné nadpisy.",
+    "on": "Zap.",
+    "off": "Vyp.",
+    "f": {
+        "fontsize": "Velikost písma",
+        "spacing": "Rozestupy",
+        "font": "Písmo",
+        "contrast": "Kontrast",
+        "saturation": "Barvy",
+        "bluefilter": "Filtr modré",
+        "colorblind": "Barvoslepost",
+        "links": "Zvýraznit odkazy",
+        "focus": "Zvýraznit fokus",
+        "cursor": "Velký kurzor",
+        "guide": "Čtecí pravítko",
+        "mask": "Čtecí maska",
+        "animations": "Zastavit animace",
+        "images": "Skrýt obrázky",
+        "structure": "Struktura stránky",
+        "tts": "Předčítání",
+        "ttsrate": "Rychlost čtení",
+        "align": "Zarovnání textu",
+        "profiles": "Profily"
+    },
+    "s": {
+        "fontsize": [
+            "Vyp.",
+            "Velké",
+            "Větší",
+            "Největší"
+        ],
+        "font": [
+            "Vyp.",
+            "Čitelné",
+            "Dyslexie"
+        ],
+        "contrast": [
+            "Vyp.",
+            "Tmavý",
+            "Světlý",
+            "Invertovaný"
+        ],
+        "saturation": [
+            "Vyp.",
+            "Stupně šedi",
+            "Nízká",
+            "Vysoká"
+        ],
+        "bluefilter": [
+            "Vyp.",
+            "Slabý",
+            "Střední",
+            "Silný"
+        ],
+        "colorblind": {
+            "1": "Slabé vnímání červené",
+            "2": "Slabé vnímání zelené",
+            "3": "Slabé vnímání modré"
+        },
+        "align": [
+            "Vyp.",
+            "Vlevo",
+            "Na střed",
+            "Vpravo"
+        ],
+        "tts": [
+            "Vyp.",
+            "Přečíst stránku",
+            "Ukázat a číst"
+        ],
+        "ttsrate": {
+            "1": "Pomaleji",
+            "2": "Normálně",
+            "3": "Rychleji"
+        }
+    },
+    "p": {
+        "vision": "Lepší viditelnost",
+        "motion": "Méně pohybu",
+        "focus": "Soustředění",
+        "dyslexia": "Dyslexie"
+    }
+}

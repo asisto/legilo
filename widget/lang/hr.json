@@ -1,0 +1,94 @@
+{
+    "title": "Postavke prikaza",
+    "open": "Otvori postavke prikaza",
+    "close": "Zatvori",
+    "back": "Natrag",
+    "reset": "Poništi sve",
+    "hideWidget": "Sakrij (ova sesija)",
+    "statement": "Izjava o pristupačnosti",
+    "structureTitle": "Struktura stranice",
+    "headings": "Naslovi",
+    "landmarks": "Orijentiri",
+    "structureEmpty": "Na ovoj stranici nema naslova.",
+    "on": "Uklj.",
+    "off": "Isklj.",
+    "f": {
+        "fontsize": "Veličina fonta",
+        "spacing": "Razmaci",
+        "font": "Font",
+        "contrast": "Kontrast",
+        "saturation": "Boje",
+        "bluefilter": "Plavi filtar",
+        "colorblind": "Daltonizam",
+        "links": "Istakni poveznice",
+        "focus": "Istakni fokus",
+        "cursor": "Veliki pokazivač",
+        "guide": "Ravnalo za čitanje",
+        "mask": "Maska za čitanje",
+        "animations": "Zaustavi animacije",
+        "images": "Sakrij slike",
+        "structure": "Struktura stranice",
+        "tts": "Čitanje naglas",
+        "ttsrate": "Brzina čitanja",
+        "align": "Poravnanje teksta",
+        "profiles": "Profili"
+    },
+    "s": {
+        "fontsize": [
+            "Isklj.",
+            "Velik",
+            "Veći",
+            "Najveći"
+        ],
+        "font": [
+            "Isklj.",
+            "Čitljiv",
+            "Disleksija"
+        ],
+        "contrast": [
+            "Isklj.",
+            "Tamni",
+            "Svijetli",
+            "Obrnuti"
+        ],
+        "saturation": [
+            "Isklj.",
+            "Sivi tonovi",
+            "Niska",
+            "Visoka"
+        ],
+        "bluefilter": [
+            "Isklj.",
+            "Blagi",
+            "Srednji",
+            "Jaki"
+        ],
+        "colorblind": {
+            "1": "Slabost na crveno",
+            "2": "Slabost na zeleno",
+            "3": "Slabost na plavo"
+        },
+        "align": [
+            "Isklj.",
+            "Lijevo",
+            "Sredina",
+            "Desno"
+        ],
+        "tts": [
+            "Isklj.",
+            "Čitaj stranicu",
+            "Pokaži i čitaj"
+        ],
+        "ttsrate": {
+            "1": "Sporije",
+            "2": "Normalno",
+            "3": "Brže"
+        }
+    },
+    "p": {
+        "vision": "Bolja vidljivost",
+        "motion": "Manje pokreta",
+        "focus": "Fokus",
+        "dyslexia": "Disleksija"
+    }
+}
