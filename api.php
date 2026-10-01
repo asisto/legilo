@@ -37,31 +37,32 @@ function legilo_api_default($def) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10314f">
+<meta name="theme-color" content="#ffd35c">
 <meta name="description" content="<?php echo htmlspecialchars($brand); ?> widget reference: embed options, all URL parameters, JavaScript API and theming.">
 <link rel="icon" type="image/svg+xml" href="<?php echo htmlspecialchars($baseUrl); ?>/assets/favicon.svg">
 <link rel="canonical" href="<?php echo htmlspecialchars($baseUrl); ?>/api">
 <title><?php echo htmlspecialchars($brand); ?> API and options</title>
 <style>
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: #1a1a1a; background: #f6f4ef; }
-    a { color: #10314f; }
-    :focus-visible { outline: 3px solid #e8a600; outline-offset: 2px; border-radius: 4px; }
-    header { background: #10314f; color: #fff; padding: 18px 28px; }
-    header a { color: #fff; text-decoration: none; font-weight: 600; }
+    /* Gleiche Optik wie die Projektseite: Sonnengelb-Kopf, runde Karten, Pill-Formen */
+    body { margin: 0; font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: #17253a; background: #fbf7ef; }
+    a { color: #14406b; }
+    :focus-visible { outline: 3px solid #b56a00; outline-offset: 2px; border-radius: 6px; }
+    header { background: #ffd35c; padding: 18px 28px; border-radius: 0 0 20px 20px; }
+    header a { color: #17253a; text-decoration: none; font-weight: 800; font-size: 16px; }
     main { max-width: 860px; margin: 0 auto; padding: 30px 28px 60px; }
-    .card { background: #fff; border: 1px solid #e3ded2; border-radius: 10px; padding: 22px 26px; margin-bottom: 18px; }
-    h1 { font-size: 24px; margin: 0 0 6px; }
-    h2 { font-size: 17px; margin: 0 0 12px; }
+    .card { background: #fff; border: 1.5px solid #ece3d1; border-radius: 18px; padding: 22px 26px; margin-bottom: 18px; }
+    h1 { font-weight: 800; letter-spacing: -0.02em; font-size: 28px; margin: 0 0 6px; }
+    h2 { font-weight: 800; letter-spacing: -0.02em; font-size: 18px; margin: 0 0 12px; }
     p, li { font-size: 14px; line-height: 1.65; }
     p { margin: 0 0 10px; }
-    .muted { color: #56606b; font-size: 13px; }
-    pre { background: #0f1720; color: #d7e3f0; border-radius: 6px; padding: 10px 12px; font-family: Consolas, Monaco, monospace; font-size: 12.5px; line-height: 1.55; overflow-x: auto; }
-    code { font-family: Consolas, Monaco, monospace; font-size: 13px; background: #f0ece3; border-radius: 4px; padding: 1px 5px; }
+    .muted { color: #5a6579; font-size: 13px; }
+    pre { background: #17253a; color: #d7e3f0; border-radius: 12px; padding: 12px 14px; font-family: Consolas, Monaco, monospace; font-size: 12.5px; line-height: 1.55; overflow-x: auto; }
+    code { font-family: Consolas, Monaco, monospace; font-size: 13px; background: #f0ead9; border-radius: 6px; padding: 1px 5px; }
     pre code { background: none; padding: 0; }
     table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
-    th, td { border: 1px solid #e3ded2; padding: 7px 10px; text-align: left; vertical-align: top; }
-    th { background: #f6f4ef; }
+    th, td { border: 1px solid #e3dac6; padding: 7px 10px; text-align: left; vertical-align: top; }
+    th { background: #f6efdf; }
     td code { white-space: nowrap; }
     .tablewrap { overflow-x: auto; }
 </style>
@@ -154,6 +155,8 @@ $brand . '.open()             // open the panel
 ' . $brand . '.reset()            // reset all visitor settings (like the panel button)
 ' . $brand . '.set(key, level)    // activate a function programmatically, e.g. set("contrast", 1)
 ' . $brand . '.get(key)           // current level of a function (0 = off), undefined if not configured
+' . $brand . '.speak(text, opts)  // read out a custom text, e.g. speak("Kitchen", { interrupt: false })
+' . $brand . '.stopSpeaking()     // stop any running speech output
 ' . $brand . '.features()         // [{ key, levels, state }, ...] for building your own UI
 ' . $brand . '.destroy()          // remove the widget from the page entirely
 ' . $brand . '.version            // version string, e.g. "' . LEGILO_VERSION . '"'); ?></code></pre>
@@ -164,6 +167,28 @@ $brand . '.open()             // open the panel
 <pre><code><?php echo htmlspecialchars(
 '// Example: your own dark mode switch, widget embedded with hide=1
 ' . $brand . '.set("contrast", ' . $brand . '.get("contrast") === 1 ? 0 : 1);'); ?></code></pre>
+        <p><code>speak()</code> lets your page announce its own texts through the widget's
+        read-aloud engine: sentence chunking, voice selection and the visitor's speed setting
+        are applied automatically. It only speaks while the visitor has turned on read-aloud
+        in the panel and returns <code>false</code> otherwise, so the page can offer
+        announcements without ever starting speech uninvited. By default a call interrupts
+        running speech; pass <code>{ interrupt: false }</code> for low-priority announcements
+        that should only be spoken when nothing else is playing. Useful where the content is
+        not readable text, e.g. a 3D tour announcing rooms or info tags on selection.</p>
+        <p>Note that the read-aloud mode "Read page" runs once: it switches itself off when
+        the page has been read, and an interrupting announcement also ends it. After that
+        <code>speak()</code> stays silent. For ongoing announcements the visitor should choose
+        "Point &amp; read", which stays active until turned off. <code>speak()</code> exists
+        since version 0.1.1; check for it before calling, e.g.
+        <code>if (<?php echo htmlspecialchars($brand); ?>.speak) { ... }</code>.</p>
+<pre><code><?php echo htmlspecialchars(
+'// Example: a 3D tour announces the selected info tag
+viewer.on("tag.select", function (tag) {
+    ' . $brand . '.speak(tag.label + ". " + tag.text);          // interrupts running speech
+});
+viewer.on("room.enter", function (room) {
+    ' . $brand . '.speak(room.name, { interrupt: false });      // only when nothing is playing
+});'); ?></code></pre>
         <p>Typical pattern: embed with <code>hide=1</code> (and optionally <code>css=none</code>)
         and build your own controls with <code>open()</code>, <code>set()</code> and
         <code>features()</code>.</p>

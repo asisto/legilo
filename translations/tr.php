@@ -3,6 +3,7 @@
 $brand = LEGILO_BRAND;
 $brandJs = strtolower($brand) . '.js';
 $repoWp = LEGILO_GITHUB_URL . '/tree/main/wordpress/legilo';
+$dirWp = 'https://wordpress.org/plugins/legilo/';
 return array(
     'metaTitle' => $brand . ': ücretsiz erişilebilirlik widget\'ı (okuma yardımı)',
     'tagline' => 'Her web sitesi için okuma yardımı. Ücretsiz.',
@@ -11,7 +12,7 @@ return array(
     'ctaConfig' => 'Widget\'ı yapılandır',
     'ctaTest' => 'Hemen dene',
     'badge1t' => 'Herkes için ücretsiz',
-    'badge1x' => 'Lisans yok, sınır yok, ek satış yok. Ekleyin ve bitti, ticari kullanım dahil.',
+    'badge1x' => 'Lisans yok, sınır yok, ek satış yok. Kayıt yok, e-posta adresi bile gerekmez. Ekleyin ve bitti, ticari kullanım dahil.',
     'badge2t' => '37 dil',
     'badge2x' => 'Widget sayfa dilini otomatik algılar, Almancadan Arapçaya (RTL düzeniyle).',
     'badge3t' => 'Gizlilik yerleşik',
@@ -45,7 +46,7 @@ return array(
         array('Web sitem bununla erişilebilir olur mu?',
             'Hayır. ' . $brand . ' bir okuma yardımıdır ve erişilebilir geliştirmenin yerini tutmaz. WCAG, EN 301 549 veya ulusal yasalara uyum web sitenizin kaynak kodunda oluşur ve bu kodu hiçbir widget değiştiremez, ücretli olanlar bile. Widget üstüne eklenen bir konfor artısıdır, ikame değildir.'),
         array('Gerçekte ne kadara mal olur?',
-            'Hiçbir şeye. Lisans yok, sınır yok, ek satış yok, zorunlu marka yok, ticari kullanım dahil. Sesli okuma bile tamamen ziyaretçinin tarayıcısında çalışır (Web Speech API) ve kimseye sürekli maliyet çıkarmaz.'),
+            'Hiçbir şeye. Lisans yok, sınır yok, ek satış yok, zorunlu marka yok, ticari kullanım dahil. Sesli okuma bile tamamen ziyaretçinin tarayıcısında çalışır (Web Speech API) ve kimseye sürekli maliyet çıkarmaz. Ayrıca hiçbir yere kayıt olmanız gerekmez: kayıt yok, e-posta adresi yok, hesap yok. Kodu kopyalayın, ekleyin, bitti.'),
         array('Bunun için çerez bildirimi gerekir mi?',
             'Hayır. Widget çerez koymaz ve üçüncü taraf sunuculardan hiçbir şey yüklemez. Ziyaretçinin seçtiği ayarlar yalnızca etkin bir etkileşimden sonra tarayıcısının localStorage alanına kaydedilir. Gizlilik politikasında belirtmek yeterlidir.'),
         array('Widget\'ı kendim nasıl barındırırım?',
@@ -63,8 +64,9 @@ return array(
     'selfTitle' => 'Kendin barındır',
     'selfHint' => 'Yapılandırması gömülü, hazır bir <code>' . $brandJs . '</code> indirir (gömülü disleksi yazı tipi dahil, SIL&nbsp;OFL). Dosyayı kendi sunucunuza koyun ve ekleyin:',
     'download' => $brandJs . ' dosyasını indir',
-    'wordpress' => 'WordPress mi kullanıyorsunuz? ' . '<a href="' . $repoWp . '" target="_blank" rel="noopener">' . 'GitHub\'da hazır bir eklenti' . '</a>' . ' var: kurun, etkinleştirin ve ekleme kodunu Ayarlar, Legilo altına yapıştırın.',
+    'wordpress' => 'WordPress mi kullanıyorsunuz? Legilo ' . '<a href="' . $dirWp . '" target="_blank" rel="noopener">' . 'resmi eklenti dizininde' . '</a>' . ' yer alıyor: Eklentiler, Yeni ekle altında "Legilo" aratın. Konumu, renkleri, dili ve özellikleri doğrudan eklenti ayarlarından seçin, veya ekleme kodunu oraya yapıştırın.',
     'wpDownload' => 'Eklentiyi indir (ZIP)',
+    'wpDirectory' => 'Eklenti dizinini aç',
     'cssOpt' => 'Widget stilleri olmadan yükle (css=none): paneli tamamen kendi CSS kodunuzla biçimlendirirsiniz',
     'cssTitle' => 'Kendi tasarımınız için CSS iskeleti (css=none)',
     'devApiT' => 'Geliştiriciler için',

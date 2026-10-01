@@ -576,6 +576,9 @@
         var ui = states.contrast === 3 ? 'invert(1) hue-rotate(180deg)' : '';
         host.style.filter = ui;
         overlayHost.style.filter = ui;
+        // Extend cursor and guide/mask tracking into same-origin iframes.
+        frameWatch(!!(states.cursor || states.guide || states.mask));
+        refreshFrames();
     }
 
     /* ---------------- Reading guide & reading mask (own overlays) ---------------- */
@@ -646,6 +649,117 @@
             moveListening = false;
         }
         if (need) positionOverlays();
+    }
+
+    /* ---------------- Same-origin iframes ----------------
+     * Our page effects live in the top document, but a cursor set there stops
+     * at the iframe boundary and pointer moves inside an iframe never reach the
+     * top document. So for every reachable (same-origin) iframe we mirror the
+     * big-cursor style into its document and listen for pointer moves inside it,
+     * translating the coordinates back into the top viewport so the reading
+     * guide and mask keep following. Cross-origin iframes stay untouched
+     * (browser security); there is no way around that. */
+
+    function eachFrameDoc(fn) {
+        var ifr = document.getElementsByTagName('iframe');
+        for (var i = 0; i < ifr.length; i++) {
+            var d = null;
+            try { d = ifr[i].contentDocument; } catch (e) { d = null; }
+            if (d && d.head && d.body) {
+                try { fn(d, ifr[i]); } catch (e) { }
+            }
+        }
+    }
+
+    function syncFrameCursor() {
+        eachFrameDoc(function (d) {
+            var el = d.getElementById('legilo-cursor');
+            if (states.cursor) {
+                if (!el) {
+                    el = d.createElement('style');
+                    el.id = 'legilo-cursor';
+                    d.head.appendChild(el);
+                }
+                el.textContent = '@media screen{' + CSSF.cursor + '}';
+            } else if (el && el.parentNode) {
+                el.parentNode.removeChild(el);
+            }
+        });
+    }
+
+    // Move listeners bound inside iframe documents (kept so we can detach them).
+    var frameMoves = [];
+    function frameBindMove(on) {
+        for (var i = 0; i < frameMoves.length; i++) {
+            var r = frameMoves[i];
+            try {
+                r.doc.removeEventListener('mousemove', r.move);
+                r.doc.removeEventListener('touchstart', r.touch);
+                r.doc.removeEventListener('touchmove', r.touch);
+            } catch (e) { }
+        }
+        frameMoves = [];
+        if (!on) return;
+        eachFrameDoc(function (d, frame) {
+            var move = function (e) {
+                mouseY = frame.getBoundingClientRect().top + e.clientY;
+                positionOverlays();
+            };
+            var touch = function (e) {
+                if (e.touches && e.touches.length) {
+                    mouseY = frame.getBoundingClientRect().top + e.touches[0].clientY;
+                    positionOverlays();
+                }
+            };
+            d.addEventListener('mousemove', move, { passive: true });
+            d.addEventListener('touchstart', touch, { passive: true });
+            d.addEventListener('touchmove', touch, { passive: true });
+            frameMoves.push({ doc: d, move: move, touch: touch });
+        });
+    }
+
+    function refreshFrames() {
+        syncFrameCursor();
+        frameBindMove(!!(states.guide || states.mask));
+    }
+
+    // Late, added or reloaded iframes: a fresh document loses our injected style
+    // and listeners, so we re-apply whenever a frame loads or a new one appears.
+    var watchedFrames = [];
+    var frameObserver = null;
+    function watchFrame(frame) {
+        if (frame.__legiloWatched) return;
+        frame.__legiloWatched = true;
+        watchedFrames.push(frame);
+        frame.addEventListener('load', refreshFrames);
+    }
+    function frameWatch(on) {
+        if (on) {
+            var ex = document.getElementsByTagName('iframe');
+            for (var i = 0; i < ex.length; i++) watchFrame(ex[i]);
+            if (!frameObserver && window.MutationObserver) {
+                frameObserver = new MutationObserver(function (muts) {
+                    var found = false;
+                    for (var m = 0; m < muts.length; m++) {
+                        var added = muts[m].addedNodes;
+                        for (var a = 0; a < added.length; a++) {
+                            var n = added[a];
+                            if (n.nodeType !== 1) continue;
+                            if (n.tagName === 'IFRAME') { watchFrame(n); found = true; }
+                            else if (n.getElementsByTagName) {
+                                var inner = n.getElementsByTagName('iframe');
+                                for (var j = 0; j < inner.length; j++) { watchFrame(inner[j]); found = true; }
+                            }
+                        }
+                    }
+                    if (found) refreshFrames();
+                });
+                frameObserver.observe(document.documentElement, { childList: true, subtree: true });
+            }
+        } else if (frameObserver) {
+            frameObserver.disconnect();
+            frameObserver = null;
+        }
     }
 
     /* ---------------- Panel UI (Shadow DOM) ---------------- */
@@ -1085,7 +1199,13 @@
             var first = root.querySelector('.close');
             if (first) first.focus();
         }
-        document.addEventListener('mousedown', onDocDown, true);
+        // Outside-Klick schliesst nur, wenn der eingebaute Launcher sichtbar ist.
+        // Bei hide=1 steuert der Betreiber das Panel ueber einen eigenen Button
+        // (Legilo.toggle/open/close); ein Outside-mousedown wuerde dessen Klick
+        // sonst zuvorkommen (schliesst per mousedown, der folgende click oeffnet
+        // wieder). Ohne den Listener toggelt ein externer Button direkt korrekt;
+        // geschlossen wird dann ueber den eigenen Button, das Panel-X oder Esc.
+        if (!cfg.hide) document.addEventListener('mousedown', onDocDown, true);
     }
     function showMainSilent() {
         structView.classList.remove('open');
@@ -1151,6 +1271,19 @@
             document.removeEventListener('touchmove', onTouch);
             moveListening = false;
         }
+        frameBindMove(false);
+        eachFrameDoc(function (d) {
+            var el = d.getElementById('legilo-cursor');
+            if (el && el.parentNode) el.parentNode.removeChild(el);
+        });
+        frameWatch(false);
+        for (var wf = 0; wf < watchedFrames.length; wf++) {
+            try {
+                watchedFrames[wf].removeEventListener('load', refreshFrames);
+                delete watchedFrames[wf].__legiloWatched;
+            } catch (e) { }
+        }
+        watchedFrames = [];
         document.removeEventListener('mousedown', onDocDown, true);
         if (styleEl && styleEl.parentNode) styleEl.parentNode.removeChild(styleEl);
         if (host.parentNode) host.parentNode.removeChild(host);
@@ -1201,6 +1334,21 @@
         });
     }
 
+    /* Eigene Ansagen der Seite ueber die Vorlese-Engine des Widgets (Chunking,
+     * Stimme und Tempo wie beim Vorlesen). Spricht NUR, wenn der Besucher die
+     * Vorlese-Funktion im Panel aktiviert hat - die Seite kann Ansagen anbieten,
+     * aber nie ungefragt losreden (kein Autostart). Mit { interrupt: false }
+     * kommt eine Ansage nur durch, wenn gerade nichts gesprochen wird
+     * (niederpriore Meldungen, z.B. Ortswechsel in einer 3D-Tour). */
+    function apiSpeak(text, opts) {
+        opts = opts || {};
+        if (!ttsSupported() || !(states.tts > 0)) return false;
+        if (opts.interrupt === false) {
+            try { if (speechSynthesis.speaking || speechSynthesis.pending) return false; } catch (e) { return false; }
+        }
+        return ttsSpeak(String(text || ''), false);
+    }
+
     window.__BRAND__ = {
         version: VERSION,
         open: openPanel,
@@ -1209,6 +1357,8 @@
         reset: resetAll,
         set: apiSet,
         get: apiGet,
+        speak: apiSpeak,
+        stopSpeaking: ttsStop,
         features: apiFeatures,
         destroy: destroy
     };

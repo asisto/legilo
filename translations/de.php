@@ -3,6 +3,7 @@
 $brand = LEGILO_BRAND;
 $brandJs = strtolower($brand) . '.js';
 $repoWp = LEGILO_GITHUB_URL . '/tree/main/wordpress/legilo';
+$dirWp = 'https://wordpress.org/plugins/legilo/';
 return array(
     'metaTitle' => $brand . ': Kostenloses Barrierefreiheits-Widget (Lesehilfe)',
     'tagline' => 'Lesehilfe für jede Website. Kostenlos.',
@@ -11,7 +12,7 @@ return array(
     'ctaConfig' => 'Widget konfigurieren',
     'ctaTest' => 'Direkt ausprobieren',
     'badge1t' => 'Kostenlos für alle',
-    'badge1x' => 'Keine Lizenzen, keine Limits, kein Upselling. Einbinden und fertig, auch kommerziell.',
+    'badge1x' => 'Keine Lizenzen, keine Limits, kein Upselling. Keine Registrierung, nicht einmal eine E-Mail-Adresse. Einbinden und fertig, auch kommerziell.',
     'badge2t' => '37 Sprachen',
     'badge2x' => 'Das Widget erkennt die Seitensprache automatisch, von Deutsch bis Arabisch (mit RTL-Layout).',
     'badge3t' => 'Datenschutz eingebaut',
@@ -45,7 +46,7 @@ return array(
         array('Ist meine Website damit barrierefrei?',
             'Nein. ' . $brand . ' ist eine Lesehilfe und ersetzt keine barrierefreie Entwicklung. Konformität mit WCAG, EN 301 549, BFSG oder BaFG entsteht im Quellcode deiner Website, und den kann kein Widget ändern, auch kein bezahltes. Das Widget ist ein Komfort-Extra obendrauf, kein Ersatz.'),
         array('Was kostet das wirklich?',
-            'Nichts. Keine Lizenzen, keine Limits, kein Upselling, kein Branding-Zwang, auch bei kommerzieller Nutzung. Selbst die Vorlesefunktion läuft komplett im Browser des Besuchers (Web Speech API) und verursacht keine laufenden Kosten, bei niemandem.'),
+            'Nichts. Keine Lizenzen, keine Limits, kein Upselling, kein Branding-Zwang, auch bei kommerzieller Nutzung. Selbst die Vorlesefunktion läuft komplett im Browser des Besuchers (Web Speech API) und verursacht keine laufenden Kosten, bei niemandem. Und du musst dich nirgends anmelden: keine Registrierung, keine E-Mail-Adresse, kein Konto. Code kopieren und einbinden reicht.'),
         array('Brauche ich dafür ein Cookie-Banner?',
             'Nein. Das Widget setzt keine Cookies und lädt nichts von Drittservern. Die vom Besucher gewählten Einstellungen landen erst nach aktiver Interaktion im localStorage seines Browsers, das ist nach Par. 25 Abs. 2 TDDDG einwilligungsfrei. In der Datenschutzerklärung erwähnen genügt.'),
         array('Wie hoste ich das Widget selbst?',
@@ -63,8 +64,9 @@ return array(
     'selfTitle' => 'Selbst hosten',
     'selfHint' => 'Lädt ein fertiges <code>' . $brandJs . '</code> mit fest eingebackener Konfiguration herunter (inkl. eingebettetem Dyslexie-Font, SIL&nbsp;OFL). Datei auf den eigenen Server legen und einbinden:',
     'download' => $brandJs . ' herunterladen',
-    'wordpress' => 'WordPress? Es gibt ein fertiges ' . '<a href="' . $repoWp . '" target="_blank" rel="noopener">' . 'Plugin auf GitHub' . '</a>' . ': installieren, aktivieren und den Embed-Code unter Einstellungen, Legilo einfügen.',
+    'wordpress' => 'WordPress? Legilo ist im ' . '<a href="' . $dirWp . '" target="_blank" rel="noopener">' . 'offiziellen Plugin-Verzeichnis' . '</a>' . ': einfach unter Plugins, Installieren nach "Legilo" suchen. Position, Farben, Sprache und Funktionen wählst du direkt in den Plugin-Einstellungen, oder du fügst dort deinen Embed-Code ein.',
     'wpDownload' => 'Plugin herunterladen (ZIP)',
+    'wpDirectory' => 'Zum Plugin-Verzeichnis',
     'cssOpt' => 'Ohne Widget-Styling laden (css=none): Panel komplett mit eigenem CSS gestalten',
     'cssTitle' => 'CSS-Gerüst für eigenes Design (css=none)',
     'devApiT' => 'Für Entwickler',

@@ -3,6 +3,7 @@
 $brand = LEGILO_BRAND;
 $brandJs = strtolower($brand) . '.js';
 $repoWp = LEGILO_GITHUB_URL . '/tree/main/wordpress/legilo';
+$dirWp = 'https://wordpress.org/plugins/legilo/';
 return array(
     'metaTitle' => $brand . ': darmowy widget dostępności (pomoc w czytaniu)',
     'tagline' => 'Pomoc w czytaniu dla każdej strony internetowej. Za darmo.',
@@ -11,7 +12,7 @@ return array(
     'ctaConfig' => 'Skonfiguruj widget',
     'ctaTest' => 'Wypróbuj od razu',
     'badge1t' => 'Darmowy dla wszystkich',
-    'badge1x' => 'Bez licencji, bez limitów, bez dosprzedaży. Osadzasz i gotowe, także komercyjnie.',
+    'badge1x' => 'Bez licencji, bez limitów, bez dosprzedaży. Bez rejestracji, nawet bez adresu e-mail. Osadzasz i gotowe, także komercyjnie.',
     'badge2t' => '37 języków',
     'badge2x' => 'Widget automatycznie rozpoznaje język strony, od niemieckiego po arabski (z układem RTL).',
     'badge3t' => 'Prywatność w standardzie',
@@ -45,7 +46,7 @@ return array(
         array('Czy moja strona stanie się dzięki temu dostępna?',
             'Nie. ' . $brand . ' to pomoc w czytaniu i nie zastępuje dostępnego programowania. Zgodność z WCAG, EN 301 549 lub przepisami krajowymi powstaje w kodzie źródłowym strony, a żaden widget nie może zmienić tego kodu, także płatny. Widget to dodatkowy komfort, nie zamiennik.'),
         array('Ile to naprawdę kosztuje?',
-            'Nic. Bez licencji, bez limitów, bez dosprzedaży, bez wymuszonego brandingu, także przy użytku komercyjnym. Nawet czytanie na głos działa w całości w przeglądarce odwiedzającego (Web Speech API) i nie generuje u nikogo bieżących kosztów.'),
+            'Nic. Bez licencji, bez limitów, bez dosprzedaży, bez wymuszonego brandingu, także przy użytku komercyjnym. Nawet czytanie na głos działa w całości w przeglądarce odwiedzającego (Web Speech API) i nie generuje u nikogo bieżących kosztów. I nigdzie nie trzeba się rejestrować: bez rejestracji, bez adresu e-mail, bez konta. Kopiujesz kod, osadzasz, gotowe.'),
         array('Czy potrzebuję do tego banera cookie?',
             'Nie. Widget nie ustawia ciasteczek i niczego nie ładuje z serwerów zewnętrznych. Wybrane przez odwiedzającego ustawienia trafiają do localStorage jego przeglądarki dopiero po aktywnej interakcji. Wystarczy wzmianka w polityce prywatności.'),
         array('Jak samodzielnie hostować widget?',
@@ -63,8 +64,9 @@ return array(
     'selfTitle' => 'Hosting własny',
     'selfHint' => 'Pobiera gotowy <code>' . $brandJs . '</code> z wbudowaną konfiguracją (wraz z osadzonym fontem dla dyslektyków, SIL&nbsp;OFL). Umieść plik na własnym serwerze i osadź go:',
     'download' => 'Pobierz ' . $brandJs,
-    'wordpress' => 'Używasz WordPressa? Jest gotowa ' . '<a href="' . $repoWp . '" target="_blank" rel="noopener">' . 'wtyczka na GitHubie' . '</a>' . ': zainstaluj ją, aktywuj i wklej kod osadzenia w Ustawienia, Legilo.',
+    'wordpress' => 'Używasz WordPressa? Legilo jest w ' . '<a href="' . $dirWp . '" target="_blank" rel="noopener">' . 'oficjalnym katalogu wtyczek' . '</a>' . ': wyszukaj "Legilo" w Wtyczki, Dodaj nową. Pozycję, kolory, język i funkcje wybierzesz bezpośrednio w ustawieniach wtyczki, albo wklej tam kod osadzenia.',
     'wpDownload' => 'Pobierz wtyczkę (ZIP)',
+    'wpDirectory' => 'Otwórz katalog wtyczek',
     'cssOpt' => 'Ładuj bez stylów widgetu (css=none): panel stylujesz w całości własnym CSS',
     'cssTitle' => 'Szkielet CSS dla własnego designu (css=none)',
     'devApiT' => 'Dla programistów',

@@ -3,6 +3,7 @@
 $brand = LEGILO_BRAND;
 $brandJs = strtolower($brand) . '.js';
 $repoWp = LEGILO_GITHUB_URL . '/tree/main/wordpress/legilo';
+$dirWp = 'https://wordpress.org/plugins/legilo/';
 return array(
     'metaTitle' => $brand . ': gratis toegankelijkheidswidget (leeshulp)',
     'tagline' => 'Leeshulp voor elke website. Gratis.',
@@ -11,7 +12,7 @@ return array(
     'ctaConfig' => 'Widget configureren',
     'ctaTest' => 'Direct uitproberen',
     'badge1t' => 'Gratis voor iedereen',
-    'badge1x' => 'Geen licenties, geen limieten, geen upselling. Insluiten en klaar, ook commercieel.',
+    'badge1x' => 'Geen licenties, geen limieten, geen upselling. Geen registratie, zelfs geen e-mailadres. Insluiten en klaar, ook commercieel.',
     'badge2t' => '37 talen',
     'badge2x' => 'De widget herkent de paginataal automatisch, van Duits tot Arabisch (met RTL-layout).',
     'badge3t' => 'Privacy ingebouwd',
@@ -45,7 +46,7 @@ return array(
         array('Wordt mijn website hiermee toegankelijk?',
             'Nee. ' . $brand . ' is een leeshulp en geen vervanging voor toegankelijke ontwikkeling. Conformiteit met WCAG, EN 301 549 of nationale wetten ontstaat in de broncode van je website, en geen enkele widget kan die code veranderen, ook geen betaalde. De widget is een comfort-extra bovenop, geen vervanging.'),
         array('Wat kost het echt?',
-            'Niets. Geen licenties, geen limieten, geen upselling, geen verplichte branding, ook bij commercieel gebruik. Zelfs de voorleesfunctie draait volledig in de browser van de bezoeker (Web Speech API) en veroorzaakt voor niemand lopende kosten.'),
+            'Niets. Geen licenties, geen limieten, geen upselling, geen verplichte branding, ook bij commercieel gebruik. Zelfs de voorleesfunctie draait volledig in de browser van de bezoeker (Web Speech API) en veroorzaakt voor niemand lopende kosten. En je hoeft je nergens aan te melden: geen registratie, geen e-mailadres, geen account. Code kopiëren, insluiten, klaar.'),
         array('Heb ik hiervoor een cookiebanner nodig?',
             'Nee. De widget plaatst geen cookies en laadt niets van externe servers. De door de bezoeker gekozen instellingen komen pas na actieve interactie in de localStorage van zijn browser terecht. Vermelden in de privacyverklaring volstaat.'),
         array('Hoe host ik de widget zelf?',
@@ -63,8 +64,9 @@ return array(
     'selfTitle' => 'Zelf hosten',
     'selfHint' => 'Downloadt een kant-en-klare <code>' . $brandJs . '</code> met de configuratie ingebakken (inclusief het ingesloten dyslexielettertype, SIL&nbsp;OFL). Zet het bestand op je eigen server en sluit het in:',
     'download' => $brandJs . ' downloaden',
-    'wordpress' => 'Gebruik je WordPress? Er is een ' . '<a href="' . $repoWp . '" target="_blank" rel="noopener">' . 'kant-en-klare plugin op GitHub' . '</a>' . ': installeren, activeren en de insluitcode onder Instellingen, Legilo plakken.',
+    'wordpress' => 'Gebruik je WordPress? Legilo staat in de ' . '<a href="' . $dirWp . '" target="_blank" rel="noopener">' . 'officiële plugincatalogus' . '</a>' . ': zoek naar "Legilo" onder Plugins, Nieuwe plugin toevoegen. Kies positie, kleuren, taal en functies direct in de plugininstellingen, of plak daar je insluitcode.',
     'wpDownload' => 'Plugin downloaden (ZIP)',
+    'wpDirectory' => 'Naar de plugincatalogus',
     'cssOpt' => 'Laden zonder widget-styling (css=none): je stijlt het paneel volledig met eigen CSS',
     'cssTitle' => 'CSS-skelet voor je eigen design (css=none)',
     'devApiT' => 'Voor ontwikkelaars',

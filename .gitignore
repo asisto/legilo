@@ -1,7 +1,9 @@
 # Interne Dateien: gehen weder online noch ins Repo
 .offline/
+_tools/
 .idea/
 .claude/
+.vscode/
 CLAUDE.md
 
 # Lokale Konfiguration mit API-Key: liegt nur auf dem Server, nie im Repo

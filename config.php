@@ -5,7 +5,7 @@
  * Konfigurator-Seite (generate.php) verwendet.
  */
 
-const LEGILO_VERSION = '0.1.0';
+const LEGILO_VERSION = '0.1.1';
 
 // Projektname (Arbeitstitel, zentral aenderbar; erscheint auf der Projektseite)
 const LEGILO_BRAND = 'Legilo';

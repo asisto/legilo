@@ -3,6 +3,7 @@
 $brand = LEGILO_BRAND;
 $brandJs = strtolower($brand) . '.js';
 $repoWp = LEGILO_GITHUB_URL . '/tree/main/wordpress/legilo';
+$dirWp = 'https://wordpress.org/plugins/legilo/';
 return array(
     'metaTitle' => $brand . ': widget de accesibilidad gratuito (ayuda a la lectura)',
     'tagline' => 'Ayuda a la lectura para cualquier sitio web. Gratis.',
@@ -11,7 +12,7 @@ return array(
     'ctaConfig' => 'Configurar el widget',
     'ctaTest' => 'Probarlo ahora mismo',
     'badge1t' => 'Gratis para todos',
-    'badge1x' => 'Sin licencias, sin límites, sin ventas adicionales. Intégralo y listo, también para uso comercial.',
+    'badge1x' => 'Sin licencias, sin límites, sin ventas adicionales. Sin registro, ni siquiera una dirección de correo. Intégralo y listo, también para uso comercial.',
     'badge2t' => '37 idiomas',
     'badge2x' => 'El widget detecta automáticamente el idioma de la página, del alemán al árabe (con diseño RTL).',
     'badge3t' => 'Privacidad integrada',
@@ -45,7 +46,7 @@ return array(
         array('¿Mi sitio web se vuelve accesible con esto?',
             'No. ' . $brand . ' es una ayuda a la lectura y no sustituye el desarrollo accesible. La conformidad con las WCAG, la norma EN 301 549 o las leyes nacionales nace en el código fuente de tu sitio, y ningún widget puede cambiar ese código, tampoco uno de pago. El widget es un extra de comodidad, no un sustituto.'),
         array('¿Cuánto cuesta realmente?',
-            'Nada. Sin licencias, sin límites, sin ventas adicionales, sin marca obligatoria, también para uso comercial. Incluso la lectura en voz alta funciona por completo en el navegador del visitante (Web Speech API) y no genera costes recurrentes para nadie.'),
+            'Nada. Sin licencias, sin límites, sin ventas adicionales, sin marca obligatoria, también para uso comercial. Incluso la lectura en voz alta funciona por completo en el navegador del visitante (Web Speech API) y no genera costes recurrentes para nadie. Y no hay que darse de alta en ningún sitio: sin registro, sin dirección de correo, sin cuenta. Copia el código, intégralo y listo.'),
         array('¿Necesito un banner de cookies?',
             'No. El widget no instala cookies y no carga nada de servidores de terceros. Los ajustes elegidos por el visitante se guardan en el localStorage de su navegador solo tras una interacción activa. Basta con mencionarlo en la política de privacidad.'),
         array('¿Cómo alojo el widget yo mismo?',
@@ -63,8 +64,9 @@ return array(
     'selfTitle' => 'Alojamiento propio',
     'selfHint' => 'Descarga un <code>' . $brandJs . '</code> listo con la configuración integrada (incluida la fuente para dislexia, SIL&nbsp;OFL). Sube el archivo a tu propio servidor e intégralo:',
     'download' => 'Descargar ' . $brandJs,
-    'wordpress' => '¿Usas WordPress? Hay un ' . '<a href="' . $repoWp . '" target="_blank" rel="noopener">' . 'plugin listo en GitHub' . '</a>' . ': instálalo, actívalo y pega tu código de integración en Ajustes, Legilo.',
+    'wordpress' => '¿Usas WordPress? Legilo está en el ' . '<a href="' . $dirWp . '" target="_blank" rel="noopener">' . 'directorio oficial de plugins' . '</a>' . ': busca "Legilo" en Plugins, Añadir nuevo. Elige posición, colores, idioma y funciones directamente en los ajustes del plugin, o pega allí tu código de integración.',
     'wpDownload' => 'Descargar el plugin (ZIP)',
+    'wpDirectory' => 'Abrir el directorio de plugins',
     'cssOpt' => 'Cargar sin estilos del widget (css=none): el panel se estiliza por completo con tu CSS',
     'cssTitle' => 'Esqueleto CSS para tu propio diseño (css=none)',
     'devApiT' => 'Para desarrolladores',

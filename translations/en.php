@@ -3,6 +3,7 @@
 $brand = LEGILO_BRAND;
 $brandJs = strtolower($brand) . '.js';
 $repoWp = LEGILO_GITHUB_URL . '/tree/main/wordpress/legilo';
+$dirWp = 'https://wordpress.org/plugins/legilo/';
 return array(
     'metaTitle' => $brand . ': Free accessibility widget (an honest reading aid)',
     'tagline' => 'A reading aid for every website. Free.',
@@ -11,7 +12,7 @@ return array(
     'ctaConfig' => 'Configure the widget',
     'ctaTest' => 'Try it right away',
     'badge1t' => 'Free for everyone',
-    'badge1x' => 'No licenses, no limits, no upselling. Embed it and you are done, commercial use included.',
+    'badge1x' => 'No licenses, no limits, no upselling. No sign-up, not even an email address. Embed it and you are done, commercial use included.',
     'badge2t' => '37 languages',
     'badge2x' => 'The widget detects the page language automatically, from German to Arabic (with RTL layout).',
     'badge3t' => 'Privacy built in',
@@ -45,7 +46,7 @@ return array(
         array('Does this make my website accessible?',
             'No. ' . $brand . ' is a reading aid and no substitute for accessible development. Conformance with WCAG, EN 301 549 or national laws is created in your website\'s source code, and no widget can change that code, not even a paid one. The widget is a comfort extra on top, not a replacement.'),
         array('What does it really cost?',
-            'Nothing. No licenses, no limits, no upselling, no forced branding, commercial use included. Even the read-aloud feature runs entirely in the visitor\'s browser (Web Speech API) and causes no running costs for anyone.'),
+            'Nothing. No licenses, no limits, no upselling, no forced branding, commercial use included. Even the read-aloud feature runs entirely in the visitor\'s browser (Web Speech API) and causes no running costs for anyone. And there is nothing to sign up for: no registration, no email address, no account. Copy the code, embed it, done.'),
         array('Do I need a cookie banner for it?',
             'No. The widget sets no cookies and loads nothing from third-party servers. The visitor\'s chosen settings are stored in their browser\'s localStorage only after active interaction. Mentioning it in the privacy policy is enough.'),
         array('How do I self-host the widget?',
@@ -63,8 +64,9 @@ return array(
     'selfTitle' => 'Self-hosting',
     'selfHint' => 'Downloads a ready-made <code>' . $brandJs . '</code> with the configuration baked in (including the embedded dyslexia font, SIL&nbsp;OFL). Put the file on your own server and embed it:',
     'download' => 'Download ' . $brandJs,
-    'wordpress' => 'Using WordPress? There is a ready-made ' . '<a href="' . $repoWp . '" target="_blank" rel="noopener">' . 'plugin on GitHub' . '</a>' . ': install it, activate it and paste your embed code under Settings, Legilo.',
+    'wordpress' => 'Using WordPress? Legilo is in the ' . '<a href="' . $dirWp . '" target="_blank" rel="noopener">' . 'official plugin directory' . '</a>' . ': just search for "Legilo" under Plugins, Add New. Choose position, colors, language and features right in the plugin settings, or paste your embed code there.',
     'wpDownload' => 'Download plugin (ZIP)',
+    'wpDirectory' => 'Open the plugin directory',
     'cssOpt' => 'Load without widget styling (css=none): style the panel entirely with your own CSS',
     'cssTitle' => 'CSS skeleton for your own design (css=none)',
     'devApiT' => 'For developers',
