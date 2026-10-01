@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Knopkleur', 'iconcolor' => 'Icoonkleur', 'icon' => 'Icoon', 'radius' => 'Afronding',
     'behavior' => 'Gedrag', 'panellang' => 'Taal van de widget', 'langauto' => 'Automatisch herkennen',
     'mobile' => 'Mobiel (tot 768 px)', 'mobileShow' => 'Tonen', 'mobileHide' => 'Verbergen',
+    'ttsmode' => 'Voorleesmodi', 'ttsBoth' => 'Beide',
     'statement' => 'Link naar de toegankelijkheidsverklaring (optioneel)',
     'hidebtn' => 'Knop verbergen (openen alleen via de JavaScript-API <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Sneltoets <kbd>Alt+Shift+A</kbd> voor openen activeren',

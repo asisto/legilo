@@ -3,7 +3,7 @@ Contributors: legiloeu
 Tags: accessibility, reading aid, readability, dyslexia, text to speech
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 Requires PHP: 7.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
@@ -64,6 +64,10 @@ on your own server and point the plugin to it in code:
 Then no request to legilo.eu is made at all.
 
 == Changelog ==
+
+= 0.1.2 =
+* New setting "Read-aloud modes": offer both modes, only "read page" or
+  only "point & read" (tts parameter of legilo.eu).
 
 = 0.1.1 =
 * Settings page with native fields (position, colors, button, language,

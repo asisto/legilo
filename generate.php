@@ -482,6 +482,12 @@ $ld = array(
                     </select>
                 </div>
             </div>
+            <label for="f_tts"><?php echo $T['ttsmode']; ?></label>
+            <select id="f_tts">
+                <option value="both"><?php echo $T['ttsBoth']; ?></option>
+                <option value="read"><?php echo htmlspecialchars($widgetLang['s']['tts'][1]); ?></option>
+                <option value="hover"><?php echo htmlspecialchars($widgetLang['s']['tts'][2]); ?></option>
+            </select>
             <label for="f_statement"><?php echo $T['statement']; ?></label>
             <input type="url" id="f_statement" placeholder="https://www.example.com/accessibility">
             <div class="checkline">
@@ -734,6 +740,7 @@ $ld = array(
         $('f_radius').value = cfg.radius;
         $('f_lang').value = cfg.lang;
         $('f_mobile').value = cfg.mobile;
+        $('f_tts').value = ['both', 'read', 'hover'].indexOf(cfg.tts) !== -1 ? cfg.tts : 'both';
         $('f_statement').value = cfg.statement || '';
         $('f_hide').checked = !!parseInt(cfg.hide, 10);
         $('f_hotkey').checked = !!parseInt(cfg.hotkey, 10);
@@ -774,6 +781,7 @@ $ld = array(
             radius: String($('f_radius').value),
             lang: $('f_lang').value,
             mobile: $('f_mobile').value,
+            tts: $('f_tts').value,
             statement: $('f_statement').value.trim(),
             hide: $('f_hide').checked ? '1' : '0',
             hotkey: $('f_hotkey').checked ? '1' : '0',

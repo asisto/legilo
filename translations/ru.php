@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Цвет кнопки', 'iconcolor' => 'Цвет иконки', 'icon' => 'Иконка', 'radius' => 'Скругление',
     'behavior' => 'Поведение', 'panellang' => 'Язык виджета', 'langauto' => 'Определять автоматически',
     'mobile' => 'Мобильные (до 768 px)', 'mobileShow' => 'Показывать', 'mobileHide' => 'Скрывать',
+    'ttsmode' => 'Режимы чтения вслух', 'ttsBoth' => 'Оба',
     'statement' => 'Ссылка на заявление о доступности (необязательно)',
     'hidebtn' => 'Скрыть кнопку (открытие только через JavaScript-API <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Включить сочетание клавиш <kbd>Alt+Shift+A</kbd> для открытия',

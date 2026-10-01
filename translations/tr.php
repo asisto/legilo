@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Düğme rengi', 'iconcolor' => 'Simge rengi', 'icon' => 'Simge', 'radius' => 'Yuvarlaklık',
     'behavior' => 'Davranış', 'panellang' => 'Widget dili', 'langauto' => 'Otomatik algıla',
     'mobile' => 'Mobil (768 px\'e kadar)', 'mobileShow' => 'Göster', 'mobileHide' => 'Gizle',
+    'ttsmode' => 'Sesli okuma modları', 'ttsBoth' => 'Her ikisi',
     'statement' => 'Erişilebilirlik bildirimine bağlantı (isteğe bağlı)',
     'hidebtn' => 'Düğmeyi gizle (yalnızca JavaScript API <a href="api"><code>' . $brand . '.open()</code></a> ile açılır)',
     'hotkeybtn' => 'Açmak için <kbd>Alt+Shift+A</kbd> kısayolunu etkinleştir',

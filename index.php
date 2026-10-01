@@ -124,7 +124,9 @@ function legilo_serve_js($download) {
         header('Content-Disposition: attachment; filename="' . strtolower(LEGILO_BRAND) . '.js"');
         header('Cache-Control: no-store');
     } else {
-        header('Cache-Control: public, max-age=86400');
+        // 1 Stunde: neue Versionen kommen schnell an, danach macht das ETag die
+        // Nachfrage billig (304 ohne Body)
+        header('Cache-Control: public, max-age=3600');
         if (isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) === $etag) {
             http_response_code(304);
             return;

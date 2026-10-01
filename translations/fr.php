@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Couleur du bouton', 'iconcolor' => 'Couleur de l\'icône', 'icon' => 'Icône', 'radius' => 'Arrondi',
     'behavior' => 'Comportement', 'panellang' => 'Langue du widget', 'langauto' => 'Détection automatique',
     'mobile' => 'Mobile (jusqu\'à 768 px)', 'mobileShow' => 'Afficher', 'mobileHide' => 'Masquer',
+    'ttsmode' => 'Modes de lecture à voix haute', 'ttsBoth' => 'Les deux',
     'statement' => 'Lien vers la déclaration d\'accessibilité (optionnel)',
     'hidebtn' => 'Masquer le bouton (ouverture uniquement via l\'API JavaScript <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Activer le raccourci clavier <kbd>Alt+Shift+A</kbd> pour ouvrir',

@@ -3,7 +3,7 @@
  * Plugin Name: Legilo - Reading Aid and Accessibility Widget
  * Plugin URI: https://legilo.eu
  * Description: Adds the free Legilo reading-aid widget to your website. Configure position, colors, language and features under Settings, Legilo. Note: Legilo is a reading aid and does not make your site conform to WCAG or national accessibility laws.
- * Version: 0.1.1
+ * Version: 0.1.2
  * Requires at least: 6.3
  * Requires PHP: 7.0
  * Author: Stefan Puergstaller
@@ -38,6 +38,7 @@ function legilo_schema() {
         'hotkey' => array('type' => 'bool', 'default' => 0),
         'css' => array('type' => 'enum', 'values' => array('base', 'none'), 'default' => 'base'),
         'statement' => array('type' => 'url', 'default' => ''),
+        'tts' => array('type' => 'enum', 'values' => array('both', 'read', 'hover'), 'default' => 'both'),
     );
 }
 
@@ -159,7 +160,7 @@ function legilo_script_url() {
 
 /** Load the widget script (deferred, in the footer, no dependencies). */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_script('legilo', legilo_script_url(), array(), '0.1.1',
+    wp_enqueue_script('legilo', legilo_script_url(), array(), '0.1.2',
         array('in_footer' => true, 'strategy' => 'defer'));
 });
 
@@ -325,6 +326,16 @@ function legilo_settings_page() {
                             <label><input type="checkbox" name="<?php echo esc_attr($name); ?>[hotkey]" value="1" <?php checked($s['hotkey'], 1); ?>>
                                 <?php esc_html_e('Keyboard shortcut Alt+A opens the panel', 'legilo'); ?></label>
                         </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="legilo_tts"><?php esc_html_e('Read-aloud modes', 'legilo'); ?></label></th>
+                    <td>
+                        <select id="legilo_tts" name="<?php echo esc_attr($name); ?>[tts]">
+                            <option value="both" <?php selected($s['tts'], 'both'); ?>><?php esc_html_e('Both: read page and point & read', 'legilo'); ?></option>
+                            <option value="read" <?php selected($s['tts'], 'read'); ?>><?php esc_html_e('Only read page', 'legilo'); ?></option>
+                            <option value="hover" <?php selected($s['tts'], 'hover'); ?>><?php esc_html_e('Only point & read', 'legilo'); ?></option>
+                        </select>
                     </td>
                 </tr>
                 <tr>

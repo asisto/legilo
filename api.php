@@ -126,7 +126,12 @@ function legilo_api_default($def) {
         <p class="muted" style="margin-top:10px">Notes: <code>hide=1</code> hides the launcher (open the panel via the
         JavaScript API instead). <code>css=none</code> loads the panel unstyled in light DOM for fully
         custom CSS (skeleton in the configurator). <code>statement</code> links your accessibility
-        statement in the panel footer.</p>
+        statement in the panel footer. <code>tts</code> sets which read-aloud modes the button offers:
+        <code>both</code> cycles off, "Read page", "Point &amp; read"; <code>read</code> or
+        <code>hover</code> offer only one of them (e.g. <code>tts=hover</code> for 3D tours, where
+        reading the whole page makes no sense). Unknown parameters are ignored, so
+        <code>&amp;v=<?php echo LEGILO_VERSION; ?></code> works as a cache buster: the script is
+        cached for one hour in the browser.</p>
     </div>
 
     <div class="card">
@@ -152,9 +157,11 @@ function legilo_api_default($def) {
 $brand . '.open()             // open the panel
 ' . $brand . '.close()            // close the panel
 ' . $brand . '.toggle()           // open or close, depending on state
+' . $brand . '.isOpen()           // true while the panel is open
 ' . $brand . '.reset()            // reset all visitor settings (like the panel button)
 ' . $brand . '.set(key, level)    // activate a function programmatically, e.g. set("contrast", 1)
 ' . $brand . '.get(key)           // current level of a function (0 = off), undefined if not configured
+' . $brand . '.values()           // actual values of the active settings, see below
 ' . $brand . '.speak(text, opts)  // read out a custom text, e.g. speak("Kitchen", { interrupt: false })
 ' . $brand . '.stopSpeaking()     // stop any running speech output
 ' . $brand . '.features()         // [{ key, levels, state }, ...] for building your own UI
@@ -163,7 +170,9 @@ $brand . '.open()             // open the panel
         <p><code>set()</code> behaves exactly like a click in the panel: the level is clamped to the
         function's range (see the feature table: most functions have 2 levels, multi-level ones up
         to 4), the change is applied, saved and announced to screen readers. Levels above the
-        maximum are clamped, unknown or unconfigured keys return <code>false</code>.</p>
+        maximum are clamped, unknown or unconfigured keys return <code>false</code>. A read-aloud
+        mode that the <code>tts</code> parameter does not offer also returns <code>false</code>;
+        <code>features()</code> lists the offered modes for <code>tts</code> as <code>allowed</code>.</p>
 <pre><code><?php echo htmlspecialchars(
 '// Example: your own dark mode switch, widget embedded with hide=1
 ' . $brand . '.set("contrast", ' . $brand . '.get("contrast") === 1 ? 0 : 1);'); ?></code></pre>
@@ -178,7 +187,8 @@ $brand . '.open()             // open the panel
         <p>Note that the read-aloud mode "Read page" runs once: it switches itself off when
         the page has been read, and an interrupting announcement also ends it. After that
         <code>speak()</code> stays silent. For ongoing announcements the visitor should choose
-        "Point &amp; read", which stays active until turned off. <code>speak()</code> exists
+        "Point &amp; read", which stays active until turned off (embed with
+        <code>tts=hover</code> to offer only that mode). <code>speak()</code> exists
         since version 0.1.1; check for it before calling, e.g.
         <code>if (<?php echo htmlspecialchars($brand); ?>.speak) { ... }</code>.</p>
 <pre><code><?php echo htmlspecialchars(
@@ -192,6 +202,69 @@ viewer.on("room.enter", function (room) {
         <p>Typical pattern: embed with <code>hide=1</code> (and optionally <code>css=none</code>)
         and build your own controls with <code>open()</code>, <code>set()</code> and
         <code>features()</code>.</p>
+        <p><code>values()</code> returns the actual values behind the active settings, so your
+        page can carry them over to areas the widget cannot reach (your own iframes, canvas
+        labels). <code>spacing</code> and <code>fontFamily</code> are <code>null</code> while off.
+        <code>fontUrl</code> and <code>fontFaceCss</code> are always set, so the dyslexia font can be
+        preloaded; in the download variant the font is embedded, then <code>fontUrl</code> is
+        <code>null</code> and only <code>fontFaceCss</code> carries it.</p>
+<pre><code><?php echo htmlspecialchars(
+'{
+    fontScale: 1.15,                 // 1 | 1.15 | 1.3 | 1.55
+    spacing: { lineHeight: "1.6", letterSpacing: "0.12em", wordSpacing: "0.16em" },
+    fontFamily: "\"OpenDyslexic\",Arial,sans-serif",
+    fontUrl: "' . $baseUrl . '/assets/fonts/opendyslexic-400.woff2",
+    fontFaceCss: "@font-face{font-family:\'OpenDyslexic\';src:url(...)...}"
+}'); ?></code></pre>
+    </div>
+
+    <div class="card">
+        <h2>Events</h2>
+        <p>Since version 0.2.0 the widget dispatches plain DOM events on <code>document</code>.
+        They stay in the browser, nothing is sent anywhere.</p>
+        <div class="tablewrap">
+        <table>
+            <tr><th>Event</th><th>When</th><th><code>event.detail</code></th></tr>
+            <tr><td><code>legilo:change</code></td><td>Every change of a setting: panel click,
+                profile, reset, <code>set()</code>, read-aloud speed, the automatic end of "Read page",
+                and once after loading when stored settings (or system preferences) were applied.
+                Fires only when something really changed.</td>
+                <td><code>key</code>, <code>level</code>, <code>states</code>, <code>rate</code>,
+                <code>values</code>, <code>source</code>, <code>profile</code></td></tr>
+            <tr><td><code>legilo:open</code><br><code>legilo:close</code></td><td>The panel opens or closes
+                (launcher, own button via the API, close button, Esc, outside click).</td><td>-</td></tr>
+            <tr><td><code>legilo:speechstart</code></td><td>The voice really starts speaking.</td>
+                <td><code>source</code>: <code>page</code> | <code>hover</code> | <code>api</code></td></tr>
+            <tr><td><code>legilo:speechend</code></td><td>Speech has ended, was stopped or failed; exactly once
+                per start. When one text replaces another, speech stays "on" in between.</td>
+                <td><code>reason</code>: <code>end</code> | <code>stop</code> | <code>error</code></td></tr>
+        </table>
+        </div>
+        <p style="margin-top:10px">In <code>legilo:change</code>, <code>key</code> is the changed function
+        (<code>ttsrate</code> for the speed) or <code>null</code> for profile, reset and load;
+        <code>level</code> is its new level, <code>states</code> all levels as
+        <code>{ key: level }</code>, <code>rate</code> the read-aloud speed (1 slower, 2 normal,
+        3 faster), <code>values</code> the same object as <code>values()</code>, <code>source</code>
+        one of <code>panel</code>, <code>profile</code>, <code>reset</code>, <code>api</code>,
+        <code>auto</code>, <code>load</code>, and <code>profile</code> the profile key when a profile was
+        toggled. Because the event only fires on real changes, a handler may call
+        <code>set()</code> itself without causing a loop.</p>
+<pre><code><?php echo htmlspecialchars(
+'// Register before the script loads, or read the state with ' . $brand . '.values() later
+document.addEventListener("legilo:change", function (e) {
+    var v = e.detail.values;
+    tourFrame.contentDocument.documentElement.style.fontSize = (16 * v.fontScale) + "px";
+});
+document.addEventListener("legilo:speechstart", function () { music.pause(); });
+document.addEventListener("legilo:speechend", function () { music.play(); });
+document.addEventListener("legilo:open", function () { myButton.setAttribute("aria-expanded", "true"); });
+document.addEventListener("legilo:close", function () { myButton.setAttribute("aria-expanded", "false"); });'); ?></code></pre>
+        <p class="muted">Font size covers a fixed list of text elements plus every element with
+        its own visible text (e.g. a <code>div</code> with a direct text node); "Point &amp; read"
+        uses the same fallback. Icons (icon classes, <code>&lt;i&gt;</code>, SVG, icon-font glyphs) stay
+        untouched. Read-aloud skips text hidden with <code>display:none</code>,
+        <code>visibility:hidden</code>, the <code>hidden</code> attribute or
+        <code>aria-hidden="true"</code>.</p>
     </div>
 
     <div class="card">

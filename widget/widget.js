@@ -16,7 +16,7 @@
     /* ------------- Configuration: window.__BRAND__Config > data-* > baked-in -- */
 
     var KEYS = ['pos', 'offx', 'offy', 'color', 'color2', 'size', 'radius',
-        'icon', 'lang', 'features', 'mobile', 'hide', 'hotkey', 'css', 'statement'];
+        'icon', 'lang', 'features', 'mobile', 'hide', 'hotkey', 'css', 'statement', 'tts'];
 
     var script = document.currentScript;
     var cfg = {};
@@ -44,6 +44,10 @@
     cfg.color2 = '#' + String(cfg.color2 || 'ffffff').replace('#', '');
     cfg.hide = cfg.hide === 1 || cfg.hide === '1' || cfg.hide === true || cfg.hide === 'true';
     cfg.hotkey = cfg.hotkey === 1 || cfg.hotkey === '1' || cfg.hotkey === true || cfg.hotkey === 'true';
+    // Read-aloud modes offered by the button: both (default), only "read page"
+    // or only "point and read" (e.g. 3D tours, where reading the page makes no sense)
+    cfg.tts = String(cfg.tts || 'both').toLowerCase();
+    if (cfg.tts !== 'read' && cfg.tts !== 'hover') cfg.tts = 'both';
     // css=none: no built-in panel styling, panel in the light DOM so the
     // site owner's CSS applies directly (expert mode, skeleton in the configurator)
     var useCss = cfg.css !== 'none';
@@ -100,10 +104,28 @@
     });
     var showProfiles = cfg.features.indexOf('profiles') !== -1 && PROFILE_KEYS.length > 0;
 
+    // Allowed read-aloud levels in button order (0 off, 1 read page, 2 point and read)
+    var TTS_MODES = cfg.tts === 'hover' ? [0, 2] : cfg.tts === 'read' ? [0, 1] : [0, 1, 2];
+
     var STORAGE_KEY = 'legilo:v1';
     var states = {};
     var ttsRate = 2; // read-aloud speed: 1 slower, 2 normal, 3 faster
     FEATURES.forEach(function (f) { states[f.k] = 0; });
+
+    /* ---------------- Page events ----------------
+     * Plain DOM events on document so the page can react to the widget
+     * (own controls, iframes, pausing music). Purely local, nothing leaves
+     * the browser. */
+
+    function emit(name, detail) {
+        try {
+            document.dispatchEvent(new CustomEvent('legilo:' + name, { detail: detail || {} }));
+        } catch (e) { }
+    }
+    function stateSnap() { return JSON.stringify(states) + '|' + ttsRate; }
+    // Last state reported via legilo:change (starts with the all-off state,
+    // so restored settings are reported once after loading)
+    var lastSnap = stateSnap();
 
     // True when the page background is light: only then does an automatic
     // dark start value make sense (dark sites stay untouched).
@@ -160,12 +182,18 @@
     // clickability feedback.
     var CURSOR_HAND = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA+0lEQVRo3u2ZQQ7EIAhFi8fQ+x/NXqOzMnFMOqKAjOaza6z2PxELel0wXyPLwWOMT/183zdtAdAKb00ThCzF55y/2lJK6hC0SrwVRLBYQm/ie22uHiizzxVYPCH1gokHVhoAAAAAAAAAAADYHqCX//f6SvqTpviZTFOaXpOneA0I8hYvhaB/EC+BCJKAGxFfi9Os1sLsTqFdGrbjcnemMLJcyge0xHO8orqErGbdDMAqWJFKcAB2mH0kcwAAQCcX8grkkXPTs5dQPQMav333GFgBMXrsznrpV2boXQ8MFTRvINtVZEfUxEecSnBihGuzd2Vm16zWwmEwJfsAnnqXFlm0OgkAAAAASUVORK5CYII=';
 
+    // Effect values in one place: the CSS below and Legilo.values() both read them
+    var SPACING = { lineHeight: '1.6', letterSpacing: '0.12em', wordSpacing: '0.16em' };
+    var FONT_READABLE = 'Arial,Verdana,"Helvetica Neue",sans-serif';
+    var FONT_DYSLEXIC = '"OpenDyslexic",Arial,sans-serif';
+
     var CSSF = {
-        spacing: 'body, body *' + NOT_W + '{line-height:1.6!important;letter-spacing:.12em!important;word-spacing:.16em!important;}',
+        spacing: 'body, body *' + NOT_W + '{line-height:' + SPACING.lineHeight + '!important;letter-spacing:' +
+            SPACING.letterSpacing + '!important;word-spacing:' + SPACING.wordSpacing + '!important;}',
         links: 'body a[href]' + NOT_W + '{text-decoration:underline!important;text-underline-offset:2px!important;background-color:#ffe36e!important;color:#111!important;}' +
             'body a[href] *' + NOT_W + '{color:#111!important;}',
-        readable: 'body, body *' + NOT_W + NOT_ICON + '{font-family:Arial,Verdana,"Helvetica Neue",sans-serif!important;}',
-        dyslexic: 'body, body *' + NOT_W + NOT_ICON + '{font-family:"OpenDyslexic",Arial,sans-serif!important;}',
+        readable: 'body, body *' + NOT_W + NOT_ICON + '{font-family:' + FONT_READABLE + '!important;}',
+        dyslexic: 'body, body *' + NOT_W + NOT_ICON + '{font-family:' + FONT_DYSLEXIC + '!important;}',
         cursor: 'body, body *{cursor:url("' + CURSOR_PNG + '") 3 2, auto!important;}' +
             'body a[href],body a[href] *,body button,body button *,body [role="button"],body label,' +
             'body select,body summary,body input[type="submit"],body input[type="button"],body input[type="checkbox"],body input[type="radio"]' +
@@ -228,39 +256,99 @@
         document.head.appendChild(styleEl);
     }
 
-    /* Font size: traversal with original-size memo (robust even on px layouts). */
+    /* Font size: traversal with original-size memo (robust even on px layouts).
+     * Scaled are the elements of a fixed tag list plus every other element
+     * with its own visible text (e.g. a div with a direct text node); icons
+     * (icon classes, <i>, SVG, icon-font glyphs) stay untouched. */
     var FS_LEVELS = [1, 1.15, 1.3, 1.55];
     var FS_SEL = 'h1,h2,h3,h4,h5,h6,p,a,li,dt,dd,td,th,span,label,strong,em,b,small,' +
         'blockquote,figcaption,legend,button,input,textarea,select,summary,caption,pre,code';
     var ICON_RE = /(^|[\s_-])(icon|fa|glyphicon|material)/i;
+    // Elements whose own text is never scaled on its own
+    var FS_OWN_SKIP = { HTML: 1, BODY: 1, SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEMPLATE: 1, I: 1, OPTION: 1 };
+    // Text made only of whitespace and private-use glyphs = icon font
+    var PUA_RE = /^[\s-]*$/;
     var fsApplied = false;
     var fsObserver = null;
 
-    function fsApplyTo(el, factor) {
-        if (el.closest && el.closest('#legilo-host')) return;
-        if (ICON_RE.test(el.className || '')) return;
-        if (factor === 1) {
-            if (el.dataset.legiloFs) {
-                el.style.removeProperty('font-size');
-                delete el.dataset.legiloFs;
-            }
-            return;
+    function fsSkip(el) {
+        if (el.closest && (el.closest('#legilo-host') || el.closest('#legilo-overlays'))) return true;
+        return ICON_RE.test(typeof el.className === 'string' ? el.className : '');
+    }
+
+    function fsOwnText(p, textNode) {
+        return p && p.nodeType === 1 && !FS_OWN_SKIP[p.nodeName] &&
+            !PUA_RE.test(textNode.nodeValue || '') && !(p.closest && p.closest('svg'));
+    }
+
+    // Collect candidates under rootEl (including rootEl itself)
+    function fsCollect(rootEl, out) {
+        if (rootEl.matches && rootEl.matches(FS_SEL)) out.push(rootEl);
+        if (!rootEl.querySelectorAll) return out;
+        var els = rootEl.querySelectorAll(FS_SEL);
+        for (var i = 0; i < els.length; i++) out.push(els[i]);
+        var w = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, null);
+        var n, last = null;
+        while ((n = w.nextNode())) {
+            var p = n.parentNode;
+            if (p === last || !fsOwnText(p, n)) continue;
+            last = p;
+            out.push(p);
         }
+        return out;
+    }
+
+    function fsWrite(el, factor) {
         var org = parseFloat(el.dataset.legiloFs);
-        if (!org) {
-            org = parseFloat(getComputedStyle(el).fontSize) || 16;
-            el.dataset.legiloFs = org;
+        if (org) el.style.setProperty('font-size', (org * factor).toFixed(2) + 'px', 'important');
+    }
+
+    /* Two phases: first read all original sizes, then write. Reading after a
+     * write would see inherited sizes that already contain the factor (nested
+     * elements would grow twice) and would force a layout per element. */
+    function fsScale(els, factor) {
+        var i, a, fresh = [], lifted = [], marked = [];
+        for (i = 0; i < els.length; i++) {
+            var el = els[i];
+            if (!el.dataset || fsSkip(el)) { els[i] = null; continue; }
+            if (el.dataset.legiloFs) continue;
+            fresh.push(el);
+            // Scaled ancestors are briefly reset while reading, see above.
+            // A marked ancestor means everything above it was walked already.
+            for (a = el.parentElement; a && !a.__legiloWalk; a = a.parentElement) {
+                a.__legiloWalk = true;
+                marked.push(a);
+                if (a.dataset && a.dataset.legiloFs) lifted.push(a);
+            }
         }
-        el.style.setProperty('font-size', (org * factor).toFixed(2) + 'px', 'important');
+        for (i = 0; i < marked.length; i++) delete marked[i].__legiloWalk;
+        for (i = 0; i < lifted.length; i++) lifted[i].style.removeProperty('font-size');
+        for (i = 0; i < fresh.length; i++) {
+            fresh[i].dataset.legiloFs = parseFloat(getComputedStyle(fresh[i]).fontSize) || 16;
+        }
+        for (i = 0; i < lifted.length; i++) fsWrite(lifted[i], factor);
+        for (i = 0; i < els.length; i++) if (els[i]) fsWrite(els[i], factor);
+    }
+
+    function fsReset() {
+        var els = document.querySelectorAll('[data-legilo-fs]');
+        for (var i = 0; i < els.length; i++) {
+            els[i].style.removeProperty('font-size');
+            delete els[i].dataset.legiloFs;
+        }
     }
 
     function applyFontSize() {
         var factor = FS_LEVELS[states.fontsize || 0];
-        if (factor === 1 && !fsApplied) { fsObserve(false); return; }
-        var els = document.body.querySelectorAll(FS_SEL);
-        for (var i = 0; i < els.length; i++) fsApplyTo(els[i], factor);
-        fsApplied = factor !== 1;
-        fsObserve(fsApplied);
+        if (factor === 1) {
+            if (fsApplied) fsReset();
+            fsApplied = false;
+            fsObserve(false);
+            return;
+        }
+        fsScale(fsCollect(document.body, []), factor);
+        fsApplied = true;
+        fsObserve(true);
     }
 
     function fsObserve(on) {
@@ -268,17 +356,20 @@
             fsObserver = new MutationObserver(function (muts) {
                 var factor = FS_LEVELS[states.fontsize || 0];
                 if (factor === 1) return;
+                var els = [];
                 muts.forEach(function (m) {
                     for (var i = 0; i < m.addedNodes.length; i++) {
                         var n = m.addedNodes[i];
-                        if (n.nodeType !== 1 || n.id === 'legilo-host' || n.id === 'legilo-overlays') continue;
-                        if (n.matches && n.matches(FS_SEL)) fsApplyTo(n, factor);
-                        if (n.querySelectorAll) {
-                            var els = n.querySelectorAll(FS_SEL);
-                            for (var j = 0; j < els.length; j++) fsApplyTo(els[j], factor);
+                        if (n.nodeType === 3) {
+                            // new text in an existing element (e.g. textContent changed)
+                            if (fsOwnText(n.parentNode, n)) els.push(n.parentNode);
+                            continue;
                         }
+                        if (n.nodeType !== 1 || n.id === 'legilo-host' || n.id === 'legilo-overlays') continue;
+                        fsCollect(n, els);
                     }
                 });
+                if (els.length) fsScale(els, factor);
             });
             fsObserver.observe(document.body, { childList: true, subtree: true });
         } else if (!on && fsObserver) {
@@ -347,6 +438,20 @@
         document.head.appendChild(hlStyleEl);
     }
 
+    /* Invisible text is not read: display:none, visibility:hidden, the hidden
+     * attribute and aria-hidden="true" (whoever hides it from screen readers
+     * does not want it read either). */
+    function ttsVisible(el) {
+        if (el.closest('[hidden],[aria-hidden="true"]')) return false;
+        // display:contents has no box of its own, the parent decides
+        while (el.parentElement && getComputedStyle(el).display === 'contents') el = el.parentElement;
+        if (el.checkVisibility) {
+            return el.checkVisibility({ visibilityProperty: true, checkVisibilityCSS: true });
+        }
+        if (!el.getClientRects().length) return false; // display:none somewhere up the tree
+        return getComputedStyle(el).visibility !== 'hidden';
+    }
+
     /* Collect the visible text under rootEl, collapse whitespace and
      * record which text node belongs to which text position. */
     function ttsCollect(rootEl) {
@@ -354,6 +459,7 @@
         var text = '';
         var runs = [];
         var run = null;
+        var lastP = null, lastOk = false; // consecutive text nodes share a parent
         var walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, {
             acceptNode: function (n) {
                 var p = n.parentNode;
@@ -361,7 +467,10 @@
                 if (p.closest && (p.closest('#legilo-host') || p.closest('#legilo-overlays'))) {
                     return NodeFilter.FILTER_REJECT;
                 }
-                return NodeFilter.FILTER_ACCEPT;
+                if (!/\S/.test(n.nodeValue)) return NodeFilter.FILTER_ACCEPT; // whitespace: no check needed
+                if (PUA_RE.test(n.nodeValue)) return NodeFilter.FILTER_REJECT; // icon-font glyphs
+                if (p !== lastP) { lastP = p; lastOk = !fsSkip(p) && ttsVisible(p); }
+                return lastOk ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
             }
         });
         var node, i, c, ws;
@@ -414,9 +523,27 @@
         } catch (e) { }
     }
 
+    /* Speech runs: every ttsSpeak call starts a new run, events of older
+     * (cancelled) runs are ignored. legilo:speechstart fires when the voice
+     * really starts, legilo:speechend exactly once when it ends, is stopped or
+     * fails - a run replacing a running one keeps the speech "on" in between,
+     * so a page pausing music does not resume it for a split second. */
+    var ttsRun = 0;
+    var ttsRunReset = false; // current run is the one-shot "read page"
+    var ttsActive = false;   // between speechstart and speechend
+
+    function ttsEnded(reason) {
+        if (!ttsActive) return;
+        ttsActive = false;
+        emit('speechend', { reason: reason });
+    }
+
     function ttsStop() {
+        ttsRun++;
+        ttsRunReset = false;
         if (ttsSupported()) { try { speechSynthesis.cancel(); } catch (e) { } }
         hlClear();
+        ttsEnded('stop');
     }
 
     function ttsDone() {
@@ -425,10 +552,12 @@
         if (states.tts === 1) {
             states.tts = 0;
             renderButtons();
+            emitChange('tts', 'auto');
         }
     }
 
-    function ttsSpeak(text, resetWhenDone, collected) {
+    // source: 'page' (read page), 'hover' (point and read) or 'api' (Legilo.speak)
+    function ttsSpeak(text, resetWhenDone, collected, source) {
         if (collected) {
             // Text from ttsCollect: offsets match the text node runs,
             // so do NOT normalize again here.
@@ -460,6 +589,11 @@
         });
         if (current) parts.push({ t: current, o: consumed });
 
+        // A running one-shot "read page" ends when something else takes over
+        if (ttsRunReset && !resetWhenDone) ttsDone();
+        var run = ++ttsRun;
+        ttsRunReset = !!resetWhenDone;
+        var src = source || 'page';
         var withHl = !!(collected && hlRuns.length && hlSupported());
         var langCode = document.documentElement.lang || (cfg.lang !== 'auto' ? cfg.lang : 'en');
         var voice = ttsPickVoice(langCode);
@@ -471,12 +605,28 @@
             if (voice) u.voice = voice;
             if (withHl) {
                 u.onboundary = function (e) {
-                    hlWordAt(part.o + (e.charIndex || 0), e.charLength);
+                    if (run === ttsRun) hlWordAt(part.o + (e.charIndex || 0), e.charLength);
                 };
             }
-            u.onerror = function () { hlClear(); if (resetWhenDone) ttsDone(); };
+            u.onstart = function () {
+                if (run !== ttsRun || ttsActive) return;
+                ttsActive = true;
+                emit('speechstart', { source: src });
+            };
+            u.onerror = function () {
+                if (run !== ttsRun) return;
+                hlClear();
+                if (resetWhenDone) ttsDone();
+                ttsEnded('error');
+            };
             if (i === parts.length - 1) {
-                u.onend = function () { hlClear(); if (resetWhenDone) ttsDone(); };
+                u.onend = function () {
+                    if (run !== ttsRun) return;
+                    hlClear();
+                    ttsRunReset = false;
+                    if (resetWhenDone) ttsDone();
+                    ttsEnded('end');
+                };
             }
             speechSynthesis.speak(u);
         });
@@ -490,10 +640,10 @@
         var ok;
         if (sel) {
             // selected text is already highlighted, no extra highlighting needed
-            ok = ttsSpeak(sel, true);
+            ok = ttsSpeak(sel, true, null, 'page');
         } else {
             var main = document.querySelector('main, [role="main"], article') || document.body;
-            ok = ttsSpeak('', true, ttsCollect(main));
+            ok = ttsSpeak('', true, ttsCollect(main), 'page');
         }
         if (!ok) states.tts = 0;
     }
@@ -505,18 +655,42 @@
     var hoverTimer = null;
     var hoverLast = null;
 
+    function hasOwnText(el) {
+        for (var c = el.firstChild; c; c = c.nextSibling) {
+            if (c.nodeType === 3 && !PUA_RE.test(c.nodeValue || '')) return true;
+        }
+        return false;
+    }
+
+    // Element to read for a pointer/focus target: a block from the list,
+    // otherwise the nearest element with its own visible text (e.g. a div
+    // label in a 3D tour). Icons, the widget and huge containers stay out.
+    function hoverTarget(t) {
+        if (!t || !t.closest) return null;
+        var el = t.closest(HOVER_SEL);
+        if (!el) {
+            for (var c = t; c && c.nodeType === 1; c = c.parentElement) {
+                if (c.nodeName === 'BODY' || c.nodeName === 'HTML') break;
+                if (FS_OWN_SKIP[c.nodeName] || (c.closest('svg')) || fsSkip(c)) continue;
+                if (hasOwnText(c)) { el = c; break; }
+            }
+        }
+        if (!el || el.closest('#legilo-host') || el.closest('#legilo-overlays')) return null;
+        if ((el.textContent || '').length > 1000) return null;
+        return el;
+    }
+
     function hoverSpeak(el, delay) {
         hoverLast = el;
         clearTimeout(hoverTimer);
         if (!el) return;
         hoverTimer = setTimeout(function () {
-            ttsSpeak('', false, ttsCollect(el));
+            ttsSpeak('', false, ttsCollect(el), 'hover');
         }, delay);
     }
 
     function onHoverOver(e) {
-        var el = e.target && e.target.closest ? e.target.closest(HOVER_SEL) : null;
-        if (el && (el.closest('#legilo-host') || el.closest('#legilo-overlays'))) el = null;
+        var el = hoverTarget(e.target);
         if (el === hoverLast) return;
         hoverSpeak(el, 350);
     }
@@ -524,8 +698,8 @@
     // Keyboard equivalent: in point-and-read mode the focused
     // element is read out as well.
     function onHoverFocus(e) {
-        var el = e.target && e.target.closest ? e.target.closest(HOVER_SEL) : null;
-        if (!el || el.closest('#legilo-host') || el.closest('#legilo-overlays')) return;
+        var el = hoverTarget(e.target);
+        if (!el) return;
         hoverSpeak(el, 150);
     }
 
@@ -1002,7 +1176,10 @@
             var v = states[f] || 0;
             var stEl = btns[i].querySelector('.st');
             var names = T.s && T.s[f];
-            var n = maxState(f);
+            // Read-aloud may offer only some of its levels (tts parameter):
+            // the dots count the offered levels, not the level numbers.
+            var n = f === 'tts' ? TTS_MODES.length : maxState(f);
+            var pos = f === 'tts' ? TTS_MODES.indexOf(v) : v;
             if (!v) {
                 // idle state without a label: only active things should stand out
                 stEl.innerHTML = '';
@@ -1010,7 +1187,7 @@
                 var html = '<span class="stname">' + esc(names ? names[v] : T.on) + '</span>';
                 if (n > 2) {
                     var dots = '';
-                    for (var d = 1; d < n; d++) dots += '<span class="dot' + (d <= v ? ' on' : '') + '"></span>';
+                    for (var d = 1; d < n; d++) dots += '<span class="dot' + (d <= pos ? ' on' : '') + '"></span>';
                     html += '<span class="dots" aria-hidden="true">' + dots + '</span>';
                 }
                 stEl.innerHTML = html;
@@ -1096,6 +1273,7 @@
         if (btn.classList.contains('prof')) {
             toggleProfile(btn.dataset.p);
             apply(); renderButtons(); saveStates(); announceProfile(btn.dataset.p);
+            emitChange(null, 'profile', btn.dataset.p);
             return;
         }
         if (btn.classList.contains('hidew')) {
@@ -1106,19 +1284,24 @@
         if (btn.classList.contains('tempo')) {
             ttsRate = parseInt(btn.dataset.r, 10) || 2;
             renderButtons(); saveStates();
+            emitChange('ttsrate', 'panel');
             return;
         }
         if (btn.classList.contains('ft')) {
             var f = btn.dataset.f;
             if (f === 'structure') { showStructure(); return; }
-            states[f] = ((states[f] || 0) + 1) % maxState(f);
             if (f === 'tts') {
+                // cycle only through the offered read-aloud modes
+                states.tts = TTS_MODES[(TTS_MODES.indexOf(states.tts || 0) + 1) % TTS_MODES.length];
                 ttsStop();
                 hoverListen(false);
                 if (states.tts === 1) ttsStart();
                 else if (states.tts === 2) hoverListen(true);
+            } else {
+                states[f] = ((states[f] || 0) + 1) % maxState(f);
             }
             apply(); renderButtons(); saveStates(); announce(f);
+            emitChange(f, 'panel');
         }
     });
 
@@ -1189,6 +1372,7 @@
     var open = false;
     function togglePanel() { open ? closePanel() : openPanel(); }
     function openPanel() {
+        var was = open;
         open = true;
         panel.classList.add('open');
         trigger.setAttribute('aria-expanded', 'true');
@@ -1206,17 +1390,20 @@
         // wieder). Ohne den Listener toggelt ein externer Button direkt korrekt;
         // geschlossen wird dann ueber den eigenen Button, das Panel-X oder Esc.
         if (!cfg.hide) document.addEventListener('mousedown', onDocDown, true);
+        if (!was) emit('open');
     }
     function showMainSilent() {
         structView.classList.remove('open');
         mainView.style.display = '';
     }
     function closePanel() {
+        var was = open;
         open = false;
         panel.classList.remove('open');
         trigger.setAttribute('aria-expanded', 'false');
         document.removeEventListener('mousedown', onDocDown, true);
         if (!cfg.hide) trigger.focus();
+        if (was) emit('close');
     }
     function onDocDown(e) {
         var path = e.composedPath ? e.composedPath() : [];
@@ -1249,6 +1436,8 @@
         var any = false;
         FEATURES.forEach(function (f) { if (states[f.k]) any = true; });
         if (any) apply();
+        // Restored settings (or system preferences) once as a change event
+        emitChange(null, 'load');
     }
 
     function destroy() {
@@ -1261,8 +1450,7 @@
         document.removeEventListener('keydown', onHotkey);
         fsObserve(false);
         if (fsApplied) {
-            var els = document.body.querySelectorAll(FS_SEL);
-            for (var i = 0; i < els.length; i++) fsApplyTo(els[i], 1);
+            fsReset();
             fsApplied = false;
         }
         if (moveListening) {
@@ -1298,6 +1486,58 @@
         hoverListen(false);
         FEATURES.forEach(function (f) { states[f.k] = 0; });
         apply(); renderButtons(); saveStates();
+        emitChange(null, 'reset');
+    }
+
+    /* Tatsaechliche Werte der aktiven Einstellungen, damit die Seite sie auf
+     * Bereiche uebertragen kann, die das Widget nicht erreicht (eigene
+     * iframes, Canvas-Beschriftungen). fontUrl/fontFaceCss stehen unabhaengig
+     * vom Zustand bereit (zum Vorladen); im Download-Build ist die Schrift als
+     * data-URI eingebettet, dann ist fontUrl null und nur fontFaceCss gesetzt. */
+    function apiValues() {
+        var url = null;
+        var m = /url\(\s*['"]?([^'")]+)/.exec(cfg.fontCss || '');
+        if (m && m[1].indexOf('data:') !== 0) url = m[1];
+        var font = states.font || 0;
+        return {
+            fontScale: FS_LEVELS[states.fontsize || 0] || 1,
+            spacing: states.spacing ? {
+                lineHeight: SPACING.lineHeight,
+                letterSpacing: SPACING.letterSpacing,
+                wordSpacing: SPACING.wordSpacing
+            } : null,
+            fontFamily: font === 1 ? FONT_READABLE : font === 2 ? FONT_DYSLEXIC : null,
+            fontUrl: url,
+            fontFaceCss: cfg.fontCss || ''
+        };
+    }
+
+    function apiStates() {
+        var out = {};
+        FEATURES.forEach(function (f) { out[f.k] = states[f.k] || 0; });
+        return out;
+    }
+
+    /* legilo:change bei jeder Zustandsaenderung (Panel, Profil, Reset, API,
+     * automatisches Ende von "Seite vorlesen", einmal nach dem Laden). Feuert
+     * nur, wenn sich wirklich etwas geaendert hat - ein Handler, der selbst
+     * Legilo.set() aufruft, kann so keine Endlosschleife ausloesen.
+     * key: geaenderte Funktion ('ttsrate' fuer das Tempo), null bei Profil,
+     * Reset und Laden. */
+    function emitChange(key, source, profile) {
+        var snap = stateSnap();
+        if (snap === lastSnap) return;
+        lastSnap = snap;
+        var d = {
+            key: key || null,
+            level: key === 'ttsrate' ? ttsRate : key ? (states[key] || 0) : null,
+            states: apiStates(),
+            rate: ttsRate,
+            values: apiValues(),
+            source: source
+        };
+        if (profile) d.profile = profile;
+        emit('change', d);
     }
 
     /* Programmatischer Zugriff auf einzelne Funktionen: damit lassen sich mit
@@ -1310,6 +1550,8 @@
         level = parseInt(level, 10);
         if (isNaN(level)) level = 0;
         level = Math.max(0, Math.min(max - 1, level));
+        // per tts-Parameter nicht angebotener Vorlese-Modus
+        if (key === 'tts' && TTS_MODES.indexOf(level) === -1) return false;
         states[key] = level;
         if (key === 'tts') {
             ttsStop();
@@ -1318,6 +1560,7 @@
             else if (level === 2) hoverListen(true);
         }
         apply(); renderButtons(); saveStates(); announce(key);
+        emitChange(key, 'api');
         return true;
     }
 
@@ -1330,7 +1573,9 @@
 
     function apiFeatures() {
         return FEATURES.map(function (f) {
-            return { key: f.k, levels: f.n, state: states[f.k] || 0 };
+            var o = { key: f.k, levels: f.n, state: states[f.k] || 0 };
+            if (f.k === 'tts') o.allowed = TTS_MODES.slice(); // angebotene Modi laut tts-Parameter
+            return o;
         });
     }
 
@@ -1346,7 +1591,7 @@
         if (opts.interrupt === false) {
             try { if (speechSynthesis.speaking || speechSynthesis.pending) return false; } catch (e) { return false; }
         }
-        return ttsSpeak(String(text || ''), false);
+        return ttsSpeak(String(text || ''), false, null, 'api');
     }
 
     window.__BRAND__ = {
@@ -1354,9 +1599,11 @@
         open: openPanel,
         close: closePanel,
         toggle: togglePanel,
+        isOpen: function () { return open; },
         reset: resetAll,
         set: apiSet,
         get: apiGet,
+        values: apiValues,
         speak: apiSpeak,
         stopSpeaking: ttsStop,
         features: apiFeatures,

@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Button color', 'iconcolor' => 'Icon color', 'icon' => 'Icon', 'radius' => 'Corner radius',
     'behavior' => 'Behavior', 'panellang' => 'Widget language', 'langauto' => 'Detect automatically',
     'mobile' => 'Mobile (up to 768 px)', 'mobileShow' => 'Show', 'mobileHide' => 'Hide',
+    'ttsmode' => 'Read-aloud modes', 'ttsBoth' => 'Both',
     'statement' => 'Link to accessibility statement (optional)',
     'hidebtn' => 'Hide the button (open only via JavaScript API <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Enable the keyboard shortcut <kbd>Alt+Shift+A</kbd> to open',

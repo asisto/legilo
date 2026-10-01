@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Колір кнопки', 'iconcolor' => 'Колір іконки', 'icon' => 'Іконка', 'radius' => 'Заокруглення',
     'behavior' => 'Поведінка', 'panellang' => 'Мова віджета', 'langauto' => 'Визначати автоматично',
     'mobile' => 'Мобільні (до 768 px)', 'mobileShow' => 'Показувати', 'mobileHide' => 'Приховувати',
+    'ttsmode' => 'Режими читання вголос', 'ttsBoth' => 'Обидва',
     'statement' => 'Посилання на заяву про доступність (необов\'язково)',
     'hidebtn' => 'Приховати кнопку (відкриття лише через JavaScript-API <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Увімкнути сполучення клавіш <kbd>Alt+Shift+A</kbd> для відкриття',

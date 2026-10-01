@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Colore pulsante', 'iconcolor' => 'Colore icona', 'icon' => 'Icona', 'radius' => 'Arrotondamento',
     'behavior' => 'Comportamento', 'panellang' => 'Lingua del widget', 'langauto' => 'Rilevamento automatico',
     'mobile' => 'Mobile (fino a 768 px)', 'mobileShow' => 'Mostra', 'mobileHide' => 'Nascondi',
+    'ttsmode' => 'Modalità di lettura ad alta voce', 'ttsBoth' => 'Entrambe',
     'statement' => 'Link alla dichiarazione di accessibilità (opzionale)',
     'hidebtn' => 'Nascondi il pulsante (apertura solo via API JavaScript <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Attiva la scorciatoia da tastiera <kbd>Alt+Shift+A</kbd> per aprire',

@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Button-Farbe', 'iconcolor' => 'Icon-Farbe', 'icon' => 'Icon', 'radius' => 'Rundung',
     'behavior' => 'Verhalten', 'panellang' => 'Sprache des Widgets', 'langauto' => 'Automatisch erkennen',
     'mobile' => 'Mobil (bis 768 px)', 'mobileShow' => 'Anzeigen', 'mobileHide' => 'Ausblenden',
+    'ttsmode' => 'Vorlese-Modi', 'ttsBoth' => 'Beide',
     'statement' => 'Link zur Barrierefreiheitserklärung (optional)',
     'hidebtn' => 'Button verstecken (Öffnen nur per JavaScript-API <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Tastenkürzel <kbd>Alt+Shift+A</kbd> zum Öffnen aktivieren',

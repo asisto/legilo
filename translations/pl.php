@@ -33,6 +33,7 @@ return array(
     'btncolor' => 'Kolor przycisku', 'iconcolor' => 'Kolor ikony', 'icon' => 'Ikona', 'radius' => 'Zaokrąglenie',
     'behavior' => 'Zachowanie', 'panellang' => 'Język widgetu', 'langauto' => 'Wykryj automatycznie',
     'mobile' => 'Mobilnie (do 768 px)', 'mobileShow' => 'Pokaż', 'mobileHide' => 'Ukryj',
+    'ttsmode' => 'Tryby czytania na głos', 'ttsBoth' => 'Oba',
     'statement' => 'Link do deklaracji dostępności (opcjonalnie)',
     'hidebtn' => 'Ukryj przycisk (otwieranie tylko przez API JavaScript <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Włącz skrót klawiszowy <kbd>Alt+Shift+A</kbd> do otwierania',
