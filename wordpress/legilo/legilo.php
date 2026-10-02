@@ -3,7 +3,7 @@
  * Plugin Name: Legilo - Reading Aid and Accessibility Widget
  * Plugin URI: https://legilo.eu
  * Description: Adds the free Legilo reading-aid widget to your website. Configure position, colors, language and features under Settings, Legilo. Note: Legilo is a reading aid and does not make your site conform to WCAG or national accessibility laws.
- * Version: 0.1.2
+ * Version: 0.1.3
  * Requires at least: 6.3
  * Requires PHP: 7.0
  * Author: Stefan Puergstaller
@@ -39,6 +39,7 @@ function legilo_schema() {
         'css' => array('type' => 'enum', 'values' => array('base', 'none'), 'default' => 'base'),
         'statement' => array('type' => 'url', 'default' => ''),
         'tts' => array('type' => 'enum', 'values' => array('both', 'read', 'hover'), 'default' => 'both'),
+        'ttscloud' => array('type' => 'bool', 'default' => 0),
     );
 }
 
@@ -160,7 +161,7 @@ function legilo_script_url() {
 
 /** Load the widget script (deferred, in the footer, no dependencies). */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_script('legilo', legilo_script_url(), array(), '0.1.2',
+    wp_enqueue_script('legilo', legilo_script_url(), array(), '0.1.3',
         array('in_footer' => true, 'strategy' => 'defer'));
 });
 
@@ -336,6 +337,9 @@ function legilo_settings_page() {
                             <option value="read" <?php selected($s['tts'], 'read'); ?>><?php esc_html_e('Only read page', 'legilo'); ?></option>
                             <option value="hover" <?php selected($s['tts'], 'hover'); ?>><?php esc_html_e('Only point & read', 'legilo'); ?></option>
                         </select>
+                        <p><label><input type="checkbox" name="<?php echo esc_attr($name); ?>[ttscloud]" value="1" <?php checked($s['ttscloud'], 1); ?>>
+                            <?php esc_html_e('Offer online voices', 'legilo'); ?></label></p>
+                        <p class="description"><?php esc_html_e('Read-aloud then prefers the browser\'s online voices where available (e.g. "Google US English" in Chrome), which usually sound more natural. The text is then sent by the browser to its vendor; Legilo itself sends nothing, no API key, no costs. Visitors can switch to a local voice at any time. Without this option only the voices on the device are used.', 'legilo'); ?></p>
                     </td>
                 </tr>
                 <tr>

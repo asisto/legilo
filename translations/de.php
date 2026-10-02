@@ -34,6 +34,7 @@ return array(
     'behavior' => 'Verhalten', 'panellang' => 'Sprache des Widgets', 'langauto' => 'Automatisch erkennen',
     'mobile' => 'Mobil (bis 768 px)', 'mobileShow' => 'Anzeigen', 'mobileHide' => 'Ausblenden',
     'ttsmode' => 'Vorlese-Modi', 'ttsBoth' => 'Beide',
+    'ttscloud' => 'Online-Stimmen anbieten', 'ttscloudInfo' => 'Vorlesen nutzt dann bevorzugt die Online-Stimmen des Browsers, sofern verfügbar (z. B. "Google Deutsch" in Chrome). Sie klingen meist natürlicher und decken auch Sprachen ab, für die auf dem Gerät keine Stimme installiert ist. Der Text geht dabei vom Browser an dessen Anbieter; Legilo selbst sendet nichts. Kein API-Key, keine Kosten. Im Panel ist die Online-Stimme gekennzeichnet, und Besucher können jederzeit eine lokale Stimme wählen. Ohne diese Option wird nur mit den Stimmen auf dem Gerät vorgelesen.',
     'statement' => 'Link zur Barrierefreiheitserklärung (optional)',
     'hidebtn' => 'Button verstecken (Öffnen nur per JavaScript-API <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Tastenkürzel <kbd>Alt+Shift+A</kbd> zum Öffnen aktivieren',

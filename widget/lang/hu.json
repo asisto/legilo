@@ -12,6 +12,13 @@
     "structureEmpty": "Nem található címsor ezen az oldalon.",
     "on": "Be",
     "off": "Ki",
+    "auto": "Automatikus",
+    "v": {
+        "online": "online",
+        "none": "Ehhez a nyelvhez nincs telepített hang.",
+        "install": "Hangok ingyenesen hozzáadhatók a rendszer beszédbeállításaiban.",
+        "note": "A szöveg ilyenkor a böngésző szolgáltatójához kerül (pl. Google)."
+    },
     "f": {
         "fontsize": "Betűméret",
         "spacing": "Térköz",
@@ -30,6 +37,7 @@
         "structure": "Oldalszerkezet",
         "tts": "Felolvasás",
         "ttsrate": "Felolvasási sebesség",
+        "ttsvoice": "Hang",
         "align": "Szöveg igazítása",
         "profiles": "Profilok"
     },

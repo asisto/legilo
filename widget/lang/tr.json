@@ -12,6 +12,13 @@
     "structureEmpty": "Bu sayfada başlık bulunamadı.",
     "on": "Açık",
     "off": "Kapalı",
+    "auto": "Otomatik",
+    "v": {
+        "online": "çevrimiçi",
+        "none": "Bu dil için yüklü ses yok.",
+        "install": "Sesler, sistemin konuşma ayarlarından ücretsiz eklenebilir.",
+        "note": "Metin bu durumda tarayıcı sağlayıcısına (ör. Google) gönderilir."
+    },
     "f": {
         "fontsize": "Yazı boyutu",
         "spacing": "Aralık",
@@ -30,6 +37,7 @@
         "structure": "Sayfa yapısı",
         "tts": "Sesli oku",
         "ttsrate": "Okuma hızı",
+        "ttsvoice": "Ses",
         "align": "Metin hizalama",
         "profiles": "Profiller"
     },

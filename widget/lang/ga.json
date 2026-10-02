@@ -12,6 +12,13 @@
     "structureEmpty": "Níor aimsíodh ceannteidil ar an leathanach seo.",
     "on": "Air",
     "off": "As",
+    "auto": "Uathoibríoch",
+    "v": {
+        "online": "ar líne",
+        "none": "Níl aon ghuth suiteáilte don teanga seo.",
+        "install": "Is féidir guthanna a chur leis saor in aisce i socruithe cainte an chórais.",
+        "note": "Seoltar an téacs chuig soláthraí an bhrabhsálaí (m.sh. Google)."
+    },
     "f": {
         "fontsize": "Clómhéid",
         "spacing": "Spásáil",
@@ -30,6 +37,7 @@
         "structure": "Struchtúr an leathanaigh",
         "tts": "Léigh os ard",
         "ttsrate": "Luas léitheoireachta",
+        "ttsvoice": "Guth",
         "align": "Ailínigh téacs",
         "profiles": "Próifílí"
     },

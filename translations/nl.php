@@ -34,6 +34,7 @@ return array(
     'behavior' => 'Gedrag', 'panellang' => 'Taal van de widget', 'langauto' => 'Automatisch herkennen',
     'mobile' => 'Mobiel (tot 768 px)', 'mobileShow' => 'Tonen', 'mobileHide' => 'Verbergen',
     'ttsmode' => 'Voorleesmodi', 'ttsBoth' => 'Beide',
+    'ttscloud' => 'Online stemmen aanbieden', 'ttscloudInfo' => 'Voorlezen gebruikt dan bij voorkeur de online stemmen van de browser, indien beschikbaar (bijv. "Google Nederlands" in Chrome). Die klinken meestal natuurlijker en dekken ook talen waarvoor op het apparaat geen stem geïnstalleerd is. De browser stuurt de tekst naar zijn aanbieder; Legilo zelf verstuurt niets. Geen API-sleutel, geen kosten. Het paneel markeert de online stem en bezoekers kunnen altijd een lokale stem kiezen. Zonder deze optie worden alleen de stemmen op het apparaat gebruikt.',
     'statement' => 'Link naar de toegankelijkheidsverklaring (optioneel)',
     'hidebtn' => 'Knop verbergen (openen alleen via de JavaScript-API <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Sneltoets <kbd>Alt+Shift+A</kbd> voor openen activeren',

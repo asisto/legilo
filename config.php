@@ -5,7 +5,7 @@
  * Konfigurator-Seite (generate.php) verwendet.
  */
 
-const LEGILO_VERSION = '0.2.0';
+const LEGILO_VERSION = '0.4.0';
 
 // Projektname (Arbeitstitel, zentral aenderbar; erscheint auf der Projektseite)
 const LEGILO_BRAND = 'Legilo';
@@ -86,6 +86,10 @@ function legilo_schema() {
         // Vorlese-Modi des Vorlesen-Knopfs: beide, nur "Seite vorlesen" oder nur
         // "Zeigen & vorlesen" (z.B. 3D-Touren, wo Seite vorlesen keinen Sinn ergibt)
         'tts' => array('type' => 'enum', 'values' => array('both', 'read', 'hover'), 'default' => 'both'),
+        // Online-Stimmen des Browsers (z.B. "Google Deutsch" in Chrome) zulassen
+        // und bevorzugen, sofern verfuegbar; ohne die Option nur lokale Stimmen.
+        // Kein API-Key, kein Server, keine Kosten: die Stimmen kommen vom Browser.
+        'ttscloud' => array('type' => 'bool', 'default' => 0),
     );
 }
 

@@ -16,7 +16,7 @@
     /* ------------- Configuration: window.__BRAND__Config > data-* > baked-in -- */
 
     var KEYS = ['pos', 'offx', 'offy', 'color', 'color2', 'size', 'radius',
-        'icon', 'lang', 'features', 'mobile', 'hide', 'hotkey', 'css', 'statement', 'tts'];
+        'icon', 'lang', 'features', 'mobile', 'hide', 'hotkey', 'css', 'statement', 'tts', 'ttscloud'];
 
     var script = document.currentScript;
     var cfg = {};
@@ -48,6 +48,8 @@
     // or only "point and read" (e.g. 3D tours, where reading the page makes no sense)
     cfg.tts = String(cfg.tts || 'both').toLowerCase();
     if (cfg.tts !== 'read' && cfg.tts !== 'hover') cfg.tts = 'both';
+    // ttscloud=1: visitors may pick the browser's online voices (see ttsVoices)
+    cfg.ttscloud = cfg.ttscloud === 1 || cfg.ttscloud === '1' || cfg.ttscloud === true || cfg.ttscloud === 'true';
     // css=none: no built-in panel styling, panel in the light DOM so the
     // site owner's CSS applies directly (expert mode, skeleton in the configurator)
     var useCss = cfg.css !== 'none';
@@ -110,6 +112,7 @@
     var STORAGE_KEY = 'legilo:v1';
     var states = {};
     var ttsRate = 2; // read-aloud speed: 1 slower, 2 normal, 3 faster
+    var ttsVoice = ''; // chosen voice name, '' = automatic (best local voice)
     FEATURES.forEach(function (f) { states[f.k] = 0; });
 
     /* ---------------- Page events ----------------
@@ -122,7 +125,7 @@
             document.dispatchEvent(new CustomEvent('legilo:' + name, { detail: detail || {} }));
         } catch (e) { }
     }
-    function stateSnap() { return JSON.stringify(states) + '|' + ttsRate; }
+    function stateSnap() { return JSON.stringify(states) + '|' + ttsRate + '|' + ttsVoice; }
     // Last state reported via legilo:change (starts with the all-off state,
     // so restored settings are reported once after loading)
     var lastSnap = stateSnap();
@@ -151,6 +154,7 @@
         });
         var r = parseInt(saved.rate, 10);
         if (r >= 1 && r <= 3) ttsRate = r;
+        if (typeof saved.voice === 'string') ttsVoice = saved.voice.substring(0, 200);
     } else {
         // system preferences as initial values until the visitor picks something
         if (states.animations !== undefined &&
@@ -168,7 +172,7 @@
     function saveStates() {
         var out = {};
         FEATURES.forEach(function (f) { if (f.k !== 'tts') out[f.k] = states[f.k] || 0; });
-        store(function () { return localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: 1, states: out, rate: ttsRate })); });
+        store(function () { return localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: 1, states: out, rate: ttsRate, voice: ttsVoice })); });
     }
 
     /* ---------------- Page effects (CSS injection) ---------------- */
@@ -176,7 +180,17 @@
     // Protects widget elements from our own page effects - including
     // descendants, because with css=none the panel lives in the light DOM.
     var NOT_W = ':not(#legilo-host):not(#legilo-host *):not(#legilo-overlays):not(#legilo-overlays *)';
-    var NOT_ICON = ':not(i):not([class*="icon"]):not([class*="fa-"]):not([class*="glyphicon"]):not([class*="material-symbols"]):not([class*="material-icons"])';
+    // Icon classes as whole class tokens (same rule as isIconClass below), so
+    // that e.g. "fancybox-content" or "lexicon" do not count as icons
+    var NOT_ICON = ':not(i)' + [
+        '[class~="fa"]', '[class~="fas"]', '[class~="far"]', '[class~="fab"]', '[class~="fal"]',
+        '[class~="fad"]', '[class~="fat"]', '[class^="fa-"]', '[class*=" fa-"]',
+        '[class~="icon"]', '[class^="icon-"]', '[class*=" icon-"]', '[class^="icon_"]', '[class*=" icon_"]',
+        '[class$="-icon"]', '[class*="-icon "]', '[class$="_icon"]', '[class*="_icon "]',
+        '[class~="glyphicon"]', '[class^="glyphicon-"]', '[class*=" glyphicon-"]',
+        '[class^="material-icons"]', '[class*=" material-icons"]',
+        '[class^="material-symbols"]', '[class*=" material-symbols"]'
+    ].map(function (s) { return ':not(' + s + ')'; }).join('');
     var CURSOR_PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIxSURBVGhD7ZovkIJAFMZfJBKJF41GopF40Ug0XiTSLhqJF4nGi0Qj0WgkGoncfNyuA0/lj7DLc8bfzM6cw+K+j3vft4gS/fNJRBkRxer1y1F4nlcREcaBiFw+QTpVHMdVkiRaRE5EH3ySZGoBIMuyynVdiLgQkc8nSuUqAJxOp2q1WkFESUQhnyyRlgBwuVyqzWajW2rPT5DGjQDNbrd7CXM/FABewdydAoB0c/cKAJLNPUgAkGruwQI00sw9WgCQZO6nBAAp5n5aAJBg7kkCwNLmnixAs5S5ZxMAljD3rAKAbXPPLgDYNLcRAcCWuY0J0Jg2t3EBwKS5rQgApsxtTQAwYW6rAgAzd8QLGsssAo7HY/0+Y4ZqJ4xJzCKgKIrKcRxd0JiBx5qTmEUA2G63KAi97fFFTDJYAK5yF3me66v6xRcxySAByHE8BC7Lkh9qsV6vIaDgi5ikV0AURdeeTdOUH26B42ouHttboVNAGIa6oJSITrjCXeA/pB7XTzbnUO4KQCFBEOji9Y0Yervu9S7wfuq8NVvLCDcCsNGoXsZobjQOUgZp00UjUpPGucZoCTifz31b/R7F9SWSzUi9CkBrqP7FwgGfqFhx0fewGal1MexOsa93D5IitfR9X/fseeC9OiJSTKR+q0WOI/tVZKSOYVCkKjNjiONhpCKh4KvG98+//GQptCIVnwkaO7duy3tRLIY6UrFjIwgahf/M+ZnXNPiNhY5L/D0mCN68WZI/ZvzTVUq3SvMAAAAASUVORK5CYII=';
     // Hand cursor for links/buttons, otherwise the big arrow would lose the
     // clickability feedback.
@@ -263,7 +277,16 @@
     var FS_LEVELS = [1, 1.15, 1.3, 1.55];
     var FS_SEL = 'h1,h2,h3,h4,h5,h6,p,a,li,dt,dd,td,th,span,label,strong,em,b,small,' +
         'blockquote,figcaption,legend,button,input,textarea,select,summary,caption,pre,code';
-    var ICON_RE = /(^|[\s_-])(icon|fa|glyphicon|material)/i;
+    // A class token marks an icon: FontAwesome (fa, fas, far, fab, fal, fad,
+    // fat, fa-*), icon / icon-* / *-icon, glyphicon(-*), material-icons /
+    // material-symbols(-*). Whole tokens only - "fancybox-content",
+    // "favorites" or "nav-fade" are text containers, not icons.
+    var ICON_TOKEN = /^(fa[srbldt]?|fa-.+|icon|icon[-_].+|.+[-_]icon|glyphicon(-.+)?|material-(icons|symbols)(-.*)?)$/i;
+    function isIconClass(cls) {
+        var t = String(cls || '').split(/\s+/);
+        for (var i = 0; i < t.length; i++) if (t[i] && ICON_TOKEN.test(t[i])) return true;
+        return false;
+    }
     // Elements whose own text is never scaled on its own
     var FS_OWN_SKIP = { HTML: 1, BODY: 1, SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, TEMPLATE: 1, I: 1, OPTION: 1 };
     // Text made only of whitespace and private-use glyphs = icon font
@@ -273,7 +296,7 @@
 
     function fsSkip(el) {
         if (el.closest && (el.closest('#legilo-host') || el.closest('#legilo-overlays'))) return true;
-        return ICON_RE.test(typeof el.className === 'string' ? el.className : '');
+        return isIconClass(typeof el.className === 'string' ? el.className : '');
     }
 
     function fsOwnText(p, textNode) {
@@ -387,22 +410,69 @@
 
     /* ---------------- Read-aloud (Web Speech API) ----------------
      * Reads the selected text, otherwise the main content. Chunking into short
-     * utterances works around Chrome aborting long texts. Local voices
-     * are preferred (no text goes to cloud services where available). */
+     * utterances works around Chrome aborting long texts. */
 
     function ttsSupported() {
         return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
     }
 
-    function ttsPickVoice(lc) {
-        var voices = [];
-        try { voices = speechSynthesis.getVoices() || []; } catch (e) { return null; }
-        lc = String(lc).toLowerCase().substring(0, 2);
-        var match = voices.filter(function (v) {
-            return v.lang && v.lang.toLowerCase().indexOf(lc) === 0;
-        });
-        var local = match.filter(function (v) { return v.localService; });
-        return local[0] || match[0] || null;
+    function ttsLang() {
+        return document.documentElement.lang || (cfg.lang !== 'auto' ? cfg.lang : 'en');
+    }
+
+    /* Voices. Default (ttscloud=0): ONLY local voices (localService), the
+     * text never leaves the device. Online voices (most "Google" voices in
+     * Chrome, "Online (Natural)" in Edge) are generated by the browser vendor,
+     * so the text goes to Google/Microsoft - no API key, no server, no costs
+     * on our side. With ttscloud=1 the site owner opts in: online voices come
+     * first and are the automatic choice (they usually sound better and cover
+     * languages without an installed voice); the panel marks them as online
+     * and visitors can always switch to a local voice.
+     * Order, best first: preferred kind (online with ttscloud=1, else local),
+     * quality names (e.g. macOS "Premium"/"Enhanced"), the system's default
+     * voice, exact region match, then system order. */
+    var VOICE_GOOD = /natural|neural|online|premium|enhanced|google|siri/i;
+
+    // withOnline: include online voices and rank them first (ttscloud=1 only)
+    function ttsVoices(withOnline) {
+        var all = [];
+        try { all = speechSynthesis.getVoices() || []; } catch (e) { return []; }
+        var full = String(ttsLang()).toLowerCase().replace('_', '-');
+        var lc = full.substring(0, 2);
+        var list = [];
+        for (var i = 0; i < all.length; i++) {
+            var v = all[i];
+            if (!v || !v.lang || (!v.localService && !withOnline)) continue;
+            var vl = String(v.lang).toLowerCase().replace('_', '-');
+            if (vl.indexOf(lc) !== 0) continue;
+            var preferred = withOnline ? !v.localService : v.localService;
+            list.push({ v: v, i: i, q: (preferred ? 8 : 0) + (VOICE_GOOD.test(v.name || '') ? 4 : 0) +
+                (v['default'] ? 2 : 0) + (vl === full ? 1 : 0) });
+        }
+        list.sort(function (a, b) { return (b.q - a.q) || (a.i - b.i); });
+        return list.map(function (x) { return x.v; });
+    }
+
+    // Voices the visitor can choose from (online ones only if allowed)
+    function ttsOffered() { return ttsVoices(cfg.ttscloud); }
+
+    // The visitor's choice if it is still offered, otherwise the best offered
+    // voice (only local ones are offered unless the site owner set ttscloud=1)
+    function ttsPickVoice() {
+        var list = ttsOffered();
+        if (ttsVoice) {
+            for (var i = 0; i < list.length; i++) if (list[i].name === ttsVoice) return list[i];
+        }
+        return list[0] || null;
+    }
+
+    /* Browsers deliver their voice list asynchronously (Chrome: empty on the
+     * first call). Until it is known, read-aloud counts as available; after
+     * that it is only available with a usable voice. */
+    var voicesKnown = false;
+    function ttsAvailable() {
+        if (!ttsSupported()) return false;
+        return !voicesKnown || !!ttsPickVoice();
     }
 
     /* Word highlighting while reading: marks the word being spoken
@@ -512,6 +582,8 @@
         if (!a || pos < a.ts || pos >= a.te) return;
         var bIdx = hlRunIdx;
         while (bIdx < hlRuns.length - 1 && hlRuns[bIdx].te < end) bIdx++;
+        // end inside the gap before a run (longer ranges, e.g. a sentence): stop at the previous one
+        while (bIdx > hlRunIdx && hlRuns[bIdx].ts >= end) bIdx--;
         var b = hlRuns[bIdx];
         var endInB = Math.min(end, b.te);
         try {
@@ -569,13 +641,19 @@
         }
         if (!text) return false;
 
-        // Split into sentence chunks <= 180 chars, remember offsets for highlighting
+        var voice = ttsPickVoice();
+        if (!voice) return false; // no usable voice: stay silent and say so in the panel
+
+        // Split into sentence chunks <= 180 chars, remember offsets for highlighting.
+        // Online voices get one chunk per sentence: they send no word events,
+        // so the spoken sentence is marked instead (see onstart below).
+        var oneSentence = !voice.localService;
         var sentences = text.match(/[^.!?。！？]+[.!?。！？]*\s*/g) || [text];
         var parts = [];
         var current = '';
         var consumed = 0;
         sentences.forEach(function (s) {
-            if ((current + s).length > 180) {
+            if ((current + s).length > 180 || (oneSentence && current)) {
                 if (current) { parts.push({ t: current, o: consumed }); consumed += current.length; }
                 while (s.length > 180) {
                     parts.push({ t: s.substring(0, 180), o: consumed });
@@ -595,21 +673,24 @@
         ttsRunReset = !!resetWhenDone;
         var src = source || 'page';
         var withHl = !!(collected && hlRuns.length && hlSupported());
-        var langCode = document.documentElement.lang || (cfg.lang !== 'auto' ? cfg.lang : 'en');
-        var voice = ttsPickVoice(langCode);
         try { speechSynthesis.cancel(); } catch (e) { }
         parts.forEach(function (part, i) {
             var u = new SpeechSynthesisUtterance(part.t);
-            u.lang = langCode;
+            u.lang = voice.lang;
             u.rate = [1, 0.75, 1, 1.25][ttsRate] || 1;
-            if (voice) u.voice = voice;
+            u.voice = voice;
             if (withHl) {
                 u.onboundary = function (e) {
                     if (run === ttsRun) hlWordAt(part.o + (e.charIndex || 0), e.charLength);
                 };
             }
             u.onstart = function () {
-                if (run !== ttsRun || ttsActive) return;
+                if (run !== ttsRun) return;
+                // Online voices (e.g. Google voices in Chrome) send no word
+                // boundary events, so mark the sentence being spoken instead;
+                // voices that do send them refine this to the single word.
+                if (withHl && !voice.localService) hlWordAt(part.o, part.t.replace(/\s+$/, '').length);
+                if (ttsActive) return;
                 ttsActive = true;
                 emit('speechstart', { source: src });
             };
@@ -1030,6 +1111,16 @@
         '.temporow[hidden]{display:none;}' +
         '.temporow button{flex:1;font-size:12px;padding:4px 8px;border-radius:16px;border:1px solid #c9c9c9;background:#fff;cursor:pointer;color:#1a1a1a;}' +
         '.temporow button.on{background:' + cfg.color + ';color:' + cfg.color2 + ';border-color:' + cfg.color + ';}' +
+        '.voicerow{grid-column:1/-1;}' +
+        '.voicerow[hidden]{display:none;}' +
+        '.voicerow label{display:flex;align-items:center;gap:8px;font-size:12px;color:#555;}' +
+        '.voicerow select{flex:1;min-width:0;font-size:12px;padding:4px 6px;border:1px solid #c9c9c9;' +
+        'border-radius:8px;background:#fff;color:#1a1a1a;}' +
+        '.vnote,.ttsnote p{font-size:11.5px;line-height:1.45;color:#555;margin-top:4px;}' +
+        '.vnote[hidden],.ttsnote[hidden]{display:none;}' +
+        '.ttsnote{grid-column:1/-1;padding:6px 10px;border-radius:9px;background:#f7f3e6;border:1px solid #e3d9b8;}' +
+        '.ttsnote p:first-child{margin-top:0;}' +
+        'button.ft[disabled]{opacity:.55;cursor:not-allowed;}' +
         'button.ft{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:3px;padding:6px 10px;min-height:44px;' +
         'border:1px solid #c9c9c9;border-radius:9px;background:#f7f7f7;color:#1a1a1a;cursor:pointer;text-align:start;font-size:13px;width:100%;}' +
         'button.ft .top{display:flex;align-items:center;gap:7px;}' +
@@ -1100,6 +1191,19 @@
             }
             b += '</div>';
         }
+        if (f.k === 'tts') {
+            // Voice selector, visible while read-aloud is active and more than
+            // one voice is offered; the note appears when an online voice is used
+            var VT = T.v || {};
+            b += '<div class="voicerow" part="voice" hidden><label>' +
+                '<span>' + esc(T.f && T.f.ttsvoice || 'Voice') + '</span>' +
+                '<select class="voice" part="voice-select"></select></label>' +
+                '<p class="vnote" part="voice-note" hidden>' + esc(VT.note || '') + '</p></div>';
+            // No usable voice for the page language: say so instead of
+            // switching read-aloud on silently, and name the way out
+            b += '<div class="ttsnote" part="tts-note" role="note" hidden>' +
+                '<p>' + esc(VT.none || '') + ' ' + esc(VT.install || '') + '</p></div>';
+        }
         return b;
     }).join('');
     if (cfg.features.indexOf('structure') !== -1) {
@@ -1116,6 +1220,8 @@
     var BARE_CSS =
         BARE + '.panel{display:none;}' +
         BARE + '.panel.open{display:flex;flex-direction:column;}' +
+        BARE + '.voicerow[hidden],' + BARE + '.ttsnote[hidden],' +
+        BARE + '.vnote[hidden]{display:none;}' +
         BARE + '.view{display:none;}' +
         BARE + '.view.open{display:block;}' +
         BARE + '.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}' +
@@ -1208,11 +1314,87 @@
                 tbs[t2].setAttribute('aria-pressed', tOn ? 'true' : 'false');
             }
         }
+        renderVoices();
         var profs = root.querySelectorAll('button.prof');
         for (var j = 0; j < profs.length; j++) {
             var active = profileActive(profs[j].dataset.p);
             profs[j].classList.toggle('on', active);
             profs[j].setAttribute('aria-pressed', active ? 'true' : 'false');
+        }
+    }
+
+    // Fill the voice selector; the options are rebuilt only when the voice
+    // list changes, so an open select does not lose its state.
+    var voiceSig = null;
+    function renderVoices() {
+        var row = root.querySelector('.voicerow');
+        if (!row) return;
+        var VT = T.v || {};
+        var sel = row.querySelector('select.voice');
+        var list = ttsSupported() ? ttsOffered() : [];
+        var used = ttsSupported() ? ttsPickVoice() : null;
+        var available = ttsAvailable();
+        var usedOnline = !!(used && !used.localService);
+        // selector: while read-aloud is on and there is a real choice (or an
+        // online voice is in use, so the visitor can always switch back)
+        row.hidden = !(states.tts > 0) || !available || (list.length < 2 && !usedOnline);
+        var sig = list.map(function (v) { return v.name + (v.localService ? '' : '*'); }).join('|');
+        if (sig !== voiceSig) {
+            voiceSig = sig;
+            var autoV = list[0];
+            var html = '<option value="">' + esc(T.auto || 'Automatic') +
+                (autoV ? ' (' + esc(autoV.name) + (autoV.localService ? '' : ', ' + esc(VT.online || 'online')) + ')' : '') +
+                '</option>';
+            list.forEach(function (v) {
+                html += '<option value="' + esc(v.name) + '">' + esc(v.name) +
+                    (v.localService ? '' : ' (' + esc(VT.online || 'online') + ')') + '</option>';
+            });
+            sel.innerHTML = html;
+        }
+        var picked = '';
+        for (var i = 0; i < list.length; i++) if (list[i].name === ttsVoice) picked = ttsVoice;
+        if (sel.value !== picked) sel.value = picked;
+        var vnote = row.querySelector('.vnote');
+        if (vnote) vnote.hidden = !usedOnline;
+        // No usable voice: disable the read-aloud button and explain why
+        var btn = root.querySelector('button.ft[data-f="tts"]');
+        if (btn) {
+            btn.disabled = !available;
+            if (!available) btn.setAttribute('aria-describedby', 'legilo-ttsnote');
+            else btn.removeAttribute('aria-describedby');
+        }
+        var note = root.querySelector('.ttsnote');
+        if (note) {
+            note.id = 'legilo-ttsnote';
+            note.hidden = available;
+        }
+    }
+
+    function setVoice(name, source) {
+        name = String(name || '');
+        if (name) {
+            var ok = false, list = ttsOffered();
+            for (var i = 0; i < list.length; i++) if (list[i].name === name) ok = true;
+            if (!ok) return false; // unknown, other language, or an online voice that is not allowed
+        }
+        ttsVoice = name;
+        renderVoices(); saveStates();
+        emitChange('ttsvoice', source);
+        return true;
+    }
+
+    // Voice list arrived or changed: refresh the panel; if read-aloud is on
+    // but no voice can speak anymore, switch it off instead of staying mute
+    function onVoices() {
+        voicesKnown = true;
+        if (!ttsAvailable() && states.tts > 0) {
+            ttsStop();
+            hoverListen(false);
+            states.tts = 0;
+            renderButtons();
+            emitChange('tts', 'auto');
+        } else {
+            renderVoices();
         }
     }
 
@@ -1259,6 +1441,11 @@
         return 2;
     }
 
+    root.addEventListener('change', function (e) {
+        var t = e.composedPath ? e.composedPath()[0] : e.target;
+        if (t && t.classList && t.classList.contains('voice')) setVoice(t.value, 'panel');
+    });
+
     root.addEventListener('click', function (e) {
         var btn = e.composedPath ? e.composedPath()[0] : e.target;
         while (btn && btn !== root && !(btn.tagName === 'BUTTON' || btn.tagName === 'A')) btn = btn.parentNode;
@@ -1290,6 +1477,7 @@
         if (btn.classList.contains('ft')) {
             var f = btn.dataset.f;
             if (f === 'structure') { showStructure(); return; }
+            if (f === 'tts' && !ttsAvailable()) return; // no voice: the note explains why
             if (f === 'tts') {
                 // cycle only through the offered read-aloud modes
                 states.tts = TTS_MODES[(TTS_MODES.indexOf(states.tts || 0) + 1) % TTS_MODES.length];
@@ -1436,12 +1624,28 @@
         var any = false;
         FEATURES.forEach(function (f) { if (states[f.k]) any = true; });
         if (any) apply();
+        // Browsers load their voice list asynchronously (Chrome: empty on the
+        // first call); asking early fills it before the visitor needs it.
+        // Some browsers never fire voiceschanged, hence the fallback timer.
+        if (states.tts !== undefined && ttsSupported()) {
+            try {
+                if ((speechSynthesis.getVoices() || []).length) onVoices();
+                speechSynthesis.addEventListener('voiceschanged', onVoices);
+            } catch (e) { }
+            voiceTimer = setTimeout(onVoices, 2000);
+        }
         // Restored settings (or system preferences) once as a change event
         emitChange(null, 'load');
     }
 
+    var voiceTimer = null;
+
     function destroy() {
         ttsStop();
+        clearTimeout(voiceTimer);
+        if (ttsSupported()) {
+            try { speechSynthesis.removeEventListener('voiceschanged', onVoices); } catch (e) { }
+        }
         hoverListen(false);
         if (hlStyleEl && hlStyleEl.parentNode) { hlStyleEl.parentNode.removeChild(hlStyleEl); }
         hlStyleEl = null;
@@ -1508,7 +1712,11 @@
             } : null,
             fontFamily: font === 1 ? FONT_READABLE : font === 2 ? FONT_DYSLEXIC : null,
             fontUrl: url,
-            fontFaceCss: cfg.fontCss || ''
+            fontFaceCss: cfg.fontCss || '',
+            // voice used for read-aloud (null: none available or list not loaded yet);
+            // voiceOnline: true when the visitor picked an online voice
+            voice: ttsSupported() ? (function (v) { return v ? v.name : null; })(ttsPickVoice()) : null,
+            voiceOnline: ttsSupported() ? (function (v) { return !!(v && !v.localService); })(ttsPickVoice()) : false
         };
     }
 
@@ -1522,15 +1730,16 @@
      * automatisches Ende von "Seite vorlesen", einmal nach dem Laden). Feuert
      * nur, wenn sich wirklich etwas geaendert hat - ein Handler, der selbst
      * Legilo.set() aufruft, kann so keine Endlosschleife ausloesen.
-     * key: geaenderte Funktion ('ttsrate' fuer das Tempo), null bei Profil,
-     * Reset und Laden. */
+     * key: geaenderte Funktion ('ttsrate' fuer das Tempo, 'ttsvoice' fuer die
+     * Stimme), null bei Profil, Reset und Laden. */
     function emitChange(key, source, profile) {
         var snap = stateSnap();
         if (snap === lastSnap) return;
         lastSnap = snap;
         var d = {
             key: key || null,
-            level: key === 'ttsrate' ? ttsRate : key ? (states[key] || 0) : null,
+            level: key === 'ttsrate' ? ttsRate : key === 'ttsvoice' ? (ttsVoice || null) :
+                key ? (states[key] || 0) : null,
             states: apiStates(),
             rate: ttsRate,
             values: apiValues(),
@@ -1552,6 +1761,8 @@
         level = Math.max(0, Math.min(max - 1, level));
         // per tts-Parameter nicht angebotener Vorlese-Modus
         if (key === 'tts' && TTS_MODES.indexOf(level) === -1) return false;
+        // ohne nutzbare Stimme nicht stumm einschalten
+        if (key === 'tts' && level > 0 && !ttsAvailable()) return false;
         states[key] = level;
         if (key === 'tts') {
             ttsStop();
@@ -1574,7 +1785,11 @@
     function apiFeatures() {
         return FEATURES.map(function (f) {
             var o = { key: f.k, levels: f.n, state: states[f.k] || 0 };
-            if (f.k === 'tts') o.allowed = TTS_MODES.slice(); // angebotene Modi laut tts-Parameter
+            if (f.k === 'tts') {
+                o.allowed = TTS_MODES.slice(); // angebotene Modi laut tts-Parameter
+                o.available = ttsAvailable();  // false: keine nutzbare Stimme fuer die Seitensprache
+                o.cloud = cfg.ttscloud;        // Online-Stimmen fuer Besucher waehlbar
+            }
             return o;
         });
     }
@@ -1594,6 +1809,18 @@
         return ttsSpeak(String(text || ''), false, null, 'api');
     }
 
+    /* Stimmauswahl per API: Stimmen der Seitensprache, beste zuerst. Ohne
+     * ttscloud nur lokale; mit ttscloud=1 auch Online-Stimmen (online: true),
+     * die dann zuerst kommen. selected = die Stimme, die tatsaechlich spricht;
+     * chosen = vom Besucher bzw. per setVoice() gewaehlt. */
+    function apiVoices() {
+        if (!ttsSupported()) return [];
+        var used = ttsPickVoice();
+        return ttsOffered().map(function (v) {
+            return { name: v.name, lang: v.lang, online: !v.localService, selected: v === used, chosen: v.name === ttsVoice };
+        });
+    }
+
     window.__BRAND__ = {
         version: VERSION,
         open: openPanel,
@@ -1606,6 +1833,8 @@
         values: apiValues,
         speak: apiSpeak,
         stopSpeaking: ttsStop,
+        voices: apiVoices,
+        setVoice: function (name) { return setVoice(name, 'api'); },
         features: apiFeatures,
         destroy: destroy
     };

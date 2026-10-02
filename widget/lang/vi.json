@@ -12,6 +12,13 @@
     "structureEmpty": "Không tìm thấy tiêu đề trên trang này.",
     "on": "Bật",
     "off": "Tắt",
+    "auto": "Tự động",
+    "v": {
+        "online": "trực tuyến",
+        "none": "Chưa cài giọng đọc cho ngôn ngữ này.",
+        "install": "Có thể thêm giọng đọc miễn phí trong cài đặt giọng nói của hệ thống.",
+        "note": "Văn bản sẽ được gửi đến nhà cung cấp trình duyệt (ví dụ Google)."
+    },
     "f": {
         "fontsize": "Cỡ chữ",
         "spacing": "Khoảng cách",
@@ -30,6 +37,7 @@
         "structure": "Cấu trúc trang",
         "tts": "Đọc to",
         "ttsrate": "Tốc độ đọc",
+        "ttsvoice": "Giọng đọc",
         "align": "Căn chữ",
         "profiles": "Chế độ"
     },

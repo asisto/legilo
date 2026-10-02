@@ -12,6 +12,13 @@
     "structureEmpty": "Ma nstabux intestaturi f'din il-paġna.",
     "on": "Mixgħul",
     "off": "Mitfi",
+    "auto": "Awtomatiku",
+    "v": {
+        "online": "online",
+        "none": "M'hemm l-ebda vuċi installata għal din il-lingwa.",
+        "install": "Il-vuċijiet jistgħu jiżdiedu b'xejn fl-issettjar tat-taħdit tas-sistema.",
+        "note": "It-test jintbagħat lill-fornitur tal-browser (eż. Google)."
+    },
     "f": {
         "fontsize": "Daqs tal-font",
         "spacing": "Spazjar",
@@ -30,6 +37,7 @@
         "structure": "Struttura tal-paġna",
         "tts": "Aqra b'leħen għoli",
         "ttsrate": "Veloċità tal-qari",
+        "ttsvoice": "Vuċi",
         "align": "Allinja t-test",
         "profiles": "Profili"
     },

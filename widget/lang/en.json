@@ -12,6 +12,13 @@
     "structureEmpty": "No headings found on this page.",
     "on": "On",
     "off": "Off",
+    "auto": "Automatic",
+    "v": {
+        "online": "online",
+        "none": "No voice installed for this language.",
+        "install": "Voices can be added free of charge in the speech settings of your system.",
+        "note": "The text is then sent to the browser vendor (e.g. Google)."
+    },
     "f": {
         "fontsize": "Font size",
         "spacing": "Spacing",
@@ -30,6 +37,7 @@
         "structure": "Page structure",
         "tts": "Read aloud",
         "ttsrate": "Reading speed",
+        "ttsvoice": "Voice",
         "align": "Align text",
         "profiles": "Profiles"
     },

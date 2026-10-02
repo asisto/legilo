@@ -34,6 +34,7 @@ return array(
     'behavior' => 'Behavior', 'panellang' => 'Widget language', 'langauto' => 'Detect automatically',
     'mobile' => 'Mobile (up to 768 px)', 'mobileShow' => 'Show', 'mobileHide' => 'Hide',
     'ttsmode' => 'Read-aloud modes', 'ttsBoth' => 'Both',
+    'ttscloud' => 'Offer online voices', 'ttscloudInfo' => 'Read-aloud then prefers the browser\'s online voices where available (e.g. "Google US English" in Chrome). They usually sound more natural and also cover languages for which no voice is installed on the device. The text is sent by the browser to its vendor; Legilo itself sends nothing. No API key, no costs. The panel marks the online voice, and visitors can switch to a local voice at any time. Without this option only the voices on the device are used.',
     'statement' => 'Link to accessibility statement (optional)',
     'hidebtn' => 'Hide the button (open only via JavaScript API <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Enable the keyboard shortcut <kbd>Alt+Shift+A</kbd> to open',

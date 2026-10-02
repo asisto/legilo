@@ -3,7 +3,7 @@ Contributors: legiloeu
 Tags: accessibility, reading aid, readability, dyslexia, text to speech
 Requires at least: 6.3
 Tested up to: 7.1
-Stable tag: 0.1.2
+Stable tag: 0.1.3
 Requires PHP: 7.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
@@ -64,6 +64,10 @@ on your own server and point the plugin to it in code:
 Then no request to legilo.eu is made at all.
 
 == Changelog ==
+
+= 0.1.3 =
+* New setting "Offer online voices" (ttscloud): read-aloud prefers the
+  browser's online voices where available; without it only local voices.
 
 = 0.1.2 =
 * New setting "Read-aloud modes": offer both modes, only "read page" or

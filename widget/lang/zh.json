@@ -12,6 +12,13 @@
     "structureEmpty": "本页未找到标题。",
     "on": "开",
     "off": "关",
+    "auto": "自动",
+    "v": {
+        "online": "在线",
+        "none": "未安装此语言的语音。",
+        "install": "可在系统的语音设置中免费添加语音。",
+        "note": "文本将发送给浏览器提供商 (例如 Google)。"
+    },
     "f": {
         "fontsize": "字体大小",
         "spacing": "间距",
@@ -30,6 +37,7 @@
         "structure": "页面结构",
         "tts": "朗读",
         "ttsrate": "朗读速度",
+        "ttsvoice": "语音",
         "align": "文本对齐",
         "profiles": "模式"
     },

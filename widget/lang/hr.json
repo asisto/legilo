@@ -12,6 +12,13 @@
     "structureEmpty": "Na ovoj stranici nema naslova.",
     "on": "Uklj.",
     "off": "Isklj.",
+    "auto": "Automatski",
+    "v": {
+        "online": "online",
+        "none": "Za ovaj jezik nije instaliran glas.",
+        "install": "Glasovi se mogu besplatno dodati u postavkama govora sustava.",
+        "note": "Tekst se šalje pružatelju preglednika (npr. Google)."
+    },
     "f": {
         "fontsize": "Veličina fonta",
         "spacing": "Razmaci",
@@ -30,6 +37,7 @@
         "structure": "Struktura stranice",
         "tts": "Čitanje naglas",
         "ttsrate": "Brzina čitanja",
+        "ttsvoice": "Glas",
         "align": "Poravnanje teksta",
         "profiles": "Profili"
     },

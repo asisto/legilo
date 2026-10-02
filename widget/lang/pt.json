@@ -12,6 +12,13 @@
     "structureEmpty": "Nenhum título encontrado nesta página.",
     "on": "On",
     "off": "Off",
+    "auto": "Automática",
+    "v": {
+        "online": "online",
+        "none": "Nenhuma voz instalada para este idioma.",
+        "install": "É possível adicionar vozes gratuitamente nas definições de voz do sistema.",
+        "note": "O texto é enviado ao fornecedor do navegador (p. ex. Google)."
+    },
     "f": {
         "fontsize": "Tamanho do texto",
         "spacing": "Espaçamento",
@@ -30,6 +37,7 @@
         "structure": "Estrutura da página",
         "tts": "Ler em voz alta",
         "ttsrate": "Velocidade de leitura",
+        "ttsvoice": "Voz",
         "align": "Alinhamento do texto",
         "profiles": "Perfis"
     },

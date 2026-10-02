@@ -12,6 +12,13 @@
     "structureEmpty": "Ingen overskrifter fundet på denne side.",
     "on": "Til",
     "off": "Fra",
+    "auto": "Automatisk",
+    "v": {
+        "online": "online",
+        "none": "Der er ingen stemme installeret til dette sprog.",
+        "install": "Stemmer kan tilføjes gratis i systemets taleindstillinger.",
+        "note": "Teksten sendes til browserens udbyder (f.eks. Google)."
+    },
     "f": {
         "fontsize": "Skriftstørrelse",
         "spacing": "Afstand",
@@ -30,6 +37,7 @@
         "structure": "Sidestruktur",
         "tts": "Oplæsning",
         "ttsrate": "Læsehastighed",
+        "ttsvoice": "Stemme",
         "align": "Juster tekst",
         "profiles": "Profiler"
     },

@@ -12,6 +12,13 @@
     "structureEmpty": "Sellel lehel pealkirju ei leitud.",
     "on": "Sees",
     "off": "Väljas",
+    "auto": "Automaatne",
+    "v": {
+        "online": "võrgus",
+        "none": "Selle keele jaoks pole häält installitud.",
+        "install": "Hääli saab tasuta lisada süsteemi kõneseadetes.",
+        "note": "Tekst saadetakse brauseri pakkujale (nt Google)."
+    },
     "f": {
         "fontsize": "Kirja suurus",
         "spacing": "Vahed",
@@ -30,6 +37,7 @@
         "structure": "Lehe struktuur",
         "tts": "Ettelugemine",
         "ttsrate": "Lugemiskiirus",
+        "ttsvoice": "Hääl",
         "align": "Teksti joondus",
         "profiles": "Profiilid"
     },

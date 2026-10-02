@@ -34,6 +34,7 @@ return array(
     'behavior' => 'Comportamento', 'panellang' => 'Lingua del widget', 'langauto' => 'Rilevamento automatico',
     'mobile' => 'Mobile (fino a 768 px)', 'mobileShow' => 'Mostra', 'mobileHide' => 'Nascondi',
     'ttsmode' => 'Modalità di lettura ad alta voce', 'ttsBoth' => 'Entrambe',
+    'ttscloud' => 'Offri voci online', 'ttscloudInfo' => 'La lettura ad alta voce usa allora di preferenza le voci online del browser, se disponibili (ad es. "Google italiano" in Chrome). Di solito suonano più naturali e coprono anche lingue per cui sul dispositivo non è installata alcuna voce. Il browser invia il testo al suo fornitore; Legilo non invia nulla. Nessuna chiave API, nessun costo. Il pannello indica la voce online e i visitatori possono scegliere in qualsiasi momento una voce locale. Senza questa opzione si usano solo le voci del dispositivo.',
     'statement' => 'Link alla dichiarazione di accessibilità (opzionale)',
     'hidebtn' => 'Nascondi il pulsante (apertura solo via API JavaScript <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Attiva la scorciatoia da tastiera <kbd>Alt+Shift+A</kbd> per aprire',

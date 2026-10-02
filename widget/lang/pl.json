@@ -12,6 +12,13 @@
     "structureEmpty": "Nie znaleziono nagłówków na tej stronie.",
     "on": "Wł.",
     "off": "Wył.",
+    "auto": "Automatyczny",
+    "v": {
+        "online": "online",
+        "none": "Brak zainstalowanego głosu dla tego języka.",
+        "install": "Głosy można bezpłatnie dodać w ustawieniach mowy systemu.",
+        "note": "Tekst zostanie wysłany do dostawcy przeglądarki (np. Google)."
+    },
     "f": {
         "fontsize": "Rozmiar tekstu",
         "spacing": "Odstępy",
@@ -30,6 +37,7 @@
         "structure": "Struktura strony",
         "tts": "Czytaj na głos",
         "ttsrate": "Tempo czytania",
+        "ttsvoice": "Głos",
         "align": "Wyrównanie tekstu",
         "profiles": "Profile"
     },

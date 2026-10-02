@@ -12,6 +12,13 @@
     "structureEmpty": "Na tej strani ni najdenih naslovov.",
     "on": "Vklopljeno",
     "off": "Izklopljeno",
+    "auto": "Samodejno",
+    "v": {
+        "online": "na spletu",
+        "none": "Za ta jezik ni nameščen noben glas.",
+        "install": "Glasove lahko brezplačno dodate v govornih nastavitvah sistema.",
+        "note": "Besedilo se pošlje ponudniku brskalnika (npr. Google)."
+    },
     "f": {
         "fontsize": "Velikost pisave",
         "spacing": "Razmiki",
@@ -30,6 +37,7 @@
         "structure": "Struktura strani",
         "tts": "Glasno branje",
         "ttsrate": "Hitrost branja",
+        "ttsvoice": "Glas",
         "align": "Poravnava besedila",
         "profiles": "Profili"
     },

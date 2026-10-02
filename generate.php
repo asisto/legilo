@@ -488,6 +488,11 @@ $ld = array(
                 <option value="read"><?php echo htmlspecialchars($widgetLang['s']['tts'][1]); ?></option>
                 <option value="hover"><?php echo htmlspecialchars($widgetLang['s']['tts'][2]); ?></option>
             </select>
+            <div class="checkline">
+                <input type="checkbox" id="f_ttscloud" aria-describedby="ttscloud_hint">
+                <label for="f_ttscloud" style="margin:0"><?php echo $T['ttscloud']; ?></label>
+            </div>
+            <p class="hint" id="ttscloud_hint"><?php echo $T['ttscloudInfo']; ?></p>
             <label for="f_statement"><?php echo $T['statement']; ?></label>
             <input type="url" id="f_statement" placeholder="https://www.example.com/accessibility">
             <div class="checkline">
@@ -741,6 +746,7 @@ $ld = array(
         $('f_lang').value = cfg.lang;
         $('f_mobile').value = cfg.mobile;
         $('f_tts').value = ['both', 'read', 'hover'].indexOf(cfg.tts) !== -1 ? cfg.tts : 'both';
+        $('f_ttscloud').checked = !!parseInt(cfg.ttscloud, 10);
         $('f_statement').value = cfg.statement || '';
         $('f_hide').checked = !!parseInt(cfg.hide, 10);
         $('f_hotkey').checked = !!parseInt(cfg.hotkey, 10);
@@ -782,6 +788,7 @@ $ld = array(
             lang: $('f_lang').value,
             mobile: $('f_mobile').value,
             tts: $('f_tts').value,
+            ttscloud: $('f_ttscloud').checked ? '1' : '0',
             statement: $('f_statement').value.trim(),
             hide: $('f_hide').checked ? '1' : '0',
             hotkey: $('f_hotkey').checked ? '1' : '0',

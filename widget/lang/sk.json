@@ -12,6 +12,13 @@
     "structureEmpty": "Na tejto stránke sa nenašli žiadne nadpisy.",
     "on": "Zapnuté",
     "off": "Vypnuté",
+    "auto": "Automaticky",
+    "v": {
+        "online": "online",
+        "none": "Pre tento jazyk nie je nainštalovaný žiadny hlas.",
+        "install": "Hlasy možno zadarmo pridať v nastaveniach reči systému.",
+        "note": "Text sa odošle poskytovateľovi prehliadača (napr. Google)."
+    },
     "f": {
         "fontsize": "Veľkosť písma",
         "spacing": "Rozstupy",
@@ -30,6 +37,7 @@
         "structure": "Štruktúra stránky",
         "tts": "Čítať nahlas",
         "ttsrate": "Rýchlosť čítania",
+        "ttsvoice": "Hlas",
         "align": "Zarovnať text",
         "profiles": "Profily"
     },

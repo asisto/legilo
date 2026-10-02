@@ -12,6 +12,13 @@
     "structureEmpty": "Geen koppen gevonden op deze pagina.",
     "on": "Aan",
     "off": "Uit",
+    "auto": "Automatisch",
+    "v": {
+        "online": "online",
+        "none": "Geen stem geïnstalleerd voor deze taal.",
+        "install": "Stemmen kunnen gratis worden toegevoegd in de spraakinstellingen van het systeem.",
+        "note": "De tekst wordt dan naar de aanbieder van de browser gestuurd (bijv. Google)."
+    },
     "f": {
         "fontsize": "Tekstgrootte",
         "spacing": "Afstand",
@@ -30,6 +37,7 @@
         "structure": "Paginastructuur",
         "tts": "Voorlezen",
         "ttsrate": "Voorleessnelheid",
+        "ttsvoice": "Stem",
         "align": "Tekstuitlijning",
         "profiles": "Profielen"
     },

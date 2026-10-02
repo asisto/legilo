@@ -12,6 +12,13 @@
     "structureEmpty": "Šiame puslapyje antraščių nerasta.",
     "on": "Įjungta",
     "off": "Išjungta",
+    "auto": "Automatinis",
+    "v": {
+        "online": "internete",
+        "none": "Šiai kalbai neįdiegtas joks balsas.",
+        "install": "Balsus galima nemokamai pridėti sistemos kalbos nustatymuose.",
+        "note": "Tekstas siunčiamas naršyklės teikėjui (pvz., Google)."
+    },
     "f": {
         "fontsize": "Šrifto dydis",
         "spacing": "Tarpai",
@@ -30,6 +37,7 @@
         "structure": "Puslapio struktūra",
         "tts": "Skaityti balsu",
         "ttsrate": "Skaitymo greitis",
+        "ttsvoice": "Balsas",
         "align": "Lygiuoti tekstą",
         "profiles": "Profiliai"
     },

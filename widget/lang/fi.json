@@ -12,6 +12,13 @@
     "structureEmpty": "Tältä sivulta ei löytynyt otsikoita.",
     "on": "Päällä",
     "off": "Pois",
+    "auto": "Automaattinen",
+    "v": {
+        "online": "verkossa",
+        "none": "Tälle kielelle ei ole asennettu ääntä.",
+        "install": "Ääniä voi lisätä maksutta järjestelmän puheasetuksista.",
+        "note": "Teksti lähetetään selaimen palveluntarjoajalle (esim. Google)."
+    },
     "f": {
         "fontsize": "Tekstin koko",
         "spacing": "Välistys",
@@ -30,6 +37,7 @@
         "structure": "Sivun rakenne",
         "tts": "Lue ääneen",
         "ttsrate": "Lukunopeus",
+        "ttsvoice": "Ääni",
         "align": "Tasaa teksti",
         "profiles": "Profiilit"
     },

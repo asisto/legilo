@@ -34,6 +34,7 @@ return array(
     'behavior' => 'Davranış', 'panellang' => 'Widget dili', 'langauto' => 'Otomatik algıla',
     'mobile' => 'Mobil (768 px\'e kadar)', 'mobileShow' => 'Göster', 'mobileHide' => 'Gizle',
     'ttsmode' => 'Sesli okuma modları', 'ttsBoth' => 'Her ikisi',
+    'ttscloud' => 'Çevrimiçi sesler sun', 'ttscloudInfo' => 'Sesli okuma bu durumda, varsa öncelikle tarayıcının çevrimiçi seslerini kullanır (ör. Chrome\'da "Google Türkçe"). Bunlar genellikle daha doğal duyulur ve cihazda ses yüklü olmayan dilleri de kapsar. Tarayıcı metni kendi sağlayıcısına gönderir; Legilo hiçbir şey göndermez. API anahtarı yok, maliyet yok. Panel çevrimiçi sesi işaretler ve ziyaretçiler istedikleri zaman yerel bir ses seçebilir. Bu seçenek olmadan yalnızca cihazdaki sesler kullanılır.',
     'statement' => 'Erişilebilirlik bildirimine bağlantı (isteğe bağlı)',
     'hidebtn' => 'Düğmeyi gizle (yalnızca JavaScript API <a href="api"><code>' . $brand . '.open()</code></a> ile açılır)',
     'hotkeybtn' => 'Açmak için <kbd>Alt+Shift+A</kbd> kısayolunu etkinleştir',

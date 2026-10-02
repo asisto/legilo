@@ -12,6 +12,13 @@
     "structureEmpty": "Keine Überschriften auf dieser Seite gefunden.",
     "on": "Ein",
     "off": "Aus",
+    "auto": "Automatisch",
+    "v": {
+        "online": "online",
+        "none": "Für diese Sprache ist keine Stimme installiert.",
+        "install": "Stimmen lassen sich kostenlos in den Spracheinstellungen des Systems hinzufügen.",
+        "note": "Der Text geht dabei an den Anbieter des Browsers (z. B. Google)."
+    },
     "f": {
         "fontsize": "Schriftgröße",
         "spacing": "Abstände",
@@ -30,6 +37,7 @@
         "structure": "Seitenstruktur",
         "tts": "Vorlesen",
         "ttsrate": "Vorlese-Tempo",
+        "ttsvoice": "Stimme",
         "align": "Textausrichtung",
         "profiles": "Profile"
     },

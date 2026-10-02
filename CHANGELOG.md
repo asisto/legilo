@@ -1,5 +1,55 @@
 # Changelog
 
+## 0.4.0 - 2026-10-02
+
+- Widget: no silent read-aloud anymore. Without a usable voice for the page
+  language the read-aloud button is disabled and the panel explains why and
+  that voices can be added free of charge in the system's speech settings
+  (new texts in all 37 languages). features() reports available: false for
+  tts, set("tts", ...) returns false. If the voice list turns out empty after
+  read-aloud was switched on, it is switched off again (legilo:change with
+  source "auto").
+- Widget: new parameter ttscloud=1 (default 0). Read-aloud then prefers the
+  browser's online voices where available (e.g. "Google US English" in
+  Chrome): they come first in the voice selector and are the automatic
+  choice, marked as online with a note that the text goes to the browser
+  vendor; visitors can switch to a local voice at any time. Without online
+  voices (e.g. Firefox, Safari) the local voices are used. Without ttscloud
+  only local voices are used. No API key, no server, no costs: the online
+  voices come from the browser itself.
+- Widget: read-aloud marking also works with online voices. Google voices in
+  Chrome send no word boundary events, so the word marker stayed empty; now
+  online voices speak sentence by sentence and the spoken sentence is marked.
+  Voices that do send word events (local voices, Edge online voices) still
+  mark the single word.
+- Widget: voices() marks online voices (online: true), values() reports
+  voiceOnline, features() reports cloud for tts.
+- Configurator: "Offer online voices" option with an explanation (11
+  languages). API reference: voices, online voices and the no-voice state.
+- WordPress plugin 0.1.3: "Offer online voices" setting.
+
+## 0.3.0 - 2026-10-01
+
+- Widget: read-aloud uses only local voices (localService). Cloud voices that
+  send the text to the browser vendor (most "Google" voices in Chrome,
+  "Online (Natural)" in Edge) are never used anymore, not even as a fallback;
+  without a local voice for the page language read-aloud stays silent.
+  Before, a missing local voice silently fell back to a cloud voice.
+- Widget: better automatic voice choice among the local voices - quality
+  names (Natural, Neural, Premium, Enhanced, Siri) first, then the system's
+  default voice, then an exact region match.
+- Widget: voice selector in the panel (below the speed chips, visible while
+  read-aloud is on and the system offers more than one local voice); the
+  choice is stored with the other settings. New labels in all 37 languages.
+- Widget: Legilo.voices() and Legilo.setVoice(name); values() reports the
+  voice in use, legilo:change reports a voice change as key "ttsvoice".
+- Widget: fix - icon detection was too greedy. Every class starting with "fa"
+  (fancybox-content, favorites, nav-fade, ...) counted as an icon, so font
+  size and point-and-read skipped text in such elements. Icons are now
+  recognized by whole class tokens only (fa, fas, far, fab, fal, fad, fat,
+  fa-*, icon, icon-*, *-icon, glyphicon(-*), material-icons/-symbols); the
+  CSS exclusion for the font functions follows the same rule.
+
 ## 0.2.0 - 2026-10-01
 
 Page integration release: the widget now tells the page what it does, so

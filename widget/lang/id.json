@@ -12,6 +12,13 @@
     "structureEmpty": "Tidak ada judul di halaman ini.",
     "on": "Aktif",
     "off": "Nonaktif",
+    "auto": "Otomatis",
+    "v": {
+        "online": "online",
+        "none": "Tidak ada suara terpasang untuk bahasa ini.",
+        "install": "Suara dapat ditambahkan gratis di pengaturan ucapan sistem.",
+        "note": "Teks akan dikirim ke penyedia browser (mis. Google)."
+    },
     "f": {
         "fontsize": "Ukuran huruf",
         "spacing": "Jarak",
@@ -30,6 +37,7 @@
         "structure": "Struktur halaman",
         "tts": "Baca nyaring",
         "ttsrate": "Kecepatan baca",
+        "ttsvoice": "Suara",
         "align": "Rata teks",
         "profiles": "Profil"
     },

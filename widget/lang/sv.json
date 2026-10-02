@@ -12,6 +12,13 @@
     "structureEmpty": "Inga rubriker hittades på denna sida.",
     "on": "På",
     "off": "Av",
+    "auto": "Automatisk",
+    "v": {
+        "online": "online",
+        "none": "Ingen röst är installerad för det här språket.",
+        "install": "Röster kan läggas till gratis i systemets talinställningar.",
+        "note": "Texten skickas då till webbläsarens leverantör (t.ex. Google)."
+    },
     "f": {
         "fontsize": "Textstorlek",
         "spacing": "Avstånd",
@@ -30,6 +37,7 @@
         "structure": "Sidstruktur",
         "tts": "Läs upp",
         "ttsrate": "Läshastighet",
+        "ttsvoice": "Röst",
         "align": "Justera text",
         "profiles": "Profiler"
     },

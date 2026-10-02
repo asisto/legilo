@@ -34,6 +34,7 @@ return array(
     'behavior' => 'Zachowanie', 'panellang' => 'Język widgetu', 'langauto' => 'Wykryj automatycznie',
     'mobile' => 'Mobilnie (do 768 px)', 'mobileShow' => 'Pokaż', 'mobileHide' => 'Ukryj',
     'ttsmode' => 'Tryby czytania na głos', 'ttsBoth' => 'Oba',
+    'ttscloud' => 'Oferuj głosy online', 'ttscloudInfo' => 'Czytanie na głos korzysta wtedy przede wszystkim z głosów online przeglądarki, jeśli są dostępne (np. "Google polski" w Chrome). Zwykle brzmią naturalniej i obejmują też języki, dla których na urządzeniu nie zainstalowano głosu. Przeglądarka wysyła tekst do swojego dostawcy; Legilo niczego nie wysyła. Bez klucza API, bez kosztów. Panel oznacza głos online, a odwiedzający mogą w każdej chwili wybrać głos lokalny. Bez tej opcji używane są tylko głosy z urządzenia.',
     'statement' => 'Link do deklaracji dostępności (opcjonalnie)',
     'hidebtn' => 'Ukryj przycisk (otwieranie tylko przez API JavaScript <a href="api"><code>' . $brand . '.open()</code></a>)',
     'hotkeybtn' => 'Włącz skrót klawiszowy <kbd>Alt+Shift+A</kbd> do otwierania',

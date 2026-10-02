@@ -12,6 +12,13 @@
     "structureEmpty": "Nu s-au găsit titluri pe această pagină.",
     "on": "Pornit",
     "off": "Oprit",
+    "auto": "Automat",
+    "v": {
+        "online": "online",
+        "none": "Nu este instalată nicio voce pentru această limbă.",
+        "install": "Vocile pot fi adăugate gratuit din setările de vorbire ale sistemului.",
+        "note": "Textul este trimis furnizorului browserului (de ex. Google)."
+    },
     "f": {
         "fontsize": "Mărimea textului",
         "spacing": "Spațiere",
@@ -30,6 +37,7 @@
         "structure": "Structura paginii",
         "tts": "Citire cu voce tare",
         "ttsrate": "Viteza de citire",
+        "ttsvoice": "Voce",
         "align": "Aliniere text",
         "profiles": "Profiluri"
     },

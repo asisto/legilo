@@ -12,6 +12,13 @@
     "structureEmpty": "Šajā lapā virsraksti nav atrasti.",
     "on": "Ieslēgts",
     "off": "Izslēgts",
+    "auto": "Automātiski",
+    "v": {
+        "online": "tiešsaistē",
+        "none": "Šai valodai nav instalēta neviena balss.",
+        "install": "Balsis var bez maksas pievienot sistēmas runas iestatījumos.",
+        "note": "Teksts tiek nosūtīts pārlūka nodrošinātājam (piem., Google)."
+    },
     "f": {
         "fontsize": "Teksta lielums",
         "spacing": "Atstarpes",
@@ -30,6 +37,7 @@
         "structure": "Lapas struktūra",
         "tts": "Lasīt skaļi",
         "ttsrate": "Lasīšanas ātrums",
+        "ttsvoice": "Balss",
         "align": "Līdzināt tekstu",
         "profiles": "Profili"
     },
