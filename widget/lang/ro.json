@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Nu este instalată nicio voce pentru această limbă.",
         "install": "Vocile pot fi adăugate gratuit din setările de vorbire ale sistemului.",
-        "note": "Textul este trimis furnizorului browserului (de ex. Google)."
+        "more": "Mai multe voci ..."
     },
     "f": {
         "fontsize": "Mărimea textului",

@@ -16,7 +16,7 @@
     /* ------------- Configuration: window.__BRAND__Config > data-* > baked-in -- */
 
     var KEYS = ['pos', 'offx', 'offy', 'color', 'color2', 'size', 'radius',
-        'icon', 'lang', 'features', 'mobile', 'hide', 'hotkey', 'css', 'statement', 'tts', 'ttscloud'];
+        'icon', 'lang', 'features', 'mobile', 'hide', 'hotkey', 'css', 'statement', 'tts', 'ttscloud', 'ttschoice', 'autocontrast'];
 
     var script = document.currentScript;
     var cfg = {};
@@ -48,8 +48,13 @@
     // or only "point and read" (e.g. 3D tours, where reading the page makes no sense)
     cfg.tts = String(cfg.tts || 'both').toLowerCase();
     if (cfg.tts !== 'read' && cfg.tts !== 'hover') cfg.tts = 'both';
-    // ttscloud=1: visitors may pick the browser's online voices (see ttsVoices)
+    // ttscloud=1: prefer the browser's online voices where available (see ttsVoices)
     cfg.ttscloud = cfg.ttscloud === 1 || cfg.ttscloud === '1' || cfg.ttscloud === true || cfg.ttscloud === 'true';
+    // ttschoice=1: voice selector in the panel (otherwise the best voice is used automatically)
+    cfg.ttschoice = cfg.ttschoice === 1 || cfg.ttschoice === '1' || cfg.ttschoice === true || cfg.ttschoice === 'true';
+    // autocontrast=0: never start with contrast from the system settings
+    // (prefers-color-scheme / prefers-contrast); default on
+    cfg.autocontrast = !(cfg.autocontrast === 0 || cfg.autocontrast === '0' || cfg.autocontrast === false || cfg.autocontrast === 'false');
     // css=none: no built-in panel styling, panel in the light DOM so the
     // site owner's CSS applies directly (expert mode, skeleton in the configurator)
     var useCss = cfg.css !== 'none';
@@ -112,7 +117,8 @@
     var STORAGE_KEY = 'legilo:v1';
     var states = {};
     var ttsRate = 2; // read-aloud speed: 1 slower, 2 normal, 3 faster
-    var ttsVoice = ''; // chosen voice name, '' = automatic (best local voice)
+    var ttsVoice = ''; // chosen voice name, '' = automatic (best voice)
+    var storedVoice = ''; // stored choice; kept as is while the selector is off (ttschoice=0)
     FEATURES.forEach(function (f) { states[f.k] = 0; });
 
     /* ---------------- Page events ----------------
@@ -154,14 +160,16 @@
         });
         var r = parseInt(saved.rate, 10);
         if (r >= 1 && r <= 3) ttsRate = r;
-        if (typeof saved.voice === 'string') ttsVoice = saved.voice.substring(0, 200);
+        // a stored voice only counts while visitors can see and change it
+        if (typeof saved.voice === 'string') storedVoice = saved.voice.substring(0, 200);
+        if (cfg.ttschoice) ttsVoice = storedVoice;
     } else {
         // system preferences as initial values until the visitor picks something
         if (states.animations !== undefined &&
             window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             states.animations = 1;
         }
-        if (states.contrast !== undefined) {
+        if (states.contrast !== undefined && cfg.autocontrast) {
             if (window.matchMedia('(prefers-contrast: more)').matches) {
                 states.contrast = window.matchMedia('(prefers-color-scheme: dark)').matches ? 1 : 2;
             } else if (window.matchMedia('(prefers-color-scheme: dark)').matches && pageIsLight()) {
@@ -172,7 +180,7 @@
     function saveStates() {
         var out = {};
         FEATURES.forEach(function (f) { if (f.k !== 'tts') out[f.k] = states[f.k] || 0; });
-        store(function () { return localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: 1, states: out, rate: ttsRate, voice: ttsVoice })); });
+        store(function () { return localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: 1, states: out, rate: ttsRate, voice: cfg.ttschoice ? ttsVoice : storedVoice })); });
     }
 
     /* ---------------- Page effects (CSS injection) ---------------- */
@@ -219,10 +227,16 @@
         alignL: 'body p' + NOT_W + ',body li' + NOT_W + ',body td,body th,body dd,body dt,body blockquote,body figcaption{text-align:left!important;}',
         alignC: 'body p' + NOT_W + ',body li' + NOT_W + ',body td,body th,body dd,body dt,body blockquote,body figcaption{text-align:center!important;}',
         alignR: 'body p' + NOT_W + ',body li' + NOT_W + ',body td,body th,body dd,body dt,body blockquote,body figcaption{text-align:right!important;}',
-        dark: 'body, body *' + NOT_W + '{background-color:#121212!important;color:#f2f2f2!important;border-color:#666!important;text-shadow:none!important;box-shadow:none!important;}' +
+        // Transparent elements (data-legilo-clear, see bgMark) keep their
+        // transparency, so layers over a canvas, iframe or 360 tour stay see-through
+        dark: 'body, body *' + NOT_W + '{color:#f2f2f2!important;border-color:#666!important;text-shadow:none!important;box-shadow:none!important;}' +
+            'body, body *' + NOT_W + ':not([data-legilo-clear]){background-color:#121212!important;}' +
             'body a[href], body a[href] *{color:#9dc6ff!important;}' +
-            'body input,body textarea,body select,body button{background-color:#1e1e1e!important;color:#fff!important;}',
-        light: 'body, body *' + NOT_W + '{background-color:#fff!important;color:#000!important;border-color:#888!important;text-shadow:none!important;box-shadow:none!important;}' +
+            'body input,body textarea,body select,body button{color:#fff!important;}' +
+            'body input:not([data-legilo-clear]),body textarea:not([data-legilo-clear]),' +
+            'body select:not([data-legilo-clear]),body button:not([data-legilo-clear]){background-color:#1e1e1e!important;}',
+        light: 'body, body *' + NOT_W + '{color:#000!important;border-color:#888!important;text-shadow:none!important;box-shadow:none!important;}' +
+            'body, body *' + NOT_W + ':not([data-legilo-clear]){background-color:#fff!important;}' +
             'body a[href], body a[href] *{color:#0645ad!important;}',
         invertMedia: 'body img,body picture,body video,body iframe,body embed,body object,body canvas,body [style*="background-image"]{filter:invert(1) hue-rotate(180deg)!important;}'
     };
@@ -401,6 +415,77 @@
         }
     }
 
+    /* Contrast dark/light: elements whose own background was transparent
+     * (alpha 0, no background image) before the effect get data-legilo-clear
+     * and keep it transparent - full-screen UI layers over a canvas, iframe
+     * or 360 tour must not turn opaque. Semi-transparent surfaces still get
+     * the contrast color. The original value is only readable without our
+     * rules, so the page stylesheet is switched off while reading
+     * (synchronous, no repaint in between). Later inserted elements are
+     * checked the same way. The body always gets the contrast color. */
+    var bgObserver = null;
+    var bgMarked = false;
+
+    function bgIsClear(cs) {
+        var c = cs.backgroundColor || '';
+        return (c === 'transparent' || /,\s*0\s*\)$/.test(c)) && (!cs.backgroundImage || cs.backgroundImage === 'none');
+    }
+
+    function inWidget(el) {
+        return !!(el.closest && (el.closest('#legilo-host') || el.closest('#legilo-overlays')));
+    }
+
+    function bgMark(roots) {
+        var els = [], clear = [], i, j;
+        for (i = 0; i < roots.length; i++) {
+            var r = roots[i];
+            if (r.nodeType !== 1 || inWidget(r)) continue;
+            if (r !== document.body) els.push(r);
+            var all = r.getElementsByTagName('*');
+            for (j = 0; j < all.length; j++) if (!inWidget(all[j])) els.push(all[j]);
+        }
+        if (!els.length) return;
+        var sheet = styleEl && styleEl.sheet;
+        if (sheet) sheet.disabled = true;
+        try {
+            for (i = 0; i < els.length; i++) clear.push(bgIsClear(getComputedStyle(els[i])));
+        } finally {
+            if (sheet) sheet.disabled = false;
+        }
+        for (i = 0; i < els.length; i++) {
+            if (clear[i]) els[i].setAttribute('data-legilo-clear', '');
+            else els[i].removeAttribute('data-legilo-clear');
+        }
+    }
+
+    function bgUnmark() {
+        var els = document.querySelectorAll('[data-legilo-clear]');
+        for (var i = 0; i < els.length; i++) els[i].removeAttribute('data-legilo-clear');
+    }
+
+    function applyBgClear(on) {
+        if (on && !bgMarked) {
+            bgMark([document.body]);
+            bgMarked = true;
+            if (!bgObserver && window.MutationObserver) {
+                bgObserver = new MutationObserver(function (muts) {
+                    var roots = [];
+                    muts.forEach(function (m) {
+                        for (var i = 0; i < m.addedNodes.length; i++) {
+                            if (m.addedNodes[i].nodeType === 1) roots.push(m.addedNodes[i]);
+                        }
+                    });
+                    if (roots.length) bgMark(roots);
+                });
+                bgObserver.observe(document.body, { childList: true, subtree: true });
+            }
+        } else if (!on && bgMarked) {
+            if (bgObserver) { bgObserver.disconnect(); bgObserver = null; }
+            bgUnmark();
+            bgMarked = false;
+        }
+    }
+
     function pauseMedia() {
         var media = document.querySelectorAll('video, audio');
         for (var i = 0; i < media.length; i++) {
@@ -420,6 +505,27 @@
         return document.documentElement.lang || (cfg.lang !== 'auto' ? cfg.lang : 'en');
     }
 
+    /* Wanted voice region, e.g. "de-de": the page's own region if it has one
+     * (lang="de-AT"), otherwise the visitor's browser languages when the
+     * language matches (de-CH visitor on a lang="de" page), otherwise the
+     * main region of the language. Without this, browsers with many regional
+     * voices (Edge: de-AT, de-CH, de-DE ...) would simply win by list order. */
+    var MAIN_REGION = {
+        en: 'us', ar: 'sa', cs: 'cz', da: 'dk', el: 'gr', et: 'ee', fa: 'ir', ga: 'ie',
+        he: 'il', hi: 'in', ja: 'jp', ko: 'kr', sl: 'si', sv: 'se', uk: 'ua', vi: 'vn', zh: 'cn'
+    };
+    function ttsRegion() {
+        var full = String(ttsLang()).toLowerCase().replace('_', '-');
+        var lc = full.substring(0, 2);
+        if (/^[a-z]{2}-[a-z]{2}/.test(full)) return full.substring(0, 5);
+        var nav = navigator.languages || [navigator.language];
+        for (var i = 0; i < nav.length; i++) {
+            var n = String(nav[i] || '').toLowerCase().replace('_', '-');
+            if (n.indexOf(lc + '-') === 0 && /^[a-z]{2}-[a-z]{2}/.test(n)) return n.substring(0, 5);
+        }
+        return lc + '-' + (MAIN_REGION[lc] || lc);
+    }
+
     /* Voices. Default (ttscloud=0): ONLY local voices (localService), the
      * text never leaves the device. Online voices (most "Google" voices in
      * Chrome, "Online (Natural)" in Edge) are generated by the browser vendor,
@@ -429,16 +535,31 @@
      * languages without an installed voice); the panel marks them as online
      * and visitors can always switch to a local voice.
      * Order, best first: preferred kind (online with ttscloud=1, else local),
-     * quality names (e.g. macOS "Premium"/"Enhanced"), the system's default
-     * voice, exact region match, then system order. */
-    var VOICE_GOOD = /natural|neural|online|premium|enhanced|google|siri/i;
+     * quality (name or voiceURI), exact region match, the system's default
+     * voice, then system order. */
+    var VOICE_GOOD = /natural|neural|online|enhanced|google|siri/i;
+
+    /* Quality 0-3. Apple marks downloaded voices in the voiceURI
+     * (com.apple.voice.premium.de-DE.Anna, older: ...Anna-premium), while
+     * iOS Safari reports the same plain name ("Anna") for the compact and
+     * the premium variant: premium > enhanced > unknown > compact. */
+    function ttsQuality(v) {
+        var s = String(v.name || '') + ' ' + String(v.voiceURI || '');
+        if (/premium/i.test(s)) return 3;
+        if (VOICE_GOOD.test(s)) return 2;
+        if (/compact/i.test(s)) return 0;
+        return 1;
+    }
 
     // withOnline: include online voices and rank them first (ttscloud=1 only)
     function ttsVoices(withOnline) {
         var all = [];
         try { all = speechSynthesis.getVoices() || []; } catch (e) { return []; }
-        var full = String(ttsLang()).toLowerCase().replace('_', '-');
-        var lc = full.substring(0, 2);
+        var region = ttsRegion();
+        var lc = region.substring(0, 2);
+        // iOS Safari flags EVERY voice as default; only a single default counts
+        var defaults = 0;
+        for (var d = 0; d < all.length; d++) if (all[d] && all[d]['default']) defaults++;
         var list = [];
         for (var i = 0; i < all.length; i++) {
             var v = all[i];
@@ -446,15 +567,41 @@
             var vl = String(v.lang).toLowerCase().replace('_', '-');
             if (vl.indexOf(lc) !== 0) continue;
             var preferred = withOnline ? !v.localService : v.localService;
-            list.push({ v: v, i: i, q: (preferred ? 8 : 0) + (VOICE_GOOD.test(v.name || '') ? 4 : 0) +
-                (v['default'] ? 2 : 0) + (vl === full ? 1 : 0) });
+            // preferred kind > quality > wanted region > system default
+            list.push({ v: v, i: i, q: (preferred ? 64 : 0) + ttsQuality(v) * 8 +
+                (vl.substring(0, 5) === region ? 4 : 0) + (v['default'] && defaults === 1 ? 2 : 0) });
         }
         list.sort(function (a, b) { return (b.q - a.q) || (a.i - b.i); });
-        return list.map(function (x) { return x.v; });
+        // Voices are chosen by name: keep only the best voice of each name
+        // (iOS lists "Anna" twice, compact and premium)
+        var seen = Object.create(null);
+        return list.filter(function (x) {
+            if (seen[x.v.name]) return false;
+            seen[x.v.name] = 1;
+            return true;
+        }).map(function (x) { return x.v; });
     }
 
     // Voices the visitor can choose from (online ones only if allowed)
     function ttsOffered() { return ttsVoices(cfg.ttscloud); }
+
+    // Short list for the panel: only the preferred kind (online with
+    // ttscloud=1, else local) in the wanted region; falls back to the
+    // preferred kind in any region, then to everything. The full list sits
+    // behind "More voices". The visitor's current choice always stays visible.
+    function ttsShortList(list) {
+        var region = ttsRegion();
+        var kind = function (v) { return cfg.ttscloud ? !v.localService : v.localService; };
+        var pick = list.filter(function (v) {
+            return kind(v) && String(v.lang).toLowerCase().replace('_', '-').substring(0, 5) === region;
+        });
+        if (!pick.length) pick = list.filter(kind);
+        if (!pick.length) pick = list.slice();
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].name === ttsVoice && pick.indexOf(list[i]) === -1) pick.push(list[i]);
+        }
+        return pick;
+    }
 
     // The visitor's choice if it is still offered, otherwise the best offered
     // voice (only local ones are offered unless the site owner set ttscloud=1)
@@ -824,6 +971,8 @@
         if (states.align === 1) frags.push(CSSF.alignL);
         if (states.align === 2) frags.push(CSSF.alignC);
         if (states.align === 3) frags.push(CSSF.alignR);
+        // mark transparent elements before the contrast colors arrive
+        applyBgClear(states.contrast === 1 || states.contrast === 2);
         setPageCss(frags.join('\n'));
         applyFontSize();
         syncOverlays();
@@ -1116,8 +1265,8 @@
         '.voicerow label{display:flex;align-items:center;gap:8px;font-size:12px;color:#555;}' +
         '.voicerow select{flex:1;min-width:0;font-size:12px;padding:4px 6px;border:1px solid #c9c9c9;' +
         'border-radius:8px;background:#fff;color:#1a1a1a;}' +
-        '.vnote,.ttsnote p{font-size:11.5px;line-height:1.45;color:#555;margin-top:4px;}' +
-        '.vnote[hidden],.ttsnote[hidden]{display:none;}' +
+        '.ttsnote p{font-size:11.5px;line-height:1.45;color:#555;margin-top:4px;}' +
+        '.ttsnote[hidden]{display:none;}' +
         '.ttsnote{grid-column:1/-1;padding:6px 10px;border-radius:9px;background:#f7f3e6;border:1px solid #e3d9b8;}' +
         '.ttsnote p:first-child{margin-top:0;}' +
         'button.ft[disabled]{opacity:.55;cursor:not-allowed;}' +
@@ -1192,13 +1341,14 @@
             b += '</div>';
         }
         if (f.k === 'tts') {
-            // Voice selector, visible while read-aloud is active and more than
-            // one voice is offered; the note appears when an online voice is used
+            // Voice selector only with ttschoice=1 (visible while read-aloud is
+            // active and more than one voice is offered)
             var VT = T.v || {};
-            b += '<div class="voicerow" part="voice" hidden><label>' +
-                '<span>' + esc(T.f && T.f.ttsvoice || 'Voice') + '</span>' +
-                '<select class="voice" part="voice-select"></select></label>' +
-                '<p class="vnote" part="voice-note" hidden>' + esc(VT.note || '') + '</p></div>';
+            if (cfg.ttschoice) {
+                b += '<div class="voicerow" part="voice" hidden><label>' +
+                    '<span>' + esc(T.f && T.f.ttsvoice || 'Voice') + '</span>' +
+                    '<select class="voice" part="voice-select"></select></label></div>';
+            }
             // No usable voice for the page language: say so instead of
             // switching read-aloud on silently, and name the way out
             b += '<div class="ttsnote" part="tts-note" role="note" hidden>' +
@@ -1220,8 +1370,7 @@
     var BARE_CSS =
         BARE + '.panel{display:none;}' +
         BARE + '.panel.open{display:flex;flex-direction:column;}' +
-        BARE + '.voicerow[hidden],' + BARE + '.ttsnote[hidden],' +
-        BARE + '.vnote[hidden]{display:none;}' +
+        BARE + '.voicerow[hidden],' + BARE + '.ttsnote[hidden]{display:none;}' +
         BARE + '.view{display:none;}' +
         BARE + '.view.open{display:block;}' +
         BARE + '.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}' +
@@ -1326,36 +1475,12 @@
     // Fill the voice selector; the options are rebuilt only when the voice
     // list changes, so an open select does not lose its state.
     var voiceSig = null;
+    var voicesAll = false; // "More voices" expanded
     function renderVoices() {
-        var row = root.querySelector('.voicerow');
-        if (!row) return;
+        if (states.tts === undefined) return; // read-aloud not configured
         var VT = T.v || {};
-        var sel = row.querySelector('select.voice');
         var list = ttsSupported() ? ttsOffered() : [];
-        var used = ttsSupported() ? ttsPickVoice() : null;
         var available = ttsAvailable();
-        var usedOnline = !!(used && !used.localService);
-        // selector: while read-aloud is on and there is a real choice (or an
-        // online voice is in use, so the visitor can always switch back)
-        row.hidden = !(states.tts > 0) || !available || (list.length < 2 && !usedOnline);
-        var sig = list.map(function (v) { return v.name + (v.localService ? '' : '*'); }).join('|');
-        if (sig !== voiceSig) {
-            voiceSig = sig;
-            var autoV = list[0];
-            var html = '<option value="">' + esc(T.auto || 'Automatic') +
-                (autoV ? ' (' + esc(autoV.name) + (autoV.localService ? '' : ', ' + esc(VT.online || 'online')) + ')' : '') +
-                '</option>';
-            list.forEach(function (v) {
-                html += '<option value="' + esc(v.name) + '">' + esc(v.name) +
-                    (v.localService ? '' : ' (' + esc(VT.online || 'online') + ')') + '</option>';
-            });
-            sel.innerHTML = html;
-        }
-        var picked = '';
-        for (var i = 0; i < list.length; i++) if (list[i].name === ttsVoice) picked = ttsVoice;
-        if (sel.value !== picked) sel.value = picked;
-        var vnote = row.querySelector('.vnote');
-        if (vnote) vnote.hidden = !usedOnline;
         // No usable voice: disable the read-aloud button and explain why
         var btn = root.querySelector('button.ft[data-f="tts"]');
         if (btn) {
@@ -1368,6 +1493,31 @@
             note.id = 'legilo-ttsnote';
             note.hidden = available;
         }
+        // Voice selector (only with ttschoice=1): while read-aloud is on and
+        // there is a real choice
+        var row = root.querySelector('.voicerow');
+        if (!row) return;
+        var sel = row.querySelector('select.voice');
+        row.hidden = !(states.tts > 0) || !available || list.length < 2;
+        var shown = voicesAll ? list : ttsShortList(list);
+        var hasMore = shown.length < list.length;
+        var sig = shown.map(function (v) { return v.name + (v.localService ? '' : '*'); }).join('|') + (hasMore ? '+' : '');
+        if (sig !== voiceSig) {
+            voiceSig = sig;
+            var autoV = list[0];
+            var html = '<option value="">' + esc(T.auto || 'Automatic') +
+                (autoV ? ' (' + esc(autoV.name) + (autoV.localService ? '' : ', ' + esc(VT.online || 'online')) + ')' : '') +
+                '</option>';
+            shown.forEach(function (v) {
+                html += '<option value="' + esc(v.name) + '">' + esc(v.name) +
+                    (v.localService ? '' : ' (' + esc(VT.online || 'online') + ')') + '</option>';
+            });
+            if (hasMore) html += '<option value="__more">' + esc(VT.more || 'More voices ...') + '</option>';
+            sel.innerHTML = html;
+        }
+        var picked = '';
+        for (var i = 0; i < list.length; i++) if (list[i].name === ttsVoice) picked = ttsVoice;
+        if (sel.value !== picked) sel.value = picked;
     }
 
     function setVoice(name, source) {
@@ -1443,7 +1593,16 @@
 
     root.addEventListener('change', function (e) {
         var t = e.composedPath ? e.composedPath()[0] : e.target;
-        if (t && t.classList && t.classList.contains('voice')) setVoice(t.value, 'panel');
+        if (t && t.classList && t.classList.contains('voice')) {
+            if (t.value === '__more') {
+                // expand to all voices of the language, keep the current choice
+                voicesAll = true;
+                renderVoices();
+                t.focus();
+                return;
+            }
+            setVoice(t.value, 'panel');
+        }
     });
 
     root.addEventListener('click', function (e) {
@@ -1652,6 +1811,7 @@
         var cbDefs = document.getElementById('legilo-cbdefs');
         if (cbDefs && cbDefs.parentNode) cbDefs.parentNode.removeChild(cbDefs);
         document.removeEventListener('keydown', onHotkey);
+        applyBgClear(false);
         fsObserve(false);
         if (fsApplied) {
             fsReset();
@@ -1788,7 +1948,8 @@
             if (f.k === 'tts') {
                 o.allowed = TTS_MODES.slice(); // angebotene Modi laut tts-Parameter
                 o.available = ttsAvailable();  // false: keine nutzbare Stimme fuer die Seitensprache
-                o.cloud = cfg.ttscloud;        // Online-Stimmen fuer Besucher waehlbar
+                o.cloud = cfg.ttscloud;        // Online-Stimmen bevorzugt (ttscloud=1)
+                o.choice = cfg.ttschoice;      // Stimmauswahl im Panel (ttschoice=1)
             }
             return o;
         });

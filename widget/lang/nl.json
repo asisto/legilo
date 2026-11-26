@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Geen stem geïnstalleerd voor deze taal.",
         "install": "Stemmen kunnen gratis worden toegevoegd in de spraakinstellingen van het systeem.",
-        "note": "De tekst wordt dan naar de aanbieder van de browser gestuurd (bijv. Google)."
+        "more": "Meer stemmen ..."
     },
     "f": {
         "fontsize": "Tekstgrootte",

@@ -493,6 +493,11 @@ $ld = array(
                 <label for="f_ttscloud" style="margin:0"><?php echo $T['ttscloud']; ?></label>
             </div>
             <p class="hint" id="ttscloud_hint"><?php echo $T['ttscloudInfo']; ?></p>
+            <div class="checkline">
+                <input type="checkbox" id="f_ttschoice" aria-describedby="ttschoice_hint">
+                <label for="f_ttschoice" style="margin:0"><?php echo $T['ttschoice']; ?></label>
+            </div>
+            <p class="hint" id="ttschoice_hint"><?php echo $T['ttschoiceInfo']; ?></p>
             <label for="f_statement"><?php echo $T['statement']; ?></label>
             <input type="url" id="f_statement" placeholder="https://www.example.com/accessibility">
             <div class="checkline">
@@ -733,6 +738,9 @@ $ld = array(
     var previewScript = null;
     var previewCounter = 0;
     var reloadTimer = null;
+    // autocontrast has no form field (special option for 3D/360 tours, see /api):
+    // a pasted embed code keeps its value
+    var autoContrast = '1';
 
     function setForm(cfg) {
         $('f_pos').value = cfg.pos;
@@ -747,10 +755,12 @@ $ld = array(
         $('f_mobile').value = cfg.mobile;
         $('f_tts').value = ['both', 'read', 'hover'].indexOf(cfg.tts) !== -1 ? cfg.tts : 'both';
         $('f_ttscloud').checked = !!parseInt(cfg.ttscloud, 10);
+        $('f_ttschoice').checked = !!parseInt(cfg.ttschoice, 10);
         $('f_statement').value = cfg.statement || '';
         $('f_hide').checked = !!parseInt(cfg.hide, 10);
         $('f_hotkey').checked = !!parseInt(cfg.hotkey, 10);
         $('f_css').checked = cfg.css === 'none';
+        autoContrast = String(cfg.autocontrast) === '0' ? '0' : '1';
         var feats = Array.isArray(cfg.features) ? cfg.features : String(cfg.features).split(',');
         document.querySelectorAll('.f_feature').forEach(function (cb) {
             cb.checked = feats.indexOf(cb.value) !== -1;
@@ -789,10 +799,12 @@ $ld = array(
             mobile: $('f_mobile').value,
             tts: $('f_tts').value,
             ttscloud: $('f_ttscloud').checked ? '1' : '0',
+            ttschoice: $('f_ttschoice').checked ? '1' : '0',
             statement: $('f_statement').value.trim(),
             hide: $('f_hide').checked ? '1' : '0',
             hotkey: $('f_hotkey').checked ? '1' : '0',
             css: $('f_css').checked ? 'none' : 'base',
+            autocontrast: autoContrast,
             features: feats
         };
     }

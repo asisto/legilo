@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Ingen röst är installerad för det här språket.",
         "install": "Röster kan läggas till gratis i systemets talinställningar.",
-        "note": "Texten skickas då till webbläsarens leverantör (t.ex. Google)."
+        "more": "Fler röster ..."
     },
     "f": {
         "fontsize": "Textstorlek",

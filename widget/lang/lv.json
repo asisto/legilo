@@ -17,7 +17,7 @@
         "online": "tiešsaistē",
         "none": "Šai valodai nav instalēta neviena balss.",
         "install": "Balsis var bez maksas pievienot sistēmas runas iestatījumos.",
-        "note": "Teksts tiek nosūtīts pārlūka nodrošinātājam (piem., Google)."
+        "more": "Vairāk balsu ..."
     },
     "f": {
         "fontsize": "Teksta lielums",

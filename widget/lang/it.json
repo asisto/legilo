@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Nessuna voce installata per questa lingua.",
         "install": "Le voci si possono aggiungere gratuitamente nelle impostazioni vocali del sistema.",
-        "note": "Il testo viene inviato al fornitore del browser (ad es. Google)."
+        "more": "Altre voci ..."
     },
     "f": {
         "fontsize": "Dimensione testo",

@@ -1,5 +1,48 @@
 # Changelog
 
+## 0.4.3 - 2026-10-13
+
+- Widget: new parameter autocontrast=0 (default 1). The widget then never
+  starts with contrast from the system settings (prefers-color-scheme: dark
+  on a light page, prefers-contrast: more); visitors can still switch it on.
+  For 3D or 360 tours, where a forced dark background covers the scene.
+- Widget: contrast dark and light keep transparent elements transparent.
+  Elements whose background was transparent before (alpha 0, no background
+  image) get no forced background color, including elements inserted later
+  (e.g. lightbox containers). Full-screen UI layers over a canvas, iframe or
+  tour stay see-through; semi-transparent surfaces still get the contrast
+  color. The body always does.
+
+## 0.4.2 - 2026-10-02
+
+- Widget: voice quality is also read from the voice identifier (voiceURI).
+  Safari on iOS gives a downloaded premium voice the same name as the basic
+  one ("Anna" twice); the widget now ranks premium > enhanced > compact and
+  lists each name only once (the best variant).
+- Widget: the system default voice only counts when exactly one voice claims
+  it (iOS Safari flags every voice as default).
+
+## 0.4.1 - 2026-10-02
+
+- Widget: voice region. With a bare page language (lang="de") the wanted
+  region comes from the visitor's browser languages when the language
+  matches, otherwise from the main region (de-DE, fr-FR, it-IT, es-ES,
+  en-US, ...). The region now outranks the system default voice, so Edge no
+  longer picks the first listed regional voice (e.g. de-AT for German).
+- Widget: simpler voice handling. By default there is no voice selector
+  anymore; the best voice is used automatically (local, or online with
+  ttscloud=1). The panel no longer shows a note about online voices; with
+  ttscloud=1 the site owner covers this in the privacy policy.
+- Widget: new parameter ttschoice=1 adds the voice selector to the panel. It
+  lists only the preferred kind (online with ttscloud=1, else local) in the
+  wanted region; "More voices ..." opens the full list (new label in all 37
+  languages). The current choice always stays visible. A stored voice only
+  counts with ttschoice=1. features() reports choice for tts; voices() still
+  returns the full list.
+- Configurator: "Offer voice selection" option and updated online-voice
+  explanation (11 languages). WordPress plugin 0.1.4 with the same option
+  (released 2026-11-26, tested up to WordPress 7.2).
+
 ## 0.4.0 - 2026-10-02
 
 - Widget: no silent read-aloud anymore. Without a usable voice for the page

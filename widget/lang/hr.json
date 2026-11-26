@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Za ovaj jezik nije instaliran glas.",
         "install": "Glasovi se mogu besplatno dodati u postavkama govora sustava.",
-        "note": "Tekst se šalje pružatelju preglednika (npr. Google)."
+        "more": "Više glasova ..."
     },
     "f": {
         "fontsize": "Veličina fonta",

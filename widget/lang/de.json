@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Für diese Sprache ist keine Stimme installiert.",
         "install": "Stimmen lassen sich kostenlos in den Spracheinstellungen des Systems hinzufügen.",
-        "note": "Der Text geht dabei an den Anbieter des Browsers (z. B. Google)."
+        "more": "Weitere Stimmen ..."
     },
     "f": {
         "fontsize": "Schriftgröße",

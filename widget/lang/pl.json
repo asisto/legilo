@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Brak zainstalowanego głosu dla tego języka.",
         "install": "Głosy można bezpłatnie dodać w ustawieniach mowy systemu.",
-        "note": "Tekst zostanie wysłany do dostawcy przeglądarki (np. Google)."
+        "more": "Więcej głosów ..."
     },
     "f": {
         "fontsize": "Rozmiar tekstu",

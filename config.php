@@ -5,7 +5,7 @@
  * Konfigurator-Seite (generate.php) verwendet.
  */
 
-const LEGILO_VERSION = '0.4.0';
+const LEGILO_VERSION = '0.4.3';
 
 // Projektname (Arbeitstitel, zentral aenderbar; erscheint auf der Projektseite)
 const LEGILO_BRAND = 'Legilo';
@@ -90,6 +90,11 @@ function legilo_schema() {
         // und bevorzugen, sofern verfuegbar; ohne die Option nur lokale Stimmen.
         // Kein API-Key, kein Server, keine Kosten: die Stimmen kommen vom Browser.
         'ttscloud' => array('type' => 'bool', 'default' => 0),
+        // Stimmauswahl im Panel anbieten; ohne wird automatisch die beste Stimme genommen
+        'ttschoice' => array('type' => 'bool', 'default' => 0),
+        // Kontrast beim ersten Besuch NICHT aus den Systemeinstellungen setzen
+        // (prefers-color-scheme / prefers-contrast); z.B. fuer 3D-/360-Touren
+        'autocontrast' => array('type' => 'bool', 'default' => 1),
     );
 }
 

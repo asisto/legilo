@@ -17,7 +17,7 @@
         "online": "çevrimiçi",
         "none": "Bu dil için yüklü ses yok.",
         "install": "Sesler, sistemin konuşma ayarlarından ücretsiz eklenebilir.",
-        "note": "Metin bu durumda tarayıcı sağlayıcısına (ör. Google) gönderilir."
+        "more": "Diğer sesler ..."
     },
     "f": {
         "fontsize": "Yazı boyutu",

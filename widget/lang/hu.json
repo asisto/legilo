@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Ehhez a nyelvhez nincs telepített hang.",
         "install": "Hangok ingyenesen hozzáadhatók a rendszer beszédbeállításaiban.",
-        "note": "A szöveg ilyenkor a böngésző szolgáltatójához kerül (pl. Google)."
+        "more": "További hangok ..."
     },
     "f": {
         "fontsize": "Betűméret",

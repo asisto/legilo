@@ -17,7 +17,7 @@
         "online": "verkossa",
         "none": "Tälle kielelle ei ole asennettu ääntä.",
         "install": "Ääniä voi lisätä maksutta järjestelmän puheasetuksista.",
-        "note": "Teksti lähetetään selaimen palveluntarjoajalle (esim. Google)."
+        "more": "Lisää ääniä ..."
     },
     "f": {
         "fontsize": "Tekstin koko",

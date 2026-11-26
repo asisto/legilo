@@ -17,7 +17,7 @@
         "online": "online",
         "none": "Pro tento jazyk není nainstalován žádný hlas.",
         "install": "Hlasy lze zdarma přidat v nastavení řeči systému.",
-        "note": "Text se odešle poskytovateli prohlížeče (např. Google)."
+        "more": "Další hlasy ..."
     },
     "f": {
         "fontsize": "Velikost písma",
